@@ -6,75 +6,67 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export function VisualSliceMotion() {
   useEffect(() => {
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    if (reduceMotion) {
-      document.documentElement.dataset.motion = "reduced";
-      return;
-    }
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (media.matches) return;
 
     gsap.registerPlugin(ScrollTrigger);
-
     const context = gsap.context(() => {
-      gsap.from(".motion-headline", {
-        yPercent: 24,
-        opacity: 0,
-        duration: 1.1,
-        ease: "power3.out",
+      gsap.from(".motion-headline", { yPercent: 18, opacity: 0, duration: 1.15, ease: "power3.out" });
+      gsap.from(".hero__atmosphere", { scale: 0.88, yPercent: 8, duration: 1.8, ease: "power2.out" });
+      gsap.to(".hero__atmosphere", {
+        yPercent: 12,
+        ease: "none",
+        scrollTrigger: { trigger: ".scene--hero", start: "top top", end: "bottom top", scrub: 0.8 },
       });
 
-      gsap.utils.toArray<HTMLElement>(".motion-reveal").forEach((element) => {
-        gsap.from(element, {
-          y: 44,
-          opacity: 0,
-          duration: 0.8,
-          ease: "power3.out",
+      const manifesto = document.querySelector<HTMLElement>(".scene--manifesto");
+      const steps = gsap.utils.toArray<HTMLElement>(".manifesto-step");
+      const progress = document.querySelector<HTMLElement>(".manifesto__progress-fill");
+      const progressLabel = document.querySelector<HTMLElement>(".manifesto__progress-label");
+      const progressBar = document.querySelector<HTMLElement>(".manifesto__progress");
+      if (manifesto && steps.length && window.matchMedia("(min-width: 1101px)").matches) {
+        manifesto.classList.add("is-pinned");
+        gsap.set(steps, { autoAlpha: 0, y: 28 });
+        gsap.set(steps[0], { autoAlpha: 1, y: 0 });
+        const timeline = gsap.timeline({
           scrollTrigger: {
-            trigger: element,
-            start: "top 82%",
+            trigger: manifesto, start: "top top", end: () => `+=${window.innerHeight * steps.length}`,
+            pin: ".manifesto__stage", scrub: 0.65, invalidateOnRefresh: true,
           },
         });
-      });
+        steps.forEach((step, index) => {
+          if (index > 0) timeline.to(steps[index - 1], { autoAlpha: 0, y: -24, duration: 0.35 }, index - 0.35);
+          if (index > 0) timeline.fromTo(step, { autoAlpha: 0, y: 28 }, { autoAlpha: 1, y: 0, duration: 0.45 }, index);
+          timeline.call(() => {
+            const current = String(index + 1).padStart(2, "0");
+            if (progressLabel) progressLabel.textContent = `${current} — ${String(steps.length).padStart(2, "0")}`;
+            progressBar?.setAttribute("aria-valuenow", String(index + 1));
+          }, [], index);
+        });
+        if (progress) timeline.to(progress, { scaleX: 1, duration: steps.length }, 0);
+      }
 
-      gsap.utils.toArray<HTMLElement>(".motion-card").forEach((element) => {
-        gsap.fromTo(
-          element,
-          { y: 60, rotate: -2, opacity: 0.72 },
-          {
-            y: -18,
-            rotate: 0,
-            opacity: 1,
-            ease: "none",
-            scrollTrigger: {
-              trigger: element,
-              start: "top bottom",
-              end: "bottom top",
-              scrub: 0.8,
-            },
-          },
-        );
-      });
-
-      gsap.utils.toArray<HTMLElement>(".manifesto-step").forEach((element, index) => {
-        gsap.fromTo(
-          element,
-          { "--step-progress": "0%" },
-          {
-            "--step-progress": "100%",
-            ease: "none",
-            scrollTrigger: {
-              trigger: element,
-              start: index === 0 ? "top 78%" : "top 72%",
-              end: "bottom 38%",
-              scrub: true,
-            },
-          },
-        );
-      });
+      const workScene = document.querySelector<HTMLElement>(".scene--work");
+      const workMedia = document.querySelector<HTMLElement>(".work-story__main");
+      if (workScene && workMedia && window.matchMedia("(min-width: 1101px)").matches) {
+        gsap.fromTo(workMedia, { clipPath: "inset(16% 18% 16% 18% round 1.5rem)", scale: 0.84 }, {
+          clipPath: "inset(0% 0% 0% 0% round 1.5rem)", scale: 1,
+          scrollTrigger: { trigger: workScene, start: "top 68%", end: "center center", scrub: 0.7 },
+        });
+        gsap.fromTo(".work-story__layer--one", { xPercent: 32, yPercent: 20, autoAlpha: 0 }, {
+          xPercent: 0, yPercent: 0, autoAlpha: 1,
+          scrollTrigger: { trigger: workMedia, start: "top 45%", end: "center center", scrub: 0.8 },
+        });
+        gsap.fromTo(".work-story__layer--two", { xPercent: -28, yPercent: -18, autoAlpha: 0 }, {
+          xPercent: 0, yPercent: 0, autoAlpha: 1,
+          scrollTrigger: { trigger: workMedia, start: "center 52%", end: "bottom 35%", scrub: 0.8 },
+        });
+      }
     });
-
-    return () => context.revert();
+    return () => {
+      context.revert();
+      document.querySelector(".scene--manifesto")?.classList.remove("is-pinned");
+    };
   }, []);
-
   return null;
 }
