@@ -1,6 +1,7 @@
 import { Hero } from "@/components/hero";
 import { Manifesto } from "@/components/manifesto";
 import { SelectedWork } from "@/components/selected-work";
+import { VisualSliceMotion } from "@/components/visual-slice-motion";
 import { resolveContentAdapter } from "@/lib/adapters/content-adapter";
 
 export default async function Home() {
@@ -9,6 +10,7 @@ export default async function Home() {
 
   return (
     <main>
+      <VisualSliceMotion />
       <Hero hero={content.hero} />
       <Manifesto manifesto={content.manifesto} />
       <SelectedWork project={featuredProject} />
@@ -18,13 +20,17 @@ export default async function Home() {
           <h2 id="contact-title">{content.contact.title}</h2>
         </div>
         <p>{content.contact.body}</p>
-        <nav aria-label="Canales de contacto">
-          {content.contact.channels.map((channel) => (
-            <a href={channel.href} key={channel.label}>
-              {channel.label}: {channel.value}
-            </a>
-          ))}
-        </nav>
+        {content.contact.channels.length > 0 ? (
+          <nav aria-label="Canales de contacto">
+            {content.contact.channels.map((channel) => (
+              <a href={channel.href} key={channel.label}>
+                {channel.label}: {channel.value}
+              </a>
+            ))}
+          </nav>
+        ) : (
+          <p className="footer__note">Canales directos pendientes de confirmación.</p>
+        )}
       </footer>
     </main>
   );
