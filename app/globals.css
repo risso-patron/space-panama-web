@@ -1,13 +1,13 @@
 :root {
-  --ink: #16130f;
-  --ink-soft: #312a22;
+  --ink: #222d3d;
+  --ink-soft: #3a475a;
   --cream: #f5ead8;
   --cream-strong: #fff6e8;
-  --space-blue: #3f5f94;
+  --space-blue: #71839f;
   --purple: #40205f;
   --gold: #c69a55;
   --lime: #ffd324;
-  --sea: #092f37;
+  --sea: #173641;
   --line: rgba(245, 234, 216, 0.16);
   --shadow: 0 30px 120px rgba(0, 0, 0, 0.38);
 }
@@ -25,9 +25,9 @@ body {
   margin: 0;
   color: var(--cream);
   background:
-    radial-gradient(circle at 20% 0%, rgba(63, 95, 148, 0.28), transparent 32rem),
-    radial-gradient(circle at 80% 30%, rgba(255, 211, 36, 0.1), transparent 30rem),
-    linear-gradient(180deg, #15120f 0%, #071d22 56%, #11100e 100%);
+    radial-gradient(circle at 18% 0%, rgba(133, 151, 178, 0.23), transparent 34rem),
+    radial-gradient(circle at 82% 34%, rgba(109, 91, 137, 0.12), transparent 31rem),
+    linear-gradient(180deg, #303b4d 0%, #263243 54%, #1d2735 100%);
   font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
   min-height: 100vh;
 }
@@ -198,8 +198,8 @@ h2 {
   border-radius: 2.4rem;
   padding: clamp(1rem, 3vw, 1.6rem);
   background:
-    linear-gradient(160deg, rgba(255, 246, 232, 0.12), rgba(63, 95, 148, 0.08)),
-    rgba(10, 20, 20, 0.56);
+    linear-gradient(160deg, rgba(255, 246, 232, 0.12), rgba(133, 151, 178, 0.1)),
+    rgba(20, 29, 41, 0.62);
   box-shadow: var(--shadow);
   backdrop-filter: blur(20px);
 }
@@ -231,7 +231,7 @@ h2 {
   padding: 1rem;
   background:
     radial-gradient(circle at 52% 30%, rgba(255, 211, 36, 0.88), transparent 0.8rem),
-    radial-gradient(circle at 56% 52%, #3f5f94 0, #40205f 34%, #092f37 62%, #050505 76%);
+    radial-gradient(circle at 56% 52%, #71839f 0, #51476a 34%, #173641 62%, #17202c 76%);
 }
 
 .hero__signal span {
