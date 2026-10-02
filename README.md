@@ -84,3 +84,16 @@ Definir el sistema de contenido real antes de conectar infraestructura:
 - Qué campos necesita el CMS o Supabase.
 - Qué canal de contacto será real.
 - Qué políticas RLS aplican a leads/contactos si se persisten en Supabase.
+
+## V6 — deuda interna de assets (no renderizar en la Home)
+
+La escena Digital muestra únicamente los nombres aprobados; no hay material visual verificado en `main` para estos proyectos. Antes de diseñar una galería visual, solicitar por cada proyecto **SOMOS Properties**, **HomePower PTY**, **SALDO** y **Provivir Panamá**:
+
+- Logo/wordmark original autorizado para uso público (SVG o PNG transparente) y nombre exacto aprobado.
+- Captura real de la página principal en escritorio y móvil, más una captura de una página interior o flujo representativo; incluir URL y fecha de captura para verificar que corresponden al producto publicado.
+- Si se usa un mockup, export/captura de pantalla real como contenido del dispositivo: no crear interfaces de muestra que parezcan producto real.
+- Confirmación de permisos para exhibir marca, interfaz y cualquier dato visible; ocultar datos personales/sensibles antes de entregar.
+
+Para un acto Behind the Work, **no reutilizar artes finales ni material de campaña como backstage**. Se requiere evidencia de proceso original de Space: por ejemplo, grabación/fotos auténticas de producción audiovisual, preparación/ejecución de evento o sesión de trabajo real. Cada asset debe venir con contexto verificable (actividad/proyecto y fecha aproximada), identificación/atribución confirmada de las personas y permisos de uso. Si no se entrega evidencia que cumpla esto, mantener el acto omitido.
+
+Esta deuda es documentación interna: no mostrar estos requisitos, notas de ausencia ni placeholders en la experiencia pública.
