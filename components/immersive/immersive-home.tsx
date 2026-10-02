@@ -42,20 +42,23 @@ export function ImmersiveHome({ content }: { content: SiteContent }) {
       </section>
       <section className="worlds-act" data-act="worlds" aria-labelledby="worlds-title">
         <header className="worlds-act__intro"><p className="eyebrow">El universo Space</p><h2 id="worlds-title">Cuatro mundos.<br /><em>Una misma órbita.</em></h2></header>
-        <div className="worlds-stage">
-          {worlds.map((world, index) => <article className="world-scene" key={world.name} style={{ "--world-color": world.color } as React.CSSProperties} aria-label={`${world.name}, ${index + 1} de 4`}>
+        <div className="worlds-stage" role="group" aria-label="Cuatro mundos de Space">
+          {worlds.map((world, index) => <article className="world-scene" key={world.name} style={{ "--world-color": world.color } as React.CSSProperties} aria-label={`${world.name}, ${index + 1} de 4`} data-world={index}>
             <span className="world-scene__index">0{index + 1} / 04</span><h3>{world.name}</h3><ul>{world.skills.map((skill) => <li key={skill}>{skill}</li>)}</ul><span className="world-scene__rule" aria-hidden="true" />
           </article>)}
-          <div className="worlds-progress" aria-hidden="true"><span /></div>
+          <div className="worlds-progress" role="progressbar" aria-label="Progreso por los cuatro mundos" aria-valuemin={1} aria-valuemax={4} aria-valuenow={1}><span /></div>
         </div>
       </section>
       <section className="digital-act" data-act="digital" aria-labelledby="digital-title">
-        <div className="digital-act__lead"><p className="eyebrow">Ideas que toman forma en pantalla</p><h2 id="digital-title">Digital<br /><em>en movimiento.</em></h2><p>Una presencia web clara, útil y pensada alrededor de cada marca.</p></div>
+        <div className="digital-act__lead"><p className="eyebrow">Ideas que toman forma en pantalla</p><h2 id="digital-title"><span className="digital-act__word">Digital</span><br /><em>en movimiento.</em></h2><p>Una presencia web clara, útil y pensada alrededor de cada marca.</p></div>
         <div className="digital-orbit" aria-label="Proyectos digitales"><span className="digital-orbit__line" aria-hidden="true" />{digitalNames.map((name, i) => <p className={`digital-name digital-name--${i + 1}`} key={name}><span>0{i + 1}</span>{name}</p>)}</div>
       </section>
       <section className="method-act" data-act="method" aria-labelledby="method-title">
         <header><p className="eyebrow">Cómo trabajamos</p><h2 id="method-title">Una idea lleva<br /><em>a la siguiente.</em></h2><p className="method-act__thesis">No entregamos y desaparecemos.</p></header>
-        <div className="method-sequence" aria-label="Entendemos, pensamos, creamos, ejecutamos, medimos y mejoramos">{method.map((step, i) => <p className="method-step" key={step}><span>0{i + 1}</span>{step}</p>)}</div>
+        <div className="method-sequence" aria-label="Entendemos, pensamos, creamos, ejecutamos, medimos y mejoramos">
+          {method.map((step, i) => <p className="method-step" key={step} data-method-step={i}><span>0{i + 1} / 06</span>{step}</p>)}
+          <div className="method-sequence__progress" role="progressbar" aria-label="Progreso del método" aria-valuemin={1} aria-valuemax={6} aria-valuenow={1}><i /></div>
+        </div>
       </section>
       <section className="space-conclusion" data-act="space" aria-labelledby="space-title">
         <p className="eyebrow">Space Panamá · Estudio creativo</p><h2 id="space-title">Estrategia con sensibilidad.<br /><em>Creatividad que se ejecuta.</em></h2>
