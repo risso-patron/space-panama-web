@@ -12,6 +12,11 @@ export type Project = {
   summary: string;
   signal: string;
   palette: string;
+  assets: {
+    poster: string;
+    secondary: string;
+    video?: string;
+  };
 };
 
 export type ContactChannel = {
@@ -45,32 +50,42 @@ export type SiteContent = {
 export const siteContent: SiteContent = {
   hero: {
     eyebrow: "Space Panamá · Estudio creativo",
-    title: "Diseñamos presencia para marcas que quieren sentirse inevitables.",
+    title: "Creamos experiencias que hacen crecer marcas.",
     deck:
-      "Space convierte estrategia, narrativa y dirección visual en experiencias digitales con pulso editorial: claras, premium y listas para crecer.",
-    primaryCta: "Ver vertical slice",
+      "Unimos estrategia, creatividad y dirección digital para convertir ideas en presencia: marcas claras, memorables y listas para moverse.",
+    primaryCta: "Ver Don Ceviche",
     secondaryCta: "Leer manifiesto",
   },
   manifesto: {
     kicker: "Manifiesto",
-    title: "Menos ruido. Más atmósfera. Más Space.",
+    title: "Del brief al crecimiento: una órbita con intención.",
     body:
-      "La nueva web debe presentar a Space como protagonista: una casa creativa que entiende el negocio, edita lo esencial y construye mundos visuales memorables sin perder velocidad.",
+      "Space edita el ruido, encuentra el ángulo y construye experiencias que conectan la ambición comercial con una atmósfera visual propia.",
     terms: [
       {
-        term: "Estrategia con textura",
+        term: "ESTRATEGIA",
         definition:
-          "Cada sección debe explicar una decisión de marca, no solo decorar una pantalla.",
+          "Leemos el negocio, el público y la oportunidad antes de diseñar cualquier pieza.",
       },
       {
-        term: "Editorial premium",
+        term: "CREATIVIDAD",
         definition:
-          "Ritmo, contraste, titulares grandes y aire suficiente para que el trabajo respire.",
+          "Transformamos la dirección en ideas con carácter: memorables, útiles y propias de cada marca.",
       },
       {
-        term: "Backend preparado",
+        term: "EXPERIENCIAS",
         definition:
-          "Contenido y formularios nacen con adaptadores simples para migrar a Supabase sin reescribir la web.",
+          "Diseñamos puntos de contacto que se sienten vivos: web, redes, lanzamientos, contenido y campañas.",
+      },
+      {
+        term: "DIGITAL",
+        definition:
+          "Construimos sistemas listos para publicarse, medirse y evolucionar sin perder el pulso visual.",
+      },
+      {
+        term: "CRECIMIENTO",
+        definition:
+          "Cada entrega debe abrir una siguiente acción: atención, conversación, venta o comunidad.",
       },
     ],
   },
@@ -82,26 +97,20 @@ export const siteContent: SiteContent = {
       category: "Identidad digital · Food brand",
       year: "2026",
       summary:
-        "Una escena de trabajo seleccionado para mostrar cómo Space puede convertir una marca gastronómica en una experiencia con apetito visual, memoria local y dirección comercial.",
-      signal: "Sabor costero, cámara cercana, tipografía con carácter y un sistema digital listo para campañas.",
-      palette: "Limón, tinta, crema y mar profundo",
+        "Una muestra gastronómica para enseñar cómo Space puede convertir una marca local en contenido con apetito visual, tono popular y dirección comercial.",
+      signal: "Producto en primer plano, color vibrante, memoria costera y piezas listas para alimentar campañas.",
+      palette: "Morado Don Ceviche, amarillo limón, tinta marina y crema editorial",
+      assets: {
+        poster: "/assets/don-ceviche/post-7.png",
+        secondary: "/assets/don-ceviche/post-4.png",
+        video: "/assets/don-ceviche/post-3.mp4",
+      },
     },
   ],
   contact: {
     title: "Abramos la siguiente órbita.",
     body:
       "Esta base deja listo el punto de entrada para conectar contenido, leads y casos a una capa persistente cuando el proyecto lo autorice.",
-    channels: [
-      {
-        label: "Email",
-        value: "hola@spacepanama.example",
-        href: "mailto:hola@spacepanama.example",
-      },
-      {
-        label: "Instagram",
-        value: "@spacepanama",
-        href: "https://instagram.com/spacepanama",
-      },
-    ],
+    channels: [],
   },
 };
