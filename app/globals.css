@@ -99,6 +99,8 @@ h2 { max-width: 12ch; margin-bottom: 1.25rem; font-size: clamp(3rem,8vw,7rem); l
 .brand-work__image-card--sissy { width:min(100%,26rem); aspect-ratio:720/1270; justify-self:center; }
 .brand-work__image-card img { object-fit:cover; }
 .brand-work__visuals--psicojazmin { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.brand-work__identity-card { position:relative; grid-column:1/-1; overflow:hidden; display:grid; place-items:center; width:min(28vw,20rem); aspect-ratio:3/4; justify-self:center; margin:0; border:1px solid rgba(245,234,216,.16); border-radius:1.15rem; background:rgba(245,234,216,.04); box-shadow:var(--shadow); }
+.brand-work__identity-card img { object-fit:contain; padding:1.5rem; }
 .brand-work__visuals--psicojazmin .brand-work__image-card { aspect-ratio:16/10; }
 .footer { display:grid; grid-template-columns:minmax(0,.8fr) minmax(0,1fr); gap:2rem; padding:clamp(2rem,5vw,5.5rem); background:var(--cream); color:var(--ink); }
 .footer .eyebrow { color:#805f2b; }.footer h2 { margin-bottom:0; }.footer p { color:rgba(22,19,15,.72); }.footer__note { align-self:start; border:1px solid rgba(22,19,15,.16); border-radius:999px; padding:.8rem 1rem; }.footer nav { grid-column:2; display:flex; flex-wrap:wrap; gap:.75rem; }.footer a { border:1px solid rgba(22,19,15,.16); border-radius:999px; padding:.8rem 1rem; }
@@ -116,6 +118,8 @@ h2 { max-width: 12ch; margin-bottom: 1.25rem; font-size: clamp(3rem,8vw,7rem); l
   .brand-work__intro { grid-template-columns:1fr; }
   .brand-work__description { grid-column:auto; }
   .brand-work__visuals--sissy { max-width:45rem; }
+  .brand-work__visuals--psicojazmin { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .brand-work__identity-card { width:min(42vw,18rem); }
 }
 @media (max-width:900px) {
   .scene,.scene--hero,.footer { grid-template-columns:1fr; }
@@ -158,6 +162,7 @@ h2 { max-width: 12ch; margin-bottom: 1.25rem; font-size: clamp(3rem,8vw,7rem); l
   .brand-work__video-card { width:min(74vw,21rem); }
   .brand-work__image-card--sissy { width:min(74vw,21rem); }
   .brand-work__visuals--psicojazmin { grid-template-columns:1fr; }
+  .brand-work__identity-card { width:min(72vw,18rem); }
 }
 @media (prefers-reduced-motion: reduce) {
   *,*::before,*::after { scroll-behavior:auto!important; animation-duration:.001ms!important; animation-iteration-count:1!important; transition-duration:.001ms!important; }
@@ -166,5 +171,5 @@ h2 { max-width: 12ch; margin-bottom: 1.25rem; font-size: clamp(3rem,8vw,7rem); l
   .manifesto-step h3 { font-size:clamp(1.9rem,3.2vw,3.2rem); }
   .manifesto-step { padding-block:1.1rem 1.4rem; }
   .manifesto__progress { display:none; }
-  .brand-work__intro,.brand-work__video-card,.brand-work__image-card { opacity:1!important; visibility:visible!important; transform:none!important; clip-path:none!important; }
+  .brand-work__intro,.brand-work__video-card,.brand-work__image-card,.brand-work__identity-card { opacity:1!important; visibility:visible!important; transform:none!important; clip-path:none!important; }
 }

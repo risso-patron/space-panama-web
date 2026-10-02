@@ -50,18 +50,26 @@ export function BrandWorkScenes({ items }: BrandWorkScenesProps) {
               </div>
             ) : (
               <div className="brand-work__visuals brand-work__visuals--psicojazmin">
-                <figure className="brand-work__image-card">
+                <figure className="brand-work__identity-card">
+                  <Image
+                    src={item.identity}
+                    alt="Logotipo de PsicoJazmin, identidad visual de la marca"
+                    fill
+                    sizes="(max-width: 700px) 72vw, (max-width: 1100px) 35vw, 24vw"
+                  />
+                </figure>
+                <figure className="brand-work__image-card brand-work__image-card--notebook">
                   <Image
                     src={item.notebook}
-                    alt="Cuaderno con la identidad de PsicoJazmin"
+                    alt="Aplicación de la identidad de PsicoJazmin en un cuaderno"
                     fill
                     sizes="(max-width: 700px) 88vw, (max-width: 1100px) 42vw, 40vw"
                   />
                 </figure>
-                <figure className="brand-work__image-card">
+                <figure className="brand-work__image-card brand-work__image-card--mugs">
                   <Image
                     src={item.mugs}
-                    alt="Tazas con la identidad de PsicoJazmin"
+                    alt="Aplicación de la identidad de PsicoJazmin en tazas"
                     fill
                     sizes="(max-width: 700px) 88vw, (max-width: 1100px) 42vw, 40vw"
                   />

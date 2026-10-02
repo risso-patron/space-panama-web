@@ -35,6 +35,7 @@ export type BrandWork =
       title: string;
       eyebrow: string;
       headline: string;
+      identity: string;
       notebook: string;
       mugs: string;
     };
@@ -145,6 +146,7 @@ export const siteContent: SiteContent = {
       title: "PsicoJazmin",
       eyebrow: "Identidad aplicada",
       headline: "Mejor versión",
+      identity: "/assets/psicojazmin/identity.webp",
       notebook: "/assets/psicojazmin/notebook.webp",
       mugs: "/assets/psicojazmin/tazas.webp",
     },

@@ -37,8 +37,8 @@ export function VisualSliceMotion() {
 
         const brandScenes = gsap.utils.toArray<HTMLElement>(".brand-work");
         brandScenes.forEach((scene) => {
+          const isSissy = scene.classList.contains("brand-work--sissy");
           const intro = scene.querySelector<HTMLElement>(".brand-work__intro");
-          const visuals = gsap.utils.toArray<HTMLElement>(".brand-work__video-card, .brand-work__image-card", scene);
 
           if (intro) {
             gsap.fromTo(
@@ -58,29 +58,70 @@ export function VisualSliceMotion() {
             );
           }
 
-          visuals.forEach((visual, index) => {
+          if (isSissy) {
+            const video = scene.querySelector<HTMLElement>(".brand-work__video-card");
+            const campaign = scene.querySelector<HTMLElement>(".brand-work__image-card--sissy");
+            if (video) {
+              gsap.fromTo(
+                video,
+                { autoAlpha: 0.45, y: 28, rotate: -1.5, clipPath: "inset(0 0 18% 0 round 1rem)" },
+                {
+                  autoAlpha: 1,
+                  y: 0,
+                  rotate: 0,
+                  clipPath: "inset(0 0 0% 0 round 1rem)",
+                  ease: "none",
+                  scrollTrigger: { trigger: video, start: desktop ? "top 82%" : "top 88%", end: desktop ? "top 42%" : "top 48%", scrub: 0.65 },
+                },
+              );
+            }
+            if (campaign) {
+              gsap.fromTo(
+                campaign,
+                { autoAlpha: 0, x: desktop ? 54 : 18, y: 14, rotate: 1.25, clipPath: "inset(0 0 0 22% round 1rem)" },
+                {
+                  autoAlpha: 1,
+                  x: 0,
+                  y: 0,
+                  rotate: 0,
+                  clipPath: "inset(0 0 0 0% round 1rem)",
+                  ease: "none",
+                  scrollTrigger: { trigger: campaign, start: desktop ? "top 78%" : "top 86%", end: desktop ? "top 38%" : "top 46%", scrub: 0.7 },
+                },
+              );
+            }
+            return;
+          }
+
+          const identity = scene.querySelector<HTMLElement>(".brand-work__identity-card");
+          const notebook = scene.querySelector<HTMLElement>(".brand-work__image-card--notebook");
+          const mugs = scene.querySelector<HTMLElement>(".brand-work__image-card--mugs");
+          if (identity) {
             gsap.fromTo(
-              visual,
-              {
-                autoAlpha: 0.58,
-                y: desktop ? 24 : 16,
-                x: desktop ? (index % 2 === 0 ? -12 : 12) : 0,
-                clipPath: "inset(5% 4% 5% 4% round 1rem)",
-                scale: 0.975,
-              },
+              identity,
+              { autoAlpha: 0.35, scale: 0.92, y: 24, clipPath: "inset(9% 7% 9% 7% round 1rem)" },
               {
                 autoAlpha: 1,
                 y: 0,
-                x: 0,
-                clipPath: "inset(0% 0% 0% 0% round 1rem)",
                 scale: 1,
                 ease: "none",
-                scrollTrigger: {
-                  trigger: visual,
-                  start: desktop ? "top 84%" : "top 92%",
-                  end: desktop ? "top 42%" : "top 50%",
-                  scrub: 0.65,
-                },
+                clipPath: "inset(0% 0% 0% 0% round 1rem)",
+                scrollTrigger: { trigger: identity, start: desktop ? "top 82%" : "top 88%", end: desktop ? "top 42%" : "top 50%", scrub: 0.65 },
+              },
+            );
+          }
+          [notebook, mugs].forEach((visual, index) => {
+            if (!visual) return;
+            gsap.fromTo(
+              visual,
+              { autoAlpha: 0.4, x: (index === 0 ? -1 : 1) * (desktop ? 42 : 14), y: desktop ? 18 : 10, clipPath: "inset(7% 5% 7% 5% round 1rem)" },
+              {
+                autoAlpha: 1,
+                x: 0,
+                y: 0,
+                clipPath: "inset(0% 0% 0% 0% round 1rem)",
+                ease: "none",
+                scrollTrigger: { trigger: visual, start: desktop ? "top 82%" : "top 88%", end: desktop ? "top 42%" : "top 48%", scrub: 0.65 },
               },
             );
           });
