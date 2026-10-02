@@ -286,6 +286,26 @@ export function VisualSliceMotion() {
       sequence.to(sceneVisual, { scale: 0.96, yPercent: -3, autoAlpha: 0.78, duration: 0.45, ease: "none" });
     });
 
+    motion.add("(prefers-reduced-motion: no-preference)", () => {
+      const reveals = gsap.utils.toArray<HTMLElement>("[data-story-reveal]");
+      reveals.forEach((element, index) => {
+        gsap.fromTo(element,
+          { autoAlpha: 0.18, y: window.innerWidth <= 700 ? 30 : 58, clipPath: "inset(0 0 22% 0)" },
+          { autoAlpha: 1, y: 0, clipPath: "inset(0 0 0 0)", ease: "none", scrollTrigger: {
+            trigger: element, start: window.innerWidth <= 700 ? "top 90%" : "top 84%", end: window.innerWidth <= 700 ? "top 45%" : "top 38%", scrub: window.innerWidth <= 700 ? 0.4 : 0.7, invalidateOnRefresh: true,
+          } },
+        );
+        if (element.classList.contains("world")) {
+          gsap.fromTo(element.querySelector("h3"), { x: 24 + (index % 2) * 12, autoAlpha: 0.5 }, { x: 0, autoAlpha: 1, ease: "none", scrollTrigger: { trigger: element, start: "top 82%", end: "top 38%", scrub: 0.55 } });
+        }
+      });
+      const pause = document.querySelector<HTMLElement>(".story-pause h2");
+      if (pause) gsap.fromTo(pause, { y: 64, autoAlpha: 0.45, clipPath: "inset(0 0 24% 0)" }, { y: 0, autoAlpha: 1, clipPath: "inset(0 0 0 0)", ease: "none", scrollTrigger: { trigger: ".story-pause", start: "top 82%", end: "center 44%", scrub: 0.65 } });
+      const cta = document.querySelector<HTMLElement>(".final-cta h2");
+      if (cta) gsap.fromTo(cta, { y: 44, autoAlpha: 0.4 }, { y: 0, autoAlpha: 1, ease: "none", scrollTrigger: { trigger: ".final-cta", start: "top 82%", end: "center 46%", scrub: 0.6 } });
+      requestAnimationFrame(() => ScrollTrigger.refresh());
+    });
+
     return () => motion.revert();
   }, []);
 

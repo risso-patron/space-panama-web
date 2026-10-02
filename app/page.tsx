@@ -1,8 +1,10 @@
+import "./storyboard.css";
 import { Hero } from "@/components/hero";
 import { Manifesto } from "@/components/manifesto";
 import { SelectedWork } from "@/components/selected-work";
 import { BrandWorkScenes } from "@/components/brand-work-scenes";
 import { VisualSliceMotion } from "@/components/visual-slice-motion";
+import { HomeStoryboard } from "@/components/home-storyboard";
 import { resolveContentAdapter } from "@/lib/adapters/content-adapter";
 
 export default async function Home() {
@@ -16,7 +18,8 @@ export default async function Home() {
       <Manifesto manifesto={content.manifesto} />
       <SelectedWork project={featuredProject} />
       <BrandWorkScenes items={content.brandWork} />
-      <footer className="footer" aria-labelledby="contact-title">
+      <HomeStoryboard />
+      <footer className="footer" id="contacto" aria-labelledby="contact-title">
         <div>
           <p className="eyebrow">Contacto</p>
           <h2 id="contact-title">{content.contact.title}</h2>
