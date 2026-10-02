@@ -35,6 +35,57 @@ export function VisualSliceMotion() {
           ease: "power2.out",
         });
 
+        const brandScenes = gsap.utils.toArray<HTMLElement>(".brand-work");
+        brandScenes.forEach((scene) => {
+          const intro = scene.querySelector<HTMLElement>(".brand-work__intro");
+          const visuals = gsap.utils.toArray<HTMLElement>(".brand-work__video-card, .brand-work__image-card", scene);
+
+          if (intro) {
+            gsap.fromTo(
+              intro,
+              { autoAlpha: 0.55, y: 20 },
+              {
+                autoAlpha: 1,
+                y: 0,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: intro,
+                  start: desktop ? "top 82%" : "top 90%",
+                  end: desktop ? "top 46%" : "top 56%",
+                  scrub: 0.55,
+                },
+              },
+            );
+          }
+
+          visuals.forEach((visual, index) => {
+            gsap.fromTo(
+              visual,
+              {
+                autoAlpha: 0.58,
+                y: desktop ? 24 : 16,
+                x: desktop ? (index % 2 === 0 ? -12 : 12) : 0,
+                clipPath: "inset(5% 4% 5% 4% round 1rem)",
+                scale: 0.975,
+              },
+              {
+                autoAlpha: 1,
+                y: 0,
+                x: 0,
+                clipPath: "inset(0% 0% 0% 0% round 1rem)",
+                scale: 1,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: visual,
+                  start: desktop ? "top 84%" : "top 92%",
+                  end: desktop ? "top 42%" : "top 50%",
+                  scrub: 0.65,
+                },
+              },
+            );
+          });
+        });
+
         if (!desktop) {
           const manifestoSteps = gsap.utils.toArray<HTMLElement>(".scene--manifesto .manifesto-step");
           manifestoSteps.forEach((step) => {
