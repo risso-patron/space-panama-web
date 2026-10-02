@@ -32,7 +32,7 @@ export function BrandWorkScenes({ items }: BrandWorkScenesProps) {
                   <video
                     controls
                     playsInline
-                    preload="metadata"
+                    preload="none"
                     poster={item.poster}
                     aria-label="Video de 5 acciones para tener orden y tranquilidad"
                   >

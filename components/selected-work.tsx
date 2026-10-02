@@ -16,7 +16,7 @@ export function SelectedWork({ project }: SelectedWorkProps) {
         <div className="work-story__scene" aria-label={`Narrativa visual de ${project.title}`}>
           <figure className="work-story__main">
             {project.assets.video ? (
-              <video className="work-story__video" autoPlay loop muted playsInline poster={project.assets.poster} aria-label="Video horizontal de Don Ceviche">
+              <video className="work-story__video" controls muted playsInline preload="none" poster={project.assets.poster} aria-label="Video horizontal de Don Ceviche">
                 <source src={project.assets.video} type="video/mp4" />
               </video>
             ) : (
