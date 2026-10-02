@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { setupSceneContinuity } from "@/components/motion/scene-continuity";
 
 export function VisualSliceMotion() {
   useEffect(() => {
@@ -22,6 +23,8 @@ export function VisualSliceMotion() {
 
         if (reduceMotion) return;
 
+        setupSceneContinuity(desktop);
+
         gsap.from(".motion-headline", {
           yPercent: 12,
           opacity: 0,
@@ -37,7 +40,6 @@ export function VisualSliceMotion() {
 
         const brandScenes = gsap.utils.toArray<HTMLElement>(".brand-work");
         brandScenes.forEach((scene) => {
-          const isSissy = scene.classList.contains("brand-work--sissy");
           const intro = scene.querySelector<HTMLElement>(".brand-work__intro");
 
           if (intro) {
@@ -58,37 +60,31 @@ export function VisualSliceMotion() {
             );
           }
 
+          const isSissy = scene.classList.contains("brand-work--sissy");
           if (isSissy) {
+            const visuals = scene.querySelector<HTMLElement>(".brand-work__visuals--sissy");
             const video = scene.querySelector<HTMLElement>(".brand-work__video-card");
             const campaign = scene.querySelector<HTMLElement>(".brand-work__image-card--sissy");
-            if (video) {
-              gsap.fromTo(
-                video,
-                { autoAlpha: 0.45, y: 28, rotate: -1.5, clipPath: "inset(0 0 18% 0 round 1rem)" },
-                {
-                  autoAlpha: 1,
-                  y: 0,
-                  rotate: 0,
-                  clipPath: "inset(0 0 0% 0 round 1rem)",
-                  ease: "none",
-                  scrollTrigger: { trigger: video, start: desktop ? "top 82%" : "top 88%", end: desktop ? "top 42%" : "top 48%", scrub: 0.65 },
+            if (visuals && video && campaign) {
+              const sequence = gsap.timeline({
+                scrollTrigger: {
+                  trigger: visuals,
+                  start: desktop ? "top 88%" : "top 92%",
+                  end: desktop ? "bottom 12%" : "bottom 18%",
+                  scrub: desktop ? 1 : 0.7,
+                  invalidateOnRefresh: true,
                 },
+              });
+              sequence.fromTo(video,
+                { autoAlpha: 0.15, x: desktop ? -96 : -28, y: desktop ? 42 : 20, scale: 0.91, clipPath: "inset(12% 0 18% 0 round 1rem)" },
+                { autoAlpha: 1, x: 0, y: 0, scale: 1, clipPath: "inset(0 0 0 0 round 1rem)", duration: 1.2, ease: "none" },
               );
-            }
-            if (campaign) {
-              gsap.fromTo(
-                campaign,
-                { autoAlpha: 0, x: desktop ? 54 : 18, y: 14, rotate: 1.25, clipPath: "inset(0 0 0 22% round 1rem)" },
-                {
-                  autoAlpha: 1,
-                  x: 0,
-                  y: 0,
-                  rotate: 0,
-                  clipPath: "inset(0 0 0 0% round 1rem)",
-                  ease: "none",
-                  scrollTrigger: { trigger: campaign, start: desktop ? "top 78%" : "top 86%", end: desktop ? "top 38%" : "top 46%", scrub: 0.7 },
-                },
+              sequence.fromTo(campaign,
+                { autoAlpha: 0, x: desktop ? 110 : 32, y: desktop ? 34 : 18, scale: 0.94, clipPath: "inset(0 0 0 42% round 1rem)" },
+                { autoAlpha: 1, x: 0, y: 0, scale: 1, clipPath: "inset(0 0 0 0 round 1rem)", duration: 1, ease: "none" },
+                "+=0.28",
               );
+              sequence.to(video, { y: desktop ? -32 : -14, scale: 0.96, autoAlpha: 0.72, duration: 0.65, ease: "none" }, "-=0.2");
             }
             return;
           }
@@ -96,35 +92,32 @@ export function VisualSliceMotion() {
           const identity = scene.querySelector<HTMLElement>(".brand-work__identity-card");
           const notebook = scene.querySelector<HTMLElement>(".brand-work__image-card--notebook");
           const mugs = scene.querySelector<HTMLElement>(".brand-work__image-card--mugs");
-          if (identity) {
-            gsap.fromTo(
-              identity,
-              { autoAlpha: 0.35, scale: 0.92, y: 24, clipPath: "inset(9% 7% 9% 7% round 1rem)" },
-              {
-                autoAlpha: 1,
-                y: 0,
-                scale: 1,
-                ease: "none",
-                clipPath: "inset(0% 0% 0% 0% round 1rem)",
-                scrollTrigger: { trigger: identity, start: desktop ? "top 82%" : "top 88%", end: desktop ? "top 42%" : "top 50%", scrub: 0.65 },
+          const visuals = scene.querySelector<HTMLElement>(".brand-work__visuals--psicojazmin");
+          if (visuals && identity && notebook && mugs) {
+            const sequence = gsap.timeline({
+              scrollTrigger: {
+                trigger: visuals,
+                start: desktop ? "top 88%" : "top 92%",
+                end: desktop ? "bottom 10%" : "bottom 16%",
+                scrub: desktop ? 1 : 0.7,
+                invalidateOnRefresh: true,
               },
+            });
+            sequence.fromTo(identity,
+              { autoAlpha: 0.08, scale: 0.78, y: desktop ? 58 : 30, clipPath: "inset(14% 10% 14% 10% round 1rem)" },
+              { autoAlpha: 1, scale: 1, y: 0, clipPath: "inset(0 0 0 0 round 1rem)", duration: 0.9, ease: "none" },
+            );
+            sequence.fromTo(notebook,
+              { autoAlpha: 0, x: desktop ? -120 : -34, y: 24, clipPath: "inset(0 38% 0 0 round 1rem)" },
+              { autoAlpha: 1, x: 0, y: 0, clipPath: "inset(0 0 0 0 round 1rem)", duration: 0.85, ease: "none" },
+              "+=0.18",
+            );
+            sequence.fromTo(mugs,
+              { autoAlpha: 0, x: desktop ? 120 : 34, y: 20, scale: 0.96, clipPath: "inset(0 0 0 38% round 1rem)" },
+              { autoAlpha: 1, x: 0, y: 0, scale: 1, clipPath: "inset(0 0 0 0 round 1rem)", duration: 0.85, ease: "none" },
+              "+=0.18",
             );
           }
-          [notebook, mugs].forEach((visual, index) => {
-            if (!visual) return;
-            gsap.fromTo(
-              visual,
-              { autoAlpha: 0.4, x: (index === 0 ? -1 : 1) * (desktop ? 42 : 14), y: desktop ? 18 : 10, clipPath: "inset(7% 5% 7% 5% round 1rem)" },
-              {
-                autoAlpha: 1,
-                x: 0,
-                y: 0,
-                clipPath: "inset(0% 0% 0% 0% round 1rem)",
-                ease: "none",
-                scrollTrigger: { trigger: visual, start: desktop ? "top 82%" : "top 88%", end: desktop ? "top 42%" : "top 48%", scrub: 0.65 },
-              },
-            );
-          });
         });
 
         if (!desktop) {
@@ -152,66 +145,40 @@ export function VisualSliceMotion() {
 
           const workScene = document.querySelector<HTMLElement>(".scene--work");
           const workMedia = document.querySelector<HTMLElement>(".work-story__main");
+          const workSceneVisual = document.querySelector<HTMLElement>(".work-story__scene");
           const workLayers = gsap.utils.toArray<HTMLElement>(".scene--work .work-story__layer");
           const workOutro = document.querySelector<HTMLElement>(".work-story__outro");
 
-          if (workScene && workMedia) {
-            gsap.fromTo(
-              workMedia,
-              { clipPath: "inset(7% 5% 7% 5% round 1rem)", scale: 0.965 },
-              {
-                clipPath: "inset(0% 0% 0% 0% round 1rem)",
-                scale: 1,
-                ease: "none",
-                scrollTrigger: {
-                  trigger: workScene,
-                  start: "top 78%",
-                  end: "center 45%",
-                  scrub: 0.65,
-                  invalidateOnRefresh: true,
-                },
+          if (workScene && workSceneVisual && workMedia && workLayers.length === 2 && workOutro) {
+            const sequence = gsap.timeline({
+              scrollTrigger: {
+                trigger: workScene,
+                start: "top 88%",
+                end: "bottom 14%",
+                scrub: 1,
+                invalidateOnRefresh: true,
               },
+            });
+            sequence.fromTo(workMedia,
+              { clipPath: "inset(18% 22% 18% 22% round 1rem)", scale: 0.82 },
+              { clipPath: "inset(0 0 0 0 round 1rem)", scale: 1, duration: 1.2, ease: "none" },
             );
-          }
-
-          workLayers.forEach((layer, index) => {
-            gsap.fromTo(
-              layer,
-              { x: index === 0 ? 14 : -14, y: 10, autoAlpha: 0.45 },
-              {
-                x: 0,
-                y: 0,
-                autoAlpha: 1,
-                ease: "none",
-                scrollTrigger: {
-                  trigger: workMedia ?? layer,
-                  start: index === 0 ? "top 68%" : "center 58%",
-                  end: index === 0 ? "center 42%" : "bottom 38%",
-                  scrub: 0.7,
-                  invalidateOnRefresh: true,
-                },
-              },
+            sequence.fromTo(workLayers[0],
+              { xPercent: 38, yPercent: 18, autoAlpha: 0, clipPath: "inset(0 0 0 48% round 1rem)" },
+              { xPercent: 0, yPercent: 0, autoAlpha: 1, clipPath: "inset(0 0 0 0 round 1rem)", duration: 0.85, ease: "none" },
+              "+=0.12",
             );
-          });
-
-          if (workOutro) {
-            gsap.fromTo(
-              workOutro,
-              { autoAlpha: 0.45, y: 18, clipPath: "inset(0 0 12% 0)" },
-              {
-                autoAlpha: 1,
-                y: 0,
-                clipPath: "inset(0 0 0% 0)",
-                ease: "none",
-                scrollTrigger: {
-                  trigger: workOutro,
-                  start: "top 88%",
-                  end: "top 52%",
-                  scrub: 0.6,
-                  invalidateOnRefresh: true,
-                },
-              },
+            sequence.fromTo(workLayers[1],
+              { xPercent: -34, yPercent: -18, autoAlpha: 0, clipPath: "inset(0 48% 0 0 round 1rem)" },
+              { xPercent: 0, yPercent: 0, autoAlpha: 1, clipPath: "inset(0 0 0 0 round 1rem)", duration: 0.85, ease: "none" },
+              "+=0.12",
             );
+            sequence.fromTo(workOutro,
+              { autoAlpha: 0.25, y: 38, clipPath: "inset(0 0 18% 0)" },
+              { autoAlpha: 1, y: 0, clipPath: "inset(0 0 0 0)", duration: 0.75, ease: "none" },
+              "+=0.25",
+            );
+            sequence.to(workSceneVisual, { scale: 0.96, yPercent: -3, autoAlpha: 0.78, duration: 0.45, ease: "none" });
           }
 
           requestAnimationFrame(() => ScrollTrigger.refresh());
@@ -249,7 +216,7 @@ export function VisualSliceMotion() {
             scrollTrigger: {
               trigger: manifesto,
               start: "top top",
-              end: () => `+=${window.innerHeight * (steps.length - 1)}`,
+              end: () => `+=${window.innerHeight * (steps.length - 1 + 0.42)}`,
               pin: ".manifesto__stage",
               scrub: 0.65,
               invalidateOnRefresh: true,
@@ -278,6 +245,11 @@ export function VisualSliceMotion() {
               at,
             );
           });
+          timeline.to(
+            steps[steps.length - 1],
+            { autoAlpha: 0.68, y: -14, scale: 0.97, duration: 0.42, ease: "none" },
+            steps.length - 1,
+          );
           if (progress) timeline.to(progress, { scaleX: 1, duration: steps.length - 1 }, 0);
 
           requestAnimationFrame(() => ScrollTrigger.refresh());
@@ -291,40 +263,27 @@ export function VisualSliceMotion() {
       const workMedia = document.querySelector<HTMLElement>(".work-story__main");
       if (!workScene || !workMedia) return;
 
-      gsap.fromTo(
-        workMedia,
-        { clipPath: "inset(12% 14% 12% 14% round 1.25rem)", scale: 0.9 },
-        {
-          clipPath: "inset(0% 0% 0% 0% round 1.25rem)",
-          scale: 1,
-          scrollTrigger: {
-            trigger: workScene,
-            start: "top 72%",
-            end: "center center",
-            scrub: 0.7,
-          },
-        },
+      const sceneVisual = workScene.querySelector<HTMLElement>(".work-story__scene");
+      const layers = gsap.utils.toArray<HTMLElement>(".work-story__layer");
+      const outro = document.querySelector<HTMLElement>(".work-story__outro");
+      if (!sceneVisual || layers.length !== 2 || !outro) return;
+      const sequence = gsap.timeline({
+        scrollTrigger: { trigger: workScene, start: "top 86%", end: "bottom 10%", scrub: 1.1, invalidateOnRefresh: true },
+      });
+      sequence.fromTo(workMedia,
+        { clipPath: "inset(18% 22% 18% 22% round 1.25rem)", scale: 0.82 },
+        { clipPath: "inset(0 0 0 0 round 1.25rem)", scale: 1, duration: 1.2, ease: "none" },
       );
-      gsap.fromTo(
-        ".work-story__layer--one",
-        { xPercent: 24, yPercent: 14, autoAlpha: 0 },
-        {
-          xPercent: 0,
-          yPercent: 0,
-          autoAlpha: 1,
-          scrollTrigger: { trigger: workMedia, start: "top 48%", end: "center center", scrub: 0.8 },
-        },
-      );
-      gsap.fromTo(
-        ".work-story__layer--two",
-        { xPercent: -20, yPercent: -12, autoAlpha: 0 },
-        {
-          xPercent: 0,
-          yPercent: 0,
-          autoAlpha: 1,
-          scrollTrigger: { trigger: workMedia, start: "center 55%", end: "bottom 38%", scrub: 0.8 },
-        },
-      );
+      sequence.fromTo(layers[0],
+        { xPercent: 40, yPercent: 18, autoAlpha: 0, clipPath: "inset(0 48% 0 0 round 1rem)" },
+        { xPercent: 0, yPercent: 0, autoAlpha: 1, clipPath: "inset(0 0 0 0 round 1rem)", duration: 0.9, ease: "none" }, "+=0.1");
+      sequence.fromTo(layers[1],
+        { xPercent: -36, yPercent: -18, autoAlpha: 0, clipPath: "inset(0 0 0 48% round 1rem)" },
+        { xPercent: 0, yPercent: 0, autoAlpha: 1, clipPath: "inset(0 0 0 0 round 1rem)", duration: 0.9, ease: "none" }, "+=0.1");
+      sequence.fromTo(outro,
+        { autoAlpha: 0.25, y: 40, clipPath: "inset(0 0 18% 0)" },
+        { autoAlpha: 1, y: 0, clipPath: "inset(0 0 0 0)", duration: 0.8, ease: "none" }, "+=0.25");
+      sequence.to(sceneVisual, { scale: 0.96, yPercent: -3, autoAlpha: 0.78, duration: 0.45, ease: "none" });
     });
 
     return () => motion.revert();
