@@ -304,6 +304,7 @@ h2 { max-width: 12ch; margin-bottom: 1.25rem; font-size: clamp(3rem,8vw,7rem); l
 .worlds-progress span { display:block; width:100%; height:100%; background:var(--lime); transform:scaleX(0); transform-origin:left; }
 .digital-act { display:grid; grid-template-columns:minmax(16rem,.75fr) minmax(0,1.25fr); gap:2rem 7vw; align-items:center; min-height:100svh; padding:14vh clamp(1.5rem,10vw,10rem); background:linear-gradient(180deg,#1d2d3a,#202d3b); }
 .digital-act__lead h2 { font-size:clamp(3rem,6.5vw,6.4rem); }
+.digital-act__word { display:inline-block; font-size:clamp(4rem,9vw,8rem); line-height:.88; letter-spacing:-.075em; text-transform:uppercase; transform-origin:left center; }
 .digital-act__lead>p:last-child { max-width:28rem; color:rgba(245,234,216,.7); line-height:1.7; }
 .digital-orbit { position:relative; display:grid; grid-template-columns:1fr 1fr; gap:3rem 1rem; padding:5rem 0; }
 .digital-orbit__line { position:absolute; inset:8% 12%; border:1px solid rgba(245,234,216,.18); border-radius:50%; transform:rotate(-18deg) scaleY(.55); }
@@ -391,4 +392,75 @@ h2 { max-width: 12ch; margin-bottom: 1.25rem; font-size: clamp(3rem,8vw,7rem); l
  .immersive .world-scene,.immersive .manifesto-step,.immersive .digital-name,.immersive .method-step { opacity:1!important; visibility:visible!important; transform:none!important; clip-path:none!important; }
  .worlds-act--pinned .world-scene { position:relative; inset:auto; }
  .worlds-act--pinned .worlds-stage { height:auto; }
+}
+
+/* V7 — Four Worlds and Method become two distinct, scroll-led sequences. */
+.thesis-pause { margin-top:-2vh; }
+.worlds-act { padding-block:8vh 0; }
+.worlds-act__intro { margin-bottom:0; padding-bottom:3vh; }
+.worlds-act--pinned .worlds-stage { min-height:0; height:88svh; overflow:hidden; }
+.worlds-act--pinned .world-scene {
+  position:absolute; inset:0; min-height:0; display:grid; grid-template-columns:minmax(0,1fr) auto; align-content:center; gap:1rem 4vw;
+  padding:clamp(2rem,7vw,7rem) clamp(1.5rem,7vw,7rem); border:0; border-radius:0; background:radial-gradient(ellipse at 74% 48%,color-mix(in srgb,var(--world-color),transparent 83%),transparent 48%);
+}
+.worlds-act--pinned .world-scene:nth-child(2) { text-align:right; }
+.worlds-act--pinned .world-scene:nth-child(2) ul { justify-items:end; }
+.worlds-act--pinned .world-scene:nth-child(3) { grid-template-columns:minmax(0,1fr); }
+.worlds-act--pinned .world-scene:nth-child(3) h3 { grid-column:1; grid-row:2; justify-self:end; text-align:right; }
+.worlds-act--pinned .world-scene:nth-child(3) ul { grid-column:1; grid-row:3; justify-self:start; }
+.worlds-act--pinned .world-scene:nth-child(4) { text-align:right; }
+.worlds-act--pinned .world-scene:nth-child(4) ul { justify-items:end; }
+.worlds-act--pinned .world-scene h3 { grid-column:1/-1; width:100%; max-width:100%; font-size:clamp(3rem,8.2vw,7rem); line-height:.9; letter-spacing:-.065em; overflow-wrap:anywhere; }
+.worlds-act--pinned .world-scene ul { display:grid; grid-template-columns:repeat(2,minmax(8rem,auto)); gap:.75rem 2rem; }
+.worlds-act--pinned .world-scene__rule { width:min(44vw,44rem); right:2%; top:10%; opacity:.72; }
+.worlds-progress { bottom:1.25rem; height:1px; }
+.worlds-progress span { transform:scaleX(0); transform-origin:left; }
+.digital-act { position:relative; isolation:isolate; overflow:hidden; }
+.digital-act::before { content:"DIGITAL"; position:absolute; z-index:-1; top:4%; right:-5%; color:rgba(245,234,216,.035); font:clamp(8rem,24vw,26rem)/.8 Georgia,serif; letter-spacing:-.09em; white-space:nowrap; }
+.digital-act__note { grid-column:2; justify-self:end; max-width:34rem; color:rgba(245,234,216,.46); font-size:.75rem; line-height:1.6; }
+.method-act { grid-template-rows:auto minmax(35rem,1fr); }
+.method-act header { align-self:end; }
+.method-sequence { min-height:clamp(32rem,72vh,52rem); display:block; overflow:hidden; }
+.method-sequence::before { top:auto; bottom:3.8rem; left:0; right:0; }
+.method-step { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; align-items:flex-start; gap:1rem; padding:0 0 3rem; border:0; font-size:clamp(3rem,5.6vw,6.5rem); letter-spacing:-.06em; }
+.method-step span { font-size:.68rem; letter-spacing:.2em; }
+.method-sequence__progress { position:absolute; z-index:3; left:0; right:0; bottom:3.75rem; height:2px; background:rgba(245,234,216,.2); }
+.method-sequence__progress i { display:block; width:100%; height:100%; background:var(--lime); transform:scaleX(0); transform-origin:left; }
+.space-conclusion { position:relative; isolation:isolate; overflow:hidden; }
+.space-conclusion::after { content:"SPACE"; position:absolute; z-index:-1; right:-4%; bottom:2%; color:rgba(245,234,216,.035); font:clamp(8rem,24vw,25rem)/.8 Georgia,serif; letter-spacing:-.1em; }
+.final-act { min-height:112svh; background:radial-gradient(ellipse at 74% 48%,rgba(103,127,156,.23),transparent 44%),linear-gradient(180deg,#202d3b,#132431); }
+@media(max-width:1100px) {
+ .worlds-act--pinned .worlds-stage { height:auto; min-height:0; overflow:visible; }
+ .worlds-act--pinned .world-scene,.worlds-act--pinned .world-scene:nth-child(n) { position:relative; inset:auto; min-height:38vh; grid-template-columns:1fr; text-align:left; padding:2rem 1.5rem; border-bottom:1px solid rgba(245,234,216,.15); background:radial-gradient(ellipse at 80% 50%,color-mix(in srgb,var(--world-color),transparent 88%),transparent 48%); }
+ .worlds-act--pinned .world-scene:nth-child(n) h3,.worlds-act--pinned .world-scene:nth-child(n) ul { grid-column:1; grid-row:auto; justify-items:start; }
+ .worlds-act--pinned .world-scene h3 { width:100%; font-size:clamp(2.8rem,8.8vw,5.8rem); overflow-wrap:anywhere; }
+ .worlds-act--pinned .world-scene ul { grid-template-columns:repeat(2,minmax(0,1fr)); }
+ .method-act { grid-template-rows:auto auto; }
+ .method-sequence { min-height:0; display:grid; grid-template-columns:1fr 1fr; gap:0 .8rem; overflow:visible; }
+ .method-sequence::before { top:50%; bottom:auto; }
+ .method-step { position:relative; inset:auto; display:flex; flex-direction:row; align-items:baseline; gap:.7rem; padding:1.2rem 0; border-bottom:1px solid rgba(245,234,216,.15); font-size:clamp(1rem,3vw,1.8rem); letter-spacing:normal; }
+ .method-sequence__progress { display:none; }
+ .digital-act__note { grid-column:1; justify-self:start; }
+}
+@media(max-width:700px) {
+ .worlds-act--pinned .world-scene,.worlds-act--pinned .world-scene:nth-child(n) { min-height:36vh; padding:1.5rem .5rem; }
+ .worlds-act--pinned .world-scene h3 { width:100%; font-size:clamp(2.45rem,9vw,4rem); }
+ .digital-act__word { font-size:clamp(3.5rem,14vw,5.4rem); }
+ .worlds-act--pinned .world-scene ul { gap:.5rem; font-size:.82rem; }
+ .method-sequence { gap:0 .6rem; }
+ .method-step { flex-wrap:wrap; gap:.5rem; font-size:clamp(.9rem,4vw,1.15rem); }
+ .method-step span { font-size:.52rem; }
+ .final-act { min-height:92svh; }
+}
+@media(prefers-reduced-motion:reduce) {
+ .worlds-stage { display:grid; gap:0; }
+ .world-scene,.worlds-act--pinned .world-scene,.worlds-act--pinned .world-scene:nth-child(n) { position:relative; inset:auto; min-height:0; display:grid; grid-template-columns:1fr auto; gap:.8rem 2rem; padding:1.4rem 0; border:0; border-bottom:1px solid rgba(245,234,216,.14); border-radius:0; background:none; }
+ .world-scene h3 { grid-column:1; grid-row:1; font-size:clamp(2rem,4vw,3.2rem); }
+ .world-scene ul { grid-column:2; grid-row:1; display:grid; gap:.4rem; }
+ .world-scene__rule { display:none; }
+ .worlds-act--pinned .world-scene,.worlds-act--pinned .world-scene:nth-child(n) { position:relative; inset:auto; opacity:1!important; visibility:visible!important; transform:none!important; }
+ .worlds-act--pinned .worlds-stage { height:auto; min-height:0; }
+ .method-step { position:relative; inset:auto; opacity:1!important; visibility:visible!important; transform:none!important; }
+ .method-sequence { min-height:0; height:auto; overflow:visible; }
+ .method-sequence__progress { display:none; }
 }

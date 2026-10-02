@@ -141,18 +141,69 @@ export function ImmersiveMotion() {
       const worldsStage = document.querySelector<HTMLElement>(".worlds-stage");
       if (worlds && worldsStage && worldScenes.length && desktop) {
         worlds.classList.add("worlds-act--pinned");
-        gsap.set(worldScenes, { autoAlpha: 0, y: 70, scale: 0.96 });
-        gsap.set(worldScenes[0], { autoAlpha: 1, y: 0, scale: 1 });
-        const sequence = gsap.timeline({ scrollTrigger: { trigger: worldsStage, start: "top top", end: () => `+=${window.innerHeight * worldScenes.length * 1.25}`, pin: worldsStage, scrub: 0.8, invalidateOnRefresh: true } });
-        worldScenes.forEach((scene, i) => { if (i) sequence.to(worldScenes[i - 1], { autoAlpha: 0, y: -64, scale: 0.97, duration: 0.32 }, i - 0.15).fromTo(scene, { autoAlpha: 0, y: 72, scale: 0.96 }, { autoAlpha: 1, y: 0, scale: 1, duration: 0.48 }, i); });
-        gsap.to(".worlds-progress span", { scaleX: 1, ease: "none", scrollTrigger: { trigger: worldsStage, start: "top top", end: () => `+=${window.innerHeight * worldScenes.length * 1.25}`, scrub: true } });
+        gsap.set(worldScenes, { autoAlpha: 0, y: 90, scale: 0.88, xPercent: 4 });
+        gsap.set(worldScenes[0], { autoAlpha: 1, y: 0, scale: 1, xPercent: 0 });
+        worldScenes.forEach((scene, index) => scene.setAttribute("aria-hidden", String(index !== 0)));
+        const progress = worldsStage.querySelector<HTMLElement>(".worlds-progress");
+        const duration = worldScenes.length - 1;
+        const sequence = gsap.timeline({ scrollTrigger: {
+          trigger: worldsStage, start: "top top", end: () => `+=${window.innerHeight * worldScenes.length * 1.05}`,
+          pin: worldsStage, scrub: 0.9, invalidateOnRefresh: true, anticipatePin: 1,
+          onUpdate: (self) => {
+            const active = Math.min(worldScenes.length - 1, Math.floor(self.progress * worldScenes.length));
+            worldScenes.forEach((scene, index) => scene.setAttribute("aria-hidden", String(index !== active)));
+            progress?.setAttribute("aria-valuenow", String(active + 1));
+          },
+        } });
+        worldScenes.forEach((scene, i) => {
+          if (!i) return;
+          const previous = worldScenes[i - 1];
+          const at = i - 1;
+          sequence.to(previous, { autoAlpha: 0, y: -72, xPercent: -5, scale: 0.9, duration: 0.42, ease: "power2.in" }, at)
+            .fromTo(scene, { autoAlpha: 0, y: 90, xPercent: 6, scale: 0.88, clipPath: "inset(8% 12% 8% 0 round 0.8rem)" }, { autoAlpha: 1, y: 0, xPercent: 0, scale: 1, clipPath: "inset(0% round 0.8rem)", duration: 0.56, ease: "power3.out" }, at + 0.36);
+        });
+        if (progress?.firstElementChild) sequence.to(progress.firstElementChild, { scaleX: 1, ease: "none", duration }, 0);
+        const lastWorld = worldScenes[worldScenes.length - 1];
+        if (lastWorld) sequence.to(lastWorld, { scale: 0.82, y: -64, autoAlpha: 0.42, clipPath: "inset(12% 8% round 1rem)", duration: 0.38, ease: "power2.in" }, duration - 0.12);
+        requestAnimationFrame(() => ScrollTrigger.refresh());
       }
 
+      gsap.fromTo(".digital-act__word", { y: 72, scale: 0.72, autoAlpha: 0.28, clipPath: "inset(14% 0 14% 0)" }, { y: 0, scale: 1, autoAlpha: 1, clipPath: "inset(0% 0 0% 0)", ease: "none", scrollTrigger: { trigger: ".digital-act", start: "top 82%", end: "top 24%", scrub: 0.85 } });
       gsap.utils.toArray<HTMLElement>(".digital-name").forEach((name, i) => gsap.fromTo(name, { y: 52, autoAlpha: 0.25, x: i % 2 ? 38 : -38 }, { y: 0, autoAlpha: 1, x: 0, ease: "none", scrollTrigger: { trigger: name, start: "top 88%", end: "top 50%", scrub: 0.6 } }));
-      gsap.fromTo(".method-step", { x: (i) => i % 2 ? 72 : -72, autoAlpha: 0.28 }, { x: 0, autoAlpha: 1, stagger: 0.16, ease: "none", scrollTrigger: { trigger: ".method-sequence", start: "top 85%", end: "bottom 34%", scrub: 0.9 } });
+      const methodSteps = gsap.utils.toArray<HTMLElement>(".method-step");
+      const methodSequence = document.querySelector<HTMLElement>(".method-sequence");
+      if (desktop && methodSequence && methodSteps.length) {
+        gsap.set(methodSteps, { autoAlpha: 0, y: 90, scale: 0.94 });
+        gsap.set(methodSteps[0], { autoAlpha: 1, y: 0, scale: 1 });
+        methodSteps.forEach((step, index) => step.setAttribute("aria-hidden", String(index !== 0)));
+        const methodProgress = methodSequence.querySelector<HTMLElement>(".method-sequence__progress");
+        const methodTimeline = gsap.timeline({ scrollTrigger: {
+          trigger: methodSequence, start: "top top+=12%", end: () => `+=${window.innerHeight * methodSteps.length * 0.82}`,
+          pin: methodSequence, scrub: 0.85, invalidateOnRefresh: true, anticipatePin: 1,
+          onUpdate: (self) => {
+            const active = Math.min(methodSteps.length - 1, Math.floor(self.progress * methodSteps.length));
+            methodSteps.forEach((step, index) => step.setAttribute("aria-hidden", String(index !== active)));
+            methodProgress?.setAttribute("aria-valuenow", String(active + 1));
+          },
+        } });
+        methodSteps.forEach((step, index) => {
+          if (!index) return;
+          methodTimeline.to(methodSteps[index - 1], { autoAlpha: 0, x: -46, scale: 0.95, duration: 0.38 }, index - 1)
+            .fromTo(step, { autoAlpha: 0, x: 56, y: 24, scale: 0.94 }, { autoAlpha: 1, x: 0, y: 0, scale: 1, duration: 0.52, ease: "power2.out" }, index - 0.62);
+        });
+        if (methodProgress?.firstElementChild) methodTimeline.to(methodProgress.firstElementChild, { scaleX: 1, ease: "none", duration: methodSteps.length - 1 }, 0);
+      } else {
+        gsap.fromTo(methodSteps, { x: (i) => i % 2 ? 42 : -42, autoAlpha: 0.35 }, { x: 0, autoAlpha: 1, stagger: 0.12, ease: "none", scrollTrigger: { trigger: methodSequence, start: "top 85%", end: "bottom 34%", scrub: 0.75 } });
+      }
       gsap.fromTo(".space-conclusion h2, .final-act h2", { y: 62, autoAlpha: 0.4 }, { y: 0, autoAlpha: 1, stagger: 0.1, ease: "none", scrollTrigger: { trigger: ".space-conclusion", start: "top 82%", end: "bottom 42%", scrub: 0.8 } });
       requestAnimationFrame(refresh);
-      return () => { manifesto?.classList.remove("is-pinned"); worlds?.classList.remove("worlds-act--pinned"); chapter?.classList.remove("selected-work-chapter--horizontal"); };
+      return () => {
+        manifesto?.classList.remove("is-pinned");
+        worlds?.classList.remove("worlds-act--pinned");
+        worldScenes.forEach((scene) => scene.removeAttribute("aria-hidden"));
+        methodSteps.forEach((step) => step.removeAttribute("aria-hidden"));
+        chapter?.classList.remove("selected-work-chapter--horizontal");
+      };
     });
 
     media.add("(max-width: 1100px) and (prefers-reduced-motion: no-preference)", () => {

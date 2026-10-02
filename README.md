@@ -97,3 +97,10 @@ La escena Digital muestra únicamente los nombres aprobados; no hay material vis
 Para un acto Behind the Work, **no reutilizar artes finales ni material de campaña como backstage**. Se requiere evidencia de proceso original de Space: por ejemplo, grabación/fotos auténticas de producción audiovisual, preparación/ejecución de evento o sesión de trabajo real. Cada asset debe venir con contexto verificable (actividad/proyecto y fecha aproximada), identificación/atribución confirmada de las personas y permisos de uso. Si no se entrega evidencia que cumpla esto, mantener el acto omitido.
 
 Esta deuda es documentación interna: no mostrar estos requisitos, notas de ausencia ni placeholders en la experiencia pública.
+
+## V7 — continuidad Four Worlds → Digital → Method → Closing
+
+- Four Worlds se presenta como una sola escena de estados en desktop; tablet/móvil y reduced-motion conservan todas las capacidades como contenido legible en flujo.
+- El capítulo Digital actual solo muestra nombres aprobados: SOMOS Properties, HomePower PTY, SALDO y Provivir Panamá. El inventario de `public/assets/` en esta rama solo contiene piezas de Don Ceviche, Sissy, PsicoJazmin y el logo de Space; **no hay screenshots, capturas responsive, logos de cliente ni mockups verificados** para los cuatro proyectos digitales.
+- Para habilitar un showcase visual solicitar por cada proyecto: wordmark autorizado; capturas reales de Home desktop/móvil y una pantalla interior representativa; URL y fecha de captura; permiso de exhibición; sanitización de datos personales. No sintetizar screenshots ni mostrar carcasas de navegador vacías que puedan confundirse con el producto real.
+- Método se mantiene en seis verbos aprobados y la frase “No entregamos y desaparecemos.”; Space cierra la narrativa y “Cuéntanos.” permanece conceptual mientras no haya un canal confirmado.
