@@ -2,6 +2,7 @@ import { BrandWorkScenes } from "@/components/brand-work-scenes";
 import { Hero } from "@/components/hero";
 import { Manifesto } from "@/components/manifesto";
 import { ImmersiveMotion } from "@/components/immersive/immersive-motion";
+import { AtmosphericMotion } from "@/components/immersive/atmospheric-motion";
 import { SelectedWork } from "@/components/selected-work";
 import type { SiteContent } from "@/lib/space-content";
 
@@ -19,6 +20,12 @@ export function ImmersiveHome({ content }: { content: SiteContent }) {
   return (
     <main className="immersive" data-immersive>
       <ImmersiveMotion />
+      <AtmosphericMotion />
+      <div className="atmosphere-canvas" aria-hidden="true">
+        <span className="atmosphere-canvas__orb atmosphere-canvas__orb--primary" />
+        <span className="atmosphere-canvas__orb atmosphere-canvas__orb--secondary" />
+        <span className="atmosphere-canvas__orbit" />
+      </div>
       <div className="story-thread" aria-hidden="true"><span className="story-thread__line" /><span className="story-thread__index">SPACE / PANAMÁ</span></div>
       <div className="story-act story-act--opening" data-act="opening"><Hero hero={content.hero} /></div>
       <div className="story-act story-act--manifesto" data-act="manifesto"><Manifesto manifesto={content.manifesto} /></div>

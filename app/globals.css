@@ -474,3 +474,126 @@ h2 { max-width: 12ch; margin-bottom: 1.25rem; font-size: clamp(3rem,8vw,7rem); l
  .method-sequence { min-height:0; height:auto; overflow:visible; }
  .method-sequence__progress { display:none; }
 }
+
+/* V10 — one persistent atmosphere behind every act; narrative sections stay transparent. */
+.immersive {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  background: #111a25;
+}
+.immersive::before { content:none; }
+.atmosphere-canvas {
+  --case-tint: 0deg;
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  contain: strict;
+  background:
+    radial-gradient(ellipse at 48% 50%,rgba(38,51,68,.22),transparent 68%),
+    linear-gradient(155deg,#17222f 0%,#111a25 54%,#101923 100%);
+}
+.atmosphere-canvas[data-work-phase="0"] { --case-tint:-4deg; }
+.atmosphere-canvas[data-work-phase="1"] { --case-tint:5deg; }
+.atmosphere-canvas[data-work-phase="2"] { --case-tint:0deg; }
+.immersive .hero__atmosphere {
+  border:0;
+  border-radius:54% 46% 59% 41% / 47% 56% 44% 53%;
+  background:radial-gradient(ellipse at 48% 49%,rgba(135,155,180,.19),rgba(102,121,149,.095) 37%,rgba(64,79,101,.035) 57%,transparent 73%);
+  box-shadow:0 0 8rem rgba(104,127,155,.075);
+}
+.immersive .hero__atmosphere::before,.immersive .hero__atmosphere::after {
+  inset:10% 7%;
+  border:0;
+  border-radius:inherit;
+  background:radial-gradient(ellipse at 50% 50%,rgba(150,165,183,.075),transparent 67%);
+  filter:blur(12px);
+  transform:scale(1.08,.78);
+}
+.immersive .hero__atmosphere::after { inset:24% 20%; opacity:.8; transform:scale(.94,.72); }
+.atmosphere-canvas::before {
+  content:"";
+  position:absolute;
+  inset:-14%;
+  opacity:.52;
+  background:radial-gradient(ellipse at 72% 38%,rgba(124,144,169,.12),transparent 43%),radial-gradient(ellipse at 19% 73%,rgba(130,105,111,.075),transparent 42%);
+}
+.atmosphere-canvas::after {
+  content:"";
+  position:absolute;
+  width:min(118vw,118rem);
+  height:min(62vw,67rem);
+  left:50%;
+  top:52%;
+  border:1px solid rgba(220,229,235,.045);
+  border-radius:50%;
+  transform:translate(-50%,-50%) rotate(-17deg) scaleY(.62);
+  box-shadow:0 0 0 7vw rgba(208,220,229,.009),0 0 0 14vw rgba(208,220,229,.007);
+}
+.atmosphere-canvas__orb {
+  position:absolute;
+  display:block;
+  border-radius:50%;
+  will-change:transform,opacity;
+}
+.atmosphere-canvas__orb--primary {
+  width:min(88vw,92rem);
+  aspect-ratio:1;
+  left:49%;
+  top:18%;
+  opacity:.48;
+  background:radial-gradient(circle at 50% 50%,rgba(128,151,179,.22),rgba(96,118,146,.105) 31%,rgba(56,73,96,.045) 52%,transparent 72%);
+  filter:blur(31px);
+  mix-blend-mode:screen;
+}
+.atmosphere-canvas__orb--secondary {
+  width:min(62vw,64rem);
+  aspect-ratio:1;
+  left:8%;
+  top:47%;
+  opacity:.3;
+  background:radial-gradient(circle at 50% 50%,rgba(153,126,126,.12),rgba(91,82,98,.065) 38%,transparent 70%);
+  filter:blur(37px) hue-rotate(var(--case-tint));
+  mix-blend-mode:screen;
+  transition:filter 1.25s ease-out;
+}
+.story-act--opening,.story-act--manifesto,.story-act--ceviche,
+.brand-work,.brand-work--sissy,.brand-work--psicojazmin,
+.thesis-pause,.worlds-act,.digital-act,.method-act,.space-conclusion,.final-act {
+  background-color:transparent;
+}
+.story-act--opening { background-image:linear-gradient(180deg,rgba(17,26,37,.025),rgba(17,26,37,.11)); }
+.story-act--manifesto { background-image:linear-gradient(180deg,rgba(17,26,37,.035),rgba(17,26,37,.16) 48%,rgba(17,26,37,.1)); }
+.story-act--ceviche { background-image:linear-gradient(180deg,rgba(17,26,37,.12),rgba(17,26,37,.08) 56%,rgba(17,26,37,.14)); }
+.brand-work { background-image:linear-gradient(180deg,rgba(17,26,37,.1),rgba(17,26,37,.16) 50%,rgba(17,26,37,.12)); }
+.brand-work--sissy,.brand-work--psicojazmin { background-image:none; }
+.thesis-pause { background-image:linear-gradient(180deg,rgba(17,26,37,.04),rgba(17,26,37,.24) 60%,rgba(17,26,37,.12)); }
+.selected-work-chapter { background:rgba(17,26,37,.15); }
+.worlds-act { background-image:linear-gradient(180deg,rgba(17,26,37,.08),rgba(17,26,37,.16)); }
+.world-scene { background:rgba(231,238,241,.018); border-color:rgba(224,232,237,.105); }
+.worlds-act--pinned .world-scene,.worlds-act--pinned .world-scene:nth-child(n) { background:rgba(231,238,241,.014); }
+.world-scene__rule { border-color:color-mix(in srgb,var(--world-color),transparent 84%); box-shadow:0 0 0 4vw color-mix(in srgb,var(--world-color),transparent 97%); }
+.digital-act,.method-act { background-image:linear-gradient(180deg,rgba(17,26,37,.08),rgba(17,26,37,.16)); }
+.digital-orbit__line { border-color:rgba(224,232,237,.11); }
+.method-sequence::before { background:linear-gradient(90deg,rgba(224,232,237,.02),rgba(224,232,237,.18),rgba(224,232,237,.02)); }
+.method-sequence__progress { background:rgba(224,232,237,.16); }
+.space-conclusion { background-image:linear-gradient(180deg,rgba(17,26,37,.08),rgba(17,26,37,.24)); }
+.final-act { background-image:linear-gradient(180deg,rgba(11,17,25,.19),rgba(10,16,23,.42)); }
+
+@media(max-width:1100px) {
+  .atmosphere-canvas__orb--primary { width:112vw; left:43%; filter:blur(25px); }
+  .atmosphere-canvas__orb--secondary { width:76vw; left:-10%; filter:blur(26px) hue-rotate(var(--case-tint)); }
+  .atmosphere-canvas::after { width:138vw; height:78vw; opacity:.68; }
+}
+@media(max-width:700px) {
+  .atmosphere-canvas__orb--primary { width:128vw; left:37%; top:12%; filter:blur(20px); }
+  .atmosphere-canvas__orb--secondary { width:92vw; left:-24%; top:54%; opacity:.22; filter:blur(21px) hue-rotate(var(--case-tint)); }
+  .atmosphere-canvas::after { width:160vw; height:112vw; top:45%; opacity:.52; }
+  .selected-work-chapter { background:rgba(17,26,37,.11); }
+}
+@media(prefers-reduced-motion:reduce) {
+  .atmosphere-canvas__orb { will-change:auto; }
+  .atmosphere-canvas__orb--secondary { transition:none; }
+}

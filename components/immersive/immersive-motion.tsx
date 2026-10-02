@@ -58,6 +58,7 @@ export function ImmersiveMotion() {
       const panels = track ? gsap.utils.toArray<HTMLElement>(".selected-work-panel", track) : [];
       const workProgress = chapter?.querySelector<HTMLElement>("[data-work-progress]");
       const progressFill = chapter?.querySelector<HTMLElement>(".selected-work-chapter__progress i");
+      const atmosphereCanvas = document.querySelector<HTMLElement>(".atmosphere-canvas");
       if (desktop && chapter && track && panels.length === 3) {
         chapter.classList.add("selected-work-chapter--horizontal");
         const distance = () => Math.max(0, track.scrollWidth - chapter.clientWidth);
@@ -67,6 +68,9 @@ export function ImmersiveMotion() {
           onUpdate: (self) => {
             const active = Math.min(2, Math.floor(self.progress * 3) + (self.progress === 1 ? 0 : 0));
             if (workProgress) workProgress.textContent = `${String(active + 1).padStart(2, "0")} / 03`;
+            if (atmosphereCanvas && atmosphereCanvas.dataset.workPhase !== String(active)) {
+              atmosphereCanvas.dataset.workPhase = String(active);
+            }
           },
         }});
         horizontal.to(track, { x: () => -distance(), ease: "none", duration: 3 });
@@ -203,6 +207,7 @@ export function ImmersiveMotion() {
         worldScenes.forEach((scene) => scene.removeAttribute("aria-hidden"));
         methodSteps.forEach((step) => step.removeAttribute("aria-hidden"));
         chapter?.classList.remove("selected-work-chapter--horizontal");
+        if (atmosphereCanvas) delete atmosphereCanvas.dataset.workPhase;
       };
     });
 
