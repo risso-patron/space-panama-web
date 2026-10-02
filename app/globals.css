@@ -330,6 +330,11 @@ h2 { max-width: 12ch; margin-bottom: 1.25rem; font-size: clamp(3rem,8vw,7rem); l
 .final-act nav a { border-bottom:1px solid rgba(245,234,216,.46); padding-bottom:.45rem; font-size:.88rem; letter-spacing:.08em; }
 .final-act nav a:hover { color:var(--lime); border-color:var(--lime); }
 .final-act__signature { position:absolute; bottom:2rem; right:clamp(1.5rem,6vw,6rem); color:rgba(245,234,216,.44); font-size:.6rem; letter-spacing:.25em; }
+.site-message { min-height:100svh; display:flex; flex-direction:column; justify-content:center; align-items:flex-start; padding:clamp(2rem,10vw,10rem); color:var(--cream); background:radial-gradient(ellipse at 74% 48%,rgba(103,127,156,.23),transparent 44%),linear-gradient(180deg,#303b4d,#132431); }
+.site-message h1 { max-width:12ch; margin-bottom:1.5rem; font-size:clamp(3.6rem,10vw,8rem); line-height:.88; }
+.site-message p:not(.eyebrow) { max-width:38rem; color:rgba(245,234,216,.75); font-size:clamp(1.05rem,2vw,1.3rem); line-height:1.65; }
+.site-message a,.site-message button { display:inline-flex; align-items:center; min-height:3rem; margin-top:.5rem; border:1px solid rgba(245,234,216,.42); border-radius:999px; padding:.6rem 1.2rem; color:inherit; background:transparent; font:inherit; cursor:pointer; }
+.site-message a:hover,.site-message button:hover { color:var(--lime); border-color:var(--lime); }
 @media(max-width:1100px) {
  .immersive .scene { grid-template-columns:1fr; }
  .story-thread { display:none; }
@@ -390,6 +395,7 @@ h2 { max-width: 12ch; margin-bottom: 1.25rem; font-size: clamp(3rem,8vw,7rem); l
  .final-act h2 { font-size:clamp(4rem,17vw,7rem); }
 }
 @media(prefers-reduced-motion:reduce) {
+ html { scroll-behavior:auto!important; }
  .immersive *, .immersive *::before, .immersive *::after { scroll-behavior:auto!important; animation-duration:.001ms!important; transition-duration:.001ms!important; }
  .immersive .story-thread__line { transform:none!important; }
  .immersive .world-scene,.immersive .manifesto-step,.immersive .digital-name,.immersive .method-step { opacity:1!important; visibility:visible!important; transform:none!important; clip-path:none!important; }

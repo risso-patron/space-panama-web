@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
+import { getSiteUrl } from "@/lib/site-url";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Space Panamá — Estrategia, creatividad y dirección digital",
   description:
     "Estudio creativo en Panamá. Unimos estrategia, creatividad y dirección digital para convertir ideas en experiencias de marca claras y memorables.",
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://space-panama-web.vercel.app"),
+  metadataBase: getSiteUrl(),
   alternates: { canonical: "/" },
   openGraph: {
     title: "Space Panamá — Estrategia, creatividad y dirección digital",
