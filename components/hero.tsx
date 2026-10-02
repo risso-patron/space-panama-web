@@ -14,10 +14,6 @@ export function Hero({ hero }: HeroProps) {
         <p className="eyebrow">{hero.eyebrow}</p>
         <h1 id="hero-title" className="motion-headline">{hero.title}</h1>
         <p className="hero__deck motion-reveal">{hero.deck}</p>
-        <div className="hero__actions motion-reveal" aria-label="Acciones principales">
-          <a href="#don-ceviche" className="button button--primary">{hero.primaryCta}</a>
-          <a href="#manifiesto" className="button button--ghost">{hero.secondaryCta}</a>
-        </div>
       </div>
       <div className="hero__atmosphere" aria-hidden="true" />
     </section>
