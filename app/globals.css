@@ -22,6 +22,7 @@ body {
   font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
 }
 a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, video:focus-visible, [tabindex]:focus-visible { outline:2px solid var(--lime); outline-offset:4px; }
 main { position: relative; overflow: clip; }
 main::before {
   content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 3;
@@ -324,8 +325,10 @@ h2 { max-width: 12ch; margin-bottom: 1.25rem; font-size: clamp(3rem,8vw,7rem); l
 .space-conclusion>p:last-child { max-width:38rem; color:rgba(245,234,216,.68); font-size:clamp(1rem,1.5vw,1.3rem); line-height:1.7; }
 .final-act { min-height:100svh; display:flex; flex-direction:column; justify-content:center; align-items:flex-start; padding:14vh clamp(1.5rem,12vw,12rem); overflow:hidden; background:radial-gradient(ellipse at 77% 48%,rgba(103,127,156,.18),transparent 40%),#182633; }
 .final-act h2 { max-width:14ch; margin-bottom:2rem; font-size:clamp(4rem,11vw,11rem); line-height:.84; }
-.final-act__link { display:flex; align-items:center; gap:1.5rem; border-bottom:1px solid rgba(245,234,216,.5); padding:.4rem 0 1rem; font:clamp(1.8rem,4vw,3.8rem)/1 Georgia,serif; }
-.final-act__link span { color:var(--gold); font:1.4rem/1 Inter,sans-serif; }
+.final-act__invitation { margin:0; color:var(--cream-strong); font:clamp(1.8rem,4vw,3.8rem)/1 Georgia,serif; }
+.final-act nav { display:flex; flex-wrap:wrap; gap:1rem 2rem; margin-top:1.5rem; }
+.final-act nav a { border-bottom:1px solid rgba(245,234,216,.46); padding-bottom:.45rem; font-size:.88rem; letter-spacing:.08em; }
+.final-act nav a:hover { color:var(--lime); border-color:var(--lime); }
 .final-act__signature { position:absolute; bottom:2rem; right:clamp(1.5rem,6vw,6rem); color:rgba(245,234,216,.44); font-size:.6rem; letter-spacing:.25em; }
 @media(max-width:1100px) {
  .immersive .scene { grid-template-columns:1fr; }
@@ -430,6 +433,7 @@ h2 { max-width: 12ch; margin-bottom: 1.25rem; font-size: clamp(3rem,8vw,7rem); l
 .space-conclusion::after { content:"SPACE"; position:absolute; z-index:-1; right:-4%; bottom:2%; color:rgba(245,234,216,.035); font:clamp(8rem,24vw,25rem)/.8 Georgia,serif; letter-spacing:-.1em; }
 .final-act { min-height:112svh; background:radial-gradient(ellipse at 74% 48%,rgba(103,127,156,.23),transparent 44%),linear-gradient(180deg,#202d3b,#132431); }
 @media(max-width:1100px) {
+ .immersive .manifesto__stage { min-height:0; }
  .worlds-act--pinned .worlds-stage { height:auto; min-height:0; overflow:visible; }
  .worlds-act--pinned .world-scene,.worlds-act--pinned .world-scene:nth-child(n) { position:relative; inset:auto; min-height:38vh; grid-template-columns:1fr; text-align:left; padding:2rem 1.5rem; border-bottom:1px solid rgba(245,234,216,.15); background:radial-gradient(ellipse at 80% 50%,color-mix(in srgb,var(--world-color),transparent 88%),transparent 48%); }
  .worlds-act--pinned .world-scene:nth-child(n) h3,.worlds-act--pinned .world-scene:nth-child(n) ul { grid-column:1; grid-row:auto; justify-items:start; }

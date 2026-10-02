@@ -123,8 +123,8 @@ export const siteContent: SiteContent = {
       signal: "Producto en primer plano, color vibrante, memoria costera y piezas listas para alimentar campañas.",
       palette: "Morado Don Ceviche, amarillo limón, tinta marina y crema editorial",
       assets: {
-        poster: "/assets/don-ceviche/post-7.png",
-        secondary: "/assets/don-ceviche/post-4.png",
+        poster: "/assets/don-ceviche/post-7.webp",
+        secondary: "/assets/don-ceviche/post-4.webp",
         video: "/assets/don-ceviche/post-3.mp4",
       },
     },
@@ -153,8 +153,10 @@ export const siteContent: SiteContent = {
   ],
   contact: {
     title: "Abramos la siguiente órbita.",
-    body:
-      "Esta base deja listo el punto de entrada para conectar contenido, leads y casos a una capa persistente cuando el proyecto lo autorice.",
-    channels: [],
+    body: "Cuéntanos qué quieres hacer crecer.",
+    channels: [
+      { label: "Email", value: "info@spaceventos.com", href: "mailto:info@spaceventos.com" },
+      { label: "WhatsApp", value: "+507 6784-7093", href: "https://wa.me/50767847093" },
+    ],
   },
 };

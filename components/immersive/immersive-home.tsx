@@ -65,7 +65,7 @@ export function ImmersiveHome({ content }: { content: SiteContent }) {
         <p>Unimos visión, criterio y producción para acompañar a las marcas desde la idea hasta cada punto de contacto.</p>
       </section>
       <footer className="final-act" data-act="closing" aria-labelledby="contact-title">
-        <p className="eyebrow">El siguiente capítulo empieza contigo</p><h2 id="contact-title">¿Qué quieres<br /><em>hacer crecer?</em></h2><p className="final-act__link">Cuéntanos.<span aria-hidden="true">↗</span></p>
+        <p className="eyebrow">El siguiente capítulo empieza contigo</p><h2 id="contact-title">¿Qué quieres<br /><em>hacer crecer?</em></h2><p className="final-act__invitation">Cuéntanos.</p>
         {content.contact.channels.length > 0 && <nav aria-label="Canales de contacto">{content.contact.channels.map((channel) => <a href={channel.href} key={channel.label}>{channel.label}: {channel.value}</a>)}</nav>}
         <span className="final-act__signature">SPACE · PANAMÁ</span>
       </footer>

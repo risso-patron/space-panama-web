@@ -24,7 +24,7 @@ export function ImmersiveMotion() {
       const fill = document.querySelector<HTMLElement>(".manifesto__progress-fill");
       const label = document.querySelector<HTMLElement>(".manifesto__progress-label");
       const bar = document.querySelector<HTMLElement>(".manifesto__progress");
-      if (manifesto && steps.length) {
+      if (desktop && manifesto && steps.length) {
         manifesto.classList.add("is-pinned");
         gsap.set(steps, { autoAlpha: 0, y: 42, scale: 0.96 });
         gsap.set(steps[0], { autoAlpha: 1, y: 0, scale: 1 });
@@ -207,7 +207,7 @@ export function ImmersiveMotion() {
     });
 
     media.add("(max-width: 1100px) and (prefers-reduced-motion: no-preference)", () => {
-      gsap.utils.toArray<HTMLElement>(".manifesto-step, .work-story__main, .work-story__layer, .brand-work__intro, .brand-work__video-card, .brand-work__image-card, .brand-work__identity-card, .thesis-pause h2, .world-scene, .digital-name, .method-step, .space-conclusion h2, .final-act h2").forEach((element, index) => {
+      gsap.utils.toArray<HTMLElement>(".manifesto-step, .world-scene").forEach((element, index) => {
         gsap.fromTo(element, { y: index % 2 ? 38 : 48, x: index % 2 ? 18 : -18, autoAlpha: 0.25, clipPath: "inset(0 0 14% 0)" }, { y: 0, x: 0, autoAlpha: 1, clipPath: "inset(0 0 0 0)", ease: "none", scrollTrigger: { trigger: element, start: "top 88%", end: "top 48%", scrub: 0.55, invalidateOnRefresh: true } });
       });
       requestAnimationFrame(() => ScrollTrigger.refresh());

@@ -104,3 +104,11 @@ Esta deuda es documentación interna: no mostrar estos requisitos, notas de ause
 - El capítulo Digital actual solo muestra nombres aprobados: SOMOS Properties, HomePower PTY, SALDO y Provivir Panamá. El inventario de `public/assets/` en esta rama solo contiene piezas de Don Ceviche, Sissy, PsicoJazmin y el logo de Space; **no hay screenshots, capturas responsive, logos de cliente ni mockups verificados** para los cuatro proyectos digitales.
 - Para habilitar un showcase visual solicitar por cada proyecto: wordmark autorizado; capturas reales de Home desktop/móvil y una pantalla interior representativa; URL y fecha de captura; permiso de exhibición; sanitización de datos personales. No sintetizar screenshots ni mostrar carcasas de navegador vacías que puedan confundirse con el producto real.
 - Método se mantiene en seis verbos aprobados y la frase “No entregamos y desaparecemos.”; Space cierra la narrativa y “Cuéntanos.” permanece conceptual mientras no haya un canal confirmado.
+
+## V8 — asset enrichment y polish
+
+- Los dos artes reales de Don Ceviche tienen derivados WebP para servir el mismo contenido visual con menos bytes; se conservan los PNG originales como fuentes.
+- El inventario local solo contiene assets de Don Ceviche, Sissy Méndez, PsicoJazmin y el logo de Space. La búsqueda de metadatos de Drive para los cuatro proyectos Digital y material de backstage no encontró evidencia disponible para esta tarea.
+- No se añadieron interfaces ficticias, mockups, BTS, testimonios ni resultados. Digital sigue como capítulo tipográfico con los cuatro nombres aprobados; Behind the Work, Testimonials y Results permanecen omitidos.
+- No hay canal de contacto guardado en el contenido base del repositorio; el sitio oficial actual de Space Eventos publica `info@spaceventos.com` y WhatsApp `+507 6784-7093`, por lo que esos dos destinos verificados se habilitan en el cierre. Instagram no se añadió sin verificarlo.
+- La metadata usa la URL pública de Vercel como fallback y `NEXT_PUBLIC_SITE_URL` como override para canonical y social metadata cuando se confirme el dominio final. No se asigna `spaceventos.com`.

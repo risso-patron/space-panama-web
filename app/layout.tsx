@@ -2,15 +2,25 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Space Panamá — Estudio creativo editorial",
+  title: "Space Panamá — Estrategia, creatividad y dirección digital",
   description:
-    "Base inicial de la nueva web de Space Panamá: estrategia, narrativa y dirección visual premium.",
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
+    "Estudio creativo en Panamá. Unimos estrategia, creatividad y dirección digital para convertir ideas en experiencias de marca claras y memorables.",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://space-panama-web.vercel.app"),
+  alternates: { canonical: "/" },
   openGraph: {
-    title: "Space Panamá — Estudio creativo editorial",
+    title: "Space Panamá — Estrategia, creatividad y dirección digital",
     description:
-      "Vertical slice inicial con Hero, Manifiesto y Don Ceviche como trabajo seleccionado.",
+      "Estudio creativo en Panamá. Estrategia, creatividad y dirección digital para marcas.",
     type: "website",
+    locale: "es_PA",
+    images: [{ url: "/assets/space/logo.png", width: 2275, height: 1166, alt: "Logo de Space Panamá" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Space Panamá — Estrategia, creatividad y dirección digital",
+    description:
+      "Estudio creativo en Panamá. Estrategia, creatividad y dirección digital para marcas.",
+    images: ["/assets/space/logo.png"],
   },
 };
 
