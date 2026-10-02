@@ -19,6 +19,27 @@ export type Project = {
   };
 };
 
+export type BrandWork =
+  | {
+      slug: "sissy";
+      title: string;
+      eyebrow: string;
+      headline: string;
+      description: string;
+      video: string;
+      poster: string;
+      campaignImage: string;
+    }
+  | {
+      slug: "psicojazmin";
+      title: string;
+      eyebrow: string;
+      headline: string;
+      identity: string;
+      notebook: string;
+      mugs: string;
+    };
+
 export type ContactChannel = {
   label: string;
   value: string;
@@ -40,6 +61,7 @@ export type SiteContent = {
     terms: ManifestoTerm[];
   };
   projects: Project[];
+  brandWork: BrandWork[];
   contact: {
     title: string;
     body: string;
@@ -105,6 +127,28 @@ export const siteContent: SiteContent = {
         secondary: "/assets/don-ceviche/post-4.png",
         video: "/assets/don-ceviche/post-3.mp4",
       },
+    },
+  ],
+  brandWork: [
+    {
+      slug: "sissy",
+      title: "Sissy Méndez",
+      eyebrow: "Contenido digital · Seguros",
+      headline: "5 acciones que te darán orden y tranquilidad",
+      description:
+        "El éxito financiero no es suerte, es orden. No te distraigas, asegúrate de tener estos puntos cubiertos. Un pequeño chequeo hoy evita grandes dolores de cabeza con la aseguradora mañana.",
+      video: "/assets/sissy/sissy-5-acciones.mp4",
+      poster: "/assets/sissy/sissy-5-acciones-poster.jpg",
+      campaignImage: "/assets/sissy/five-actions.webp",
+    },
+    {
+      slug: "psicojazmin",
+      title: "PsicoJazmin",
+      eyebrow: "Identidad aplicada",
+      headline: "Mejor versión",
+      identity: "/assets/psicojazmin/identity.webp",
+      notebook: "/assets/psicojazmin/notebook.webp",
+      mugs: "/assets/psicojazmin/tazas.webp",
     },
   ],
   contact: {

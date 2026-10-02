@@ -1,6 +1,7 @@
 import { Hero } from "@/components/hero";
 import { Manifesto } from "@/components/manifesto";
 import { SelectedWork } from "@/components/selected-work";
+import { BrandWorkScenes } from "@/components/brand-work-scenes";
 import { VisualSliceMotion } from "@/components/visual-slice-motion";
 import { resolveContentAdapter } from "@/lib/adapters/content-adapter";
 
@@ -14,6 +15,7 @@ export default async function Home() {
       <Hero hero={content.hero} />
       <Manifesto manifesto={content.manifesto} />
       <SelectedWork project={featuredProject} />
+      <BrandWorkScenes items={content.brandWork} />
       <footer className="footer" aria-labelledby="contact-title">
         <div>
           <p className="eyebrow">Contacto</p>
