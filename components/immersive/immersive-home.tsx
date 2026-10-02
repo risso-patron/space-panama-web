@@ -22,9 +22,18 @@ export function ImmersiveHome({ content }: { content: SiteContent }) {
       <div className="story-thread" aria-hidden="true"><span className="story-thread__line" /><span className="story-thread__index">SPACE / PANAMÁ</span></div>
       <div className="story-act story-act--opening" data-act="opening"><Hero hero={content.hero} /></div>
       <div className="story-act story-act--manifesto" data-act="manifesto"><Manifesto manifesto={content.manifesto} /></div>
-      <div className="selected-work" id="trabajo" aria-label="Trabajo seleccionado">
-        <div className="story-act story-act--ceviche" data-act="ceviche"><SelectedWork project={featuredProject} /></div>
-        <BrandWorkScenes items={content.brandWork} />
+      <div className="selected-work-chapter" id="trabajo" aria-label="Trabajo seleccionado" data-selected-work>
+        <header className="selected-work-chapter__rail"><p className="eyebrow">Selected work</p><span data-work-progress>01 / 03</span><span className="selected-work-chapter__progress"><i /></span></header>
+        <div className="selected-work-viewport">
+          <div className="selected-work-track">
+            <div className="selected-work-panel selected-work-panel--ceviche story-act story-act--ceviche" data-act="ceviche"><SelectedWork project={featuredProject} /></div>
+            {content.brandWork.map((item, index) => (
+              <div className={`selected-work-panel selected-work-panel--${item.slug}`} key={item.slug} data-work-panel={index + 1}>
+                <BrandWorkScenes items={[item]} />
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
       <section className="thesis-pause" data-act="thesis" aria-label="Tesis de Space">
         <p className="eyebrow">Una marca. Un sistema.</p>

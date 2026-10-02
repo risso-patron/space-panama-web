@@ -53,14 +53,52 @@ export function ImmersiveMotion() {
         gsap.to(".story-act--ceviche", { yPercent: -8, ease: "none", scrollTrigger: { trigger: manifesto, start: "bottom bottom", end: "bottom top", scrub: 0.7 } });
       }
 
-      const workItems = gsap.utils.toArray<HTMLElement>(".selected-work > .story-act, .selected-work > .brand-work");
-      workItems.forEach((item, index) => {
+      const chapter = document.querySelector<HTMLElement>("[data-selected-work]");
+      const track = chapter?.querySelector<HTMLElement>(".selected-work-track");
+      const panels = track ? gsap.utils.toArray<HTMLElement>(".selected-work-panel", track) : [];
+      const workProgress = chapter?.querySelector<HTMLElement>("[data-work-progress]");
+      const progressFill = chapter?.querySelector<HTMLElement>(".selected-work-chapter__progress i");
+      if (desktop && chapter && track && panels.length === 3) {
+        chapter.classList.add("selected-work-chapter--horizontal");
+        const distance = () => Math.max(0, track.scrollWidth - chapter.clientWidth);
+        const horizontal = gsap.timeline({ scrollTrigger: {
+          trigger: chapter, start: "top top", end: () => `+=${distance() * 1.65}`,
+          pin: chapter, scrub: 0.85, invalidateOnRefresh: true, anticipatePin: 1,
+          onUpdate: (self) => {
+            const active = Math.min(2, Math.floor(self.progress * 3) + (self.progress === 1 ? 0 : 0));
+            if (workProgress) workProgress.textContent = `${String(active + 1).padStart(2, "0")} / 03`;
+          },
+        }});
+        horizontal.to(track, { x: () => -distance(), ease: "none", duration: 3 });
+        if (progressFill) horizontal.to(progressFill, { scaleX: 1, ease: "none", duration: 3 }, 0);
+        const cevicheMain = panels[0]?.querySelector<HTMLElement>(".work-story__main");
+        const cevicheLayers = gsap.utils.toArray<HTMLElement>(".work-story__layer", panels[0]);
+        const sissyVideo = panels[1]?.querySelector<HTMLElement>(".brand-work__video-card");
+        const sissyArt = panels[1]?.querySelector<HTMLElement>(".brand-work__image-card--sissy");
+        const sissyCopy = panels[1]?.querySelector<HTMLElement>(".brand-work__description");
+        const identity = panels[2]?.querySelector<HTMLElement>(".brand-work__identity-card");
+        const notebookCard = panels[2]?.querySelector<HTMLElement>(".brand-work__image-card--notebook");
+        const mugCard = panels[2]?.querySelector<HTMLElement>(".brand-work__image-card--mugs");
+        if (cevicheMain) horizontal.fromTo(cevicheMain, { scale: .78, clipPath: "inset(18% 20% round 1.5rem)" }, { scale: 1, clipPath: "inset(0% 0% round 1.5rem)", duration: .72 }, 0);
+        if (cevicheLayers[0]) horizontal.fromTo(cevicheLayers[0], { x: 100, autoAlpha: 0 }, { x: 0, autoAlpha: 1, duration: .45 }, .35);
+        if (cevicheLayers[1]) horizontal.fromTo(cevicheLayers[1], { x: -90, autoAlpha: 0 }, { x: 0, autoAlpha: 1, duration: .45 }, .6);
+        if (sissyVideo) horizontal.fromTo(sissyVideo, { x: 150, scale: .78, clipPath: "inset(16% 0 16% 0)", autoAlpha: .25 }, { x: 0, scale: 1, clipPath: "inset(0% 0 0% 0)", autoAlpha: 1, duration: .72 }, 1.05);
+        if (sissyArt) horizontal.fromTo(sissyArt, { x: 90, autoAlpha: 0, clipPath: "inset(0 0 0 45%)" }, { x: 0, autoAlpha: 1, clipPath: "inset(0)", duration: .48 }, 1.48);
+        if (sissyCopy) horizontal.fromTo(sissyCopy, { y: 38, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .35 }, 1.72);
+        if (identity) horizontal.fromTo(identity, { scale: .7, autoAlpha: .25 }, { scale: 1, autoAlpha: 1, duration: .52 }, 2.02);
+        if (notebookCard) horizontal.fromTo(notebookCard, { x: -110, autoAlpha: 0 }, { x: 0, autoAlpha: 1, duration: .4 }, 2.42);
+        if (mugCard) horizontal.fromTo(mugCard, { x: 100, autoAlpha: 0 }, { x: 0, autoAlpha: 1, duration: .4 }, 2.64);
+        requestAnimationFrame(() => ScrollTrigger.refresh());
+      }
+
+      const workItems = gsap.utils.toArray<HTMLElement>(".selected-work-panel");
+      if (!desktop) workItems.forEach((item, index) => {
         const intro = item.querySelector<HTMLElement>(".work-story__intro, .brand-work__intro");
         if (intro) gsap.fromTo(intro, { y: 56, autoAlpha: 0.3 }, { y: 0, autoAlpha: 1, ease: "none", scrollTrigger: { trigger: item, start: "top 82%", end: "top 32%", scrub: 0.8 } });
         if (index < workItems.length - 1) gsap.to(item, { yPercent: -8, autoAlpha: 0.72, scale: 0.97, ease: "none", scrollTrigger: { trigger: item, start: "bottom 72%", end: "bottom 15%", scrub: 0.8 } });
       });
 
-      const ceviche = document.querySelector<HTMLElement>(".story-act--ceviche");
+      const ceviche = desktop ? null : document.querySelector<HTMLElement>(".story-act--ceviche");
       const mainMedia = ceviche?.querySelector<HTMLElement>(".work-story__main");
       const cevicheLayers = gsap.utils.toArray<HTMLElement>(".story-act--ceviche .work-story__layer");
       const cevicheOutro = ceviche?.querySelector<HTMLElement>(".work-story__outro");
@@ -73,7 +111,7 @@ export function ImmersiveMotion() {
         story.to(mainMedia, { scale: 0.92, yPercent: -7, autoAlpha: 0.65, duration: 0.5, ease: "none" });
       }
 
-      const sissy = document.querySelector<HTMLElement>(".brand-work--sissy");
+      const sissy = desktop ? null : document.querySelector<HTMLElement>(".brand-work--sissy");
       const sissyVideo = sissy?.querySelector<HTMLElement>(".brand-work__video-card");
       const sissyCampaign = sissy?.querySelector<HTMLElement>(".brand-work__image-card--sissy");
       const sissyCopy = sissy?.querySelector<HTMLElement>(".brand-work__description");
@@ -85,7 +123,7 @@ export function ImmersiveMotion() {
         story.to(sissyVideo, { y: -34, scale: 0.94, autoAlpha: 0.72, duration: 0.5, ease: "none" });
       }
 
-      const psico = document.querySelector<HTMLElement>(".brand-work--psicojazmin");
+      const psico = desktop ? null : document.querySelector<HTMLElement>(".brand-work--psicojazmin");
       const logo = psico?.querySelector<HTMLElement>(".brand-work__identity-card");
       const notebook = psico?.querySelector<HTMLElement>(".brand-work__image-card--notebook");
       const mugs = psico?.querySelector<HTMLElement>(".brand-work__image-card--mugs");
@@ -114,7 +152,7 @@ export function ImmersiveMotion() {
       gsap.fromTo(".method-step", { x: (i) => i % 2 ? 72 : -72, autoAlpha: 0.28 }, { x: 0, autoAlpha: 1, stagger: 0.16, ease: "none", scrollTrigger: { trigger: ".method-sequence", start: "top 85%", end: "bottom 34%", scrub: 0.9 } });
       gsap.fromTo(".space-conclusion h2, .final-act h2", { y: 62, autoAlpha: 0.4 }, { y: 0, autoAlpha: 1, stagger: 0.1, ease: "none", scrollTrigger: { trigger: ".space-conclusion", start: "top 82%", end: "bottom 42%", scrub: 0.8 } });
       requestAnimationFrame(refresh);
-      return () => { manifesto?.classList.remove("is-pinned"); worlds?.classList.remove("worlds-act--pinned"); };
+      return () => { manifesto?.classList.remove("is-pinned"); worlds?.classList.remove("worlds-act--pinned"); chapter?.classList.remove("selected-work-chapter--horizontal"); };
     });
 
     media.add("(max-width: 1100px) and (prefers-reduced-motion: no-preference)", () => {
