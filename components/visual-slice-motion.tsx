@@ -35,7 +35,96 @@ export function VisualSliceMotion() {
           ease: "power2.out",
         });
 
-        if (!desktop) return;
+        if (!desktop) {
+          const manifestoSteps = gsap.utils.toArray<HTMLElement>(".scene--manifesto .manifesto-step");
+          manifestoSteps.forEach((step) => {
+            gsap.fromTo(
+              step,
+              { autoAlpha: 0.35, y: 20, scale: 0.985, clipPath: "inset(0 0 12% 0)" },
+              {
+                autoAlpha: 1,
+                y: 0,
+                scale: 1,
+                clipPath: "inset(0 0 0% 0)",
+                ease: "none",
+                scrollTrigger: {
+                  trigger: step,
+                  start: "top 82%",
+                  end: "top 38%",
+                  scrub: 0.55,
+                  invalidateOnRefresh: true,
+                },
+              },
+            );
+          });
+
+          const workScene = document.querySelector<HTMLElement>(".scene--work");
+          const workMedia = document.querySelector<HTMLElement>(".work-story__main");
+          const workLayers = gsap.utils.toArray<HTMLElement>(".scene--work .work-story__layer");
+          const workOutro = document.querySelector<HTMLElement>(".work-story__outro");
+
+          if (workScene && workMedia) {
+            gsap.fromTo(
+              workMedia,
+              { clipPath: "inset(7% 5% 7% 5% round 1rem)", scale: 0.965 },
+              {
+                clipPath: "inset(0% 0% 0% 0% round 1rem)",
+                scale: 1,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: workScene,
+                  start: "top 78%",
+                  end: "center 45%",
+                  scrub: 0.65,
+                  invalidateOnRefresh: true,
+                },
+              },
+            );
+          }
+
+          workLayers.forEach((layer, index) => {
+            gsap.fromTo(
+              layer,
+              { x: index === 0 ? 14 : -14, y: 10, autoAlpha: 0.45 },
+              {
+                x: 0,
+                y: 0,
+                autoAlpha: 1,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: workMedia ?? layer,
+                  start: index === 0 ? "top 68%" : "center 58%",
+                  end: index === 0 ? "center 42%" : "bottom 38%",
+                  scrub: 0.7,
+                  invalidateOnRefresh: true,
+                },
+              },
+            );
+          });
+
+          if (workOutro) {
+            gsap.fromTo(
+              workOutro,
+              { autoAlpha: 0.45, y: 18, clipPath: "inset(0 0 12% 0)" },
+              {
+                autoAlpha: 1,
+                y: 0,
+                clipPath: "inset(0 0 0% 0)",
+                ease: "none",
+                scrollTrigger: {
+                  trigger: workOutro,
+                  start: "top 88%",
+                  end: "top 52%",
+                  scrub: 0.6,
+                  invalidateOnRefresh: true,
+                },
+              },
+            );
+          }
+
+          requestAnimationFrame(() => ScrollTrigger.refresh());
+          return;
+        }
 
         gsap.to(".hero__atmosphere", {
           yPercent: 9,
