@@ -98,6 +98,14 @@ Para un acto Behind the Work, **no reutilizar artes finales ni material de campa
 
 Esta deuda es documentación interna: no mostrar estos requisitos, notas de ausencia ni placeholders en la experiencia pública.
 
+## V9 — production readiness
+
+- `robots.txt` allows the public site and excludes `/api/`; `sitemap.xml` currently lists the only public route, `/`. Both use the configured public URL, then Vercel's production hostname, then the stable Vercel fallback. Set `NEXT_PUBLIC_SITE_URL` to the approved canonical origin before any future custom-domain launch; this gate does not configure DNS or assign `spaceventos.com`.
+- The current contact destinations are direct email/WhatsApp links. The JSON contact endpoint validates requests but returns `503` until a persistent, approved provider is available; it must never report durable acceptance through process-local memory.
+- Analytics are not installed and no analytics provider is configured. Do not add one without explicit approval and privacy/configuration review.
+- Global response headers include MIME sniffing, framing, referrer, and browser-permission protections. No CSP was added because the existing GSAP/Next runtime needs a nonce-aware CSP design rather than a brittle blanket policy.
+- No persistent integration credentials belong in the repository or `.env.example`; API health output omits adapter and Supabase internals.
+
 ## V7 — continuidad Four Worlds → Digital → Method → Closing
 
 - Four Worlds se presenta como una sola escena de estados en desktop; tablet/móvil y reduced-motion conservan todas las capacidades como contenido legible en flujo.
