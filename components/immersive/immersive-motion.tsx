@@ -172,6 +172,26 @@ export function ImmersiveMotion() {
         requestAnimationFrame(() => ScrollTrigger.refresh());
       }
 
+      const assetScene = document.querySelector<HTMLElement>(".asset-story-scene");
+      const assetPieces = gsap.utils.toArray<HTMLElement>("[data-asset-reveal]");
+      if (desktop && assetScene && assetPieces.length) {
+        const piece = (name: string) => assetScene.querySelector<HTMLElement>(`[data-asset-reveal="${name}"]`);
+        const logo = piece("logo");
+        const round = piece("round");
+        const pasta = piece("pasta");
+        const flyer = piece("flyer");
+        const emc = piece("emc");
+        const story = gsap.timeline({ scrollTrigger: {
+          trigger: assetScene, start: "top 86%", end: "bottom 18%", scrub: 0.8, invalidateOnRefresh: true,
+        } });
+        if (logo) story.fromTo(logo, { y: 84, scale: 0.72, autoAlpha: 0.18, clipPath: "inset(13% 8% round 1rem)" }, { y: 0, scale: 1, autoAlpha: 1, clipPath: "inset(0% round 1rem)", duration: 0.72, ease: "none" }, 0);
+        if (round) story.fromTo(round, { x: 120, y: 56, scale: 0.68, autoAlpha: 0.12, clipPath: "inset(10% round 50%)" }, { x: 0, y: 0, scale: 1, autoAlpha: 1, clipPath: "inset(0% round 50%)", duration: 0.74, ease: "none" }, 0.24);
+        if (pasta) story.fromTo(pasta, { x: -126, y: 38, scale: 0.76, autoAlpha: 0.18, clipPath: "inset(10% 0 10% 20% round 1rem)" }, { x: 0, y: 0, scale: 1, autoAlpha: 1, clipPath: "inset(0% round 1rem)", duration: 0.8, ease: "none" }, 0.52);
+        if (flyer) story.fromTo(flyer, { x: 86, y: 112, scale: 0.74, autoAlpha: 0.1, clipPath: "inset(16% 4% 0 20%)" }, { x: 0, y: 0, scale: 1, autoAlpha: 1, clipPath: "inset(0%)", duration: 0.72, ease: "none" }, 0.9);
+        if (emc) story.fromTo(emc, { x: 94, y: 56, scale: 0.86, autoAlpha: 0.2, clipPath: "inset(8% 0 8% 22%)" }, { x: 0, y: 0, scale: 1, autoAlpha: 1, clipPath: "inset(0%)", duration: 0.82, ease: "none" }, 1.75);
+        requestAnimationFrame(() => ScrollTrigger.refresh());
+      }
+
       gsap.fromTo(".digital-act__word", { y: 72, scale: 0.72, autoAlpha: 0.28, clipPath: "inset(14% 0 14% 0)" }, { y: 0, scale: 1, autoAlpha: 1, clipPath: "inset(0% 0 0% 0)", ease: "none", scrollTrigger: { trigger: ".digital-act", start: "top 82%", end: "top 24%", scrub: 0.85 } });
       gsap.utils.toArray<HTMLElement>(".digital-name").forEach((name, i) => gsap.fromTo(name, { y: 52, autoAlpha: 0.25, x: i % 2 ? 38 : -38 }, { y: 0, autoAlpha: 1, x: 0, ease: "none", scrollTrigger: { trigger: name, start: "top 88%", end: "top 50%", scrub: 0.6 } }));
       const methodSteps = gsap.utils.toArray<HTMLElement>(".method-step");
@@ -214,6 +234,9 @@ export function ImmersiveMotion() {
     media.add("(max-width: 1100px) and (prefers-reduced-motion: no-preference)", () => {
       gsap.utils.toArray<HTMLElement>(".manifesto-step, .world-scene").forEach((element, index) => {
         gsap.fromTo(element, { y: index % 2 ? 38 : 48, x: index % 2 ? 18 : -18, autoAlpha: 0.25, clipPath: "inset(0 0 14% 0)" }, { y: 0, x: 0, autoAlpha: 1, clipPath: "inset(0 0 0 0)", ease: "none", scrollTrigger: { trigger: element, start: "top 88%", end: "top 48%", scrub: 0.55, invalidateOnRefresh: true } });
+      });
+      gsap.utils.toArray<HTMLElement>("[data-asset-reveal]").forEach((element, index) => {
+        gsap.fromTo(element, { y: index % 2 ? 28 : 38, x: index % 2 ? 12 : -12, autoAlpha: 0.28, clipPath: "inset(0 0 12% 0)" }, { y: 0, x: 0, autoAlpha: 1, clipPath: "inset(0)", ease: "none", scrollTrigger: { trigger: element, start: "top 90%", end: "top 54%", scrub: 0.58, invalidateOnRefresh: true } });
       });
       requestAnimationFrame(() => ScrollTrigger.refresh());
     });
