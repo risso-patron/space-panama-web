@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { setupSceneContinuity } from "@/components/motion/scene-continuity";
 
 export function VisualSliceMotion() {
   useEffect(() => {
@@ -21,6 +22,8 @@ export function VisualSliceMotion() {
         };
 
         if (reduceMotion) return;
+
+        setupSceneContinuity(desktop);
 
         gsap.from(".motion-headline", {
           yPercent: 12,
@@ -249,7 +252,7 @@ export function VisualSliceMotion() {
             scrollTrigger: {
               trigger: manifesto,
               start: "top top",
-              end: () => `+=${window.innerHeight * (steps.length - 1)}`,
+              end: () => `+=${window.innerHeight * (steps.length - 1 + 0.42)}`,
               pin: ".manifesto__stage",
               scrub: 0.65,
               invalidateOnRefresh: true,
@@ -278,6 +281,11 @@ export function VisualSliceMotion() {
               at,
             );
           });
+          timeline.to(
+            steps[steps.length - 1],
+            { autoAlpha: 0.68, y: -14, scale: 0.97, duration: 0.42, ease: "none" },
+            steps.length - 1,
+          );
           if (progress) timeline.to(progress, { scaleX: 1, duration: steps.length - 1 }, 0);
 
           requestAnimationFrame(() => ScrollTrigger.refresh());
