@@ -14,10 +14,12 @@ export function ImmersiveMotion() {
       if (reduced) return;
 
       const refresh = () => ScrollTrigger.refresh();
-      gsap.fromTo(".motion-headline", { yPercent: 14, autoAlpha: 0 }, { yPercent: 0, autoAlpha: 1, duration: 1.25, ease: "power3.out" });
-      gsap.fromTo(".hero__atmosphere", { scale: 0.78, autoAlpha: 0.3 }, { scale: 1, autoAlpha: 1, duration: 1.8, ease: "power2.out" });
-      gsap.to(".hero__content", { yPercent: -10, scale: 0.94, autoAlpha: 0.68, ease: "none", scrollTrigger: { trigger: ".scene--hero", start: "top top", end: "bottom top", scrub: 0.8 } });
-      gsap.to(".hero__atmosphere", { yPercent: 24, scale: 1.12, ease: "none", scrollTrigger: { trigger: ".scene--hero", start: "top top", end: "bottom top", scrub: 1 } });
+      if (!document.querySelector("[data-earth-hero]")) {
+        gsap.fromTo(".motion-headline", { yPercent: 14, autoAlpha: 0 }, { yPercent: 0, autoAlpha: 1, duration: 1.25, ease: "power3.out" });
+        gsap.fromTo(".hero__atmosphere", { scale: 0.78, autoAlpha: 0.3 }, { scale: 1, autoAlpha: 1, duration: 1.8, ease: "power2.out" });
+        gsap.to(".hero__content", { yPercent: -10, scale: 0.94, autoAlpha: 0.68, ease: "none", scrollTrigger: { trigger: ".scene--hero", start: "top top", end: "bottom top", scrub: 0.8 } });
+        gsap.to(".hero__atmosphere", { yPercent: 24, scale: 1.12, ease: "none", scrollTrigger: { trigger: ".scene--hero", start: "top top", end: "bottom top", scrub: 1 } });
+      }
 
       const manifesto = document.querySelector<HTMLElement>(".scene--manifesto");
       const steps = gsap.utils.toArray<HTMLElement>(".manifesto-step");
@@ -25,7 +27,6 @@ export function ImmersiveMotion() {
       const label = document.querySelector<HTMLElement>(".manifesto__progress-label");
       const bar = document.querySelector<HTMLElement>(".manifesto__progress");
       if (desktop && manifesto && steps.length) {
-        manifesto.classList.add("is-pinned");
         gsap.set(steps, { autoAlpha: 0, y: 42, scale: 0.96 });
         gsap.set(steps[0], { autoAlpha: 1, y: 0, scale: 1 });
         steps.forEach((step, i) => step.setAttribute("aria-hidden", String(i !== 0)));
@@ -33,6 +34,7 @@ export function ImmersiveMotion() {
         const timeline = gsap.timeline({ scrollTrigger: {
           trigger: manifesto, start: "top top", end: () => `+=${window.innerHeight * (steps.length + 1)}`,
           pin: ".manifesto__stage", scrub: 0.8, invalidateOnRefresh: true,
+          onToggle: (self) => manifesto.classList.toggle("is-pinned", self.isActive),
           onUpdate: (self) => {
             const active = Math.min(steps.length - 1, Math.floor(self.progress * steps.length));
             steps.forEach((step, i) => step.setAttribute("aria-hidden", String(i !== active)));
