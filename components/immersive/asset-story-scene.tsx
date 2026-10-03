@@ -89,7 +89,7 @@ export function AssetStoryScene() {
           <p className={styles.intro__deck}>Una identidad que se despliega en distintas piezas.</p>
         </header>
 
-        <div className={styles.collage} aria-label="Piezas de identidad y comunicación de AsuMesa">
+        <div className={styles.collage} role="group" aria-label="Piezas de identidad y comunicación de AsuMesa">
           {asuMesaAssets.map((asset, index) => (
             <figure className={`${styles.artwork} ${styles[`artwork--${asset.className}`]}`} data-asset-reveal={asset.className} key={asset.id}>
               <Image src={asset.src} alt={asset.alt} fill sizes="(max-width: 700px) 80vw, (max-width: 1100px) 44vw, 34vw" />
@@ -119,10 +119,10 @@ export function AssetStoryScene() {
               <Image src={activeAsset.src} alt={activeAsset.alt} fill sizes="(max-width: 700px) 92vw, 66vw" />
             </div>
             <div className={styles.expansion__copy}>
-              <p className={styles.detail__index}>PIEZA / SPACE</p>
+              <p className={styles.expansion__eyebrow}>PIEZA / SPACE</p>
               <h2 id="asset-expansion-title">{activeAsset.title}</h2>
               <p>{activeAsset.note}</p>
-              <button className={styles.detail__close} type="button" ref={dialogCloseRef} onClick={() => dialogRef.current?.close()}>
+              <button className={styles.expansion__close} type="button" ref={dialogCloseRef} onClick={() => dialogRef.current?.close()}>
                 Cerrar <span aria-hidden="true">×</span>
               </button>
             </div>
