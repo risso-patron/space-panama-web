@@ -78,24 +78,28 @@ export async function createEarthScene(canvas: HTMLCanvasElement, onReady: () =>
   };
   const applyProgress = (value: number) => {
     progress = THREE.MathUtils.clamp(value, 0, 1);
+    const mobile = window.innerWidth <= 700;
+    const tablet = window.innerWidth <= 1100;
+    const abstractionStart = mobile ? 0.68 : tablet ? 0.75 : 0.82;
+    const abstractionEnd = mobile ? 0.82 : tablet ? 0.88 : 0.93;
     const orientation = progress < 0.45
       ? startRotation.clone().slerp(panamaRotation, THREE.MathUtils.smoothstep(progress, 0.2, 0.45))
       : panamaRotation;
     earth.quaternion.copy(orientation);
     atmosphere.quaternion.copy(orientation);
-    const zoom = THREE.MathUtils.smoothstep(progress, 0.45, 1);
-    const abstraction = THREE.MathUtils.smoothstep(progress, 0.72, 1);
+    const zoom = THREE.MathUtils.smoothstep(progress, 0.45, abstractionEnd);
+    const abstraction = THREE.MathUtils.smoothstep(progress, abstractionStart, abstractionEnd);
     camera.position.z = THREE.MathUtils.lerp(4.05, 2.18, zoom);
-    earth.position.set(abstraction * 0.13, abstraction * -0.035, 0);
+    earth.position.set(abstraction * (mobile ? 0.26 : 0.18), abstraction * -0.04, 0);
     earth.scale.setScalar(1 + abstraction * 0.025);
     atmosphere.position.copy(earth.position);
     atmosphere.scale.setScalar(1 + abstraction * 0.2);
-    earthMaterial.color.copy(earthBaseColor).lerp(earthHazeColor, abstraction * 0.72);
-    const literal = 1 - THREE.MathUtils.smoothstep(progress, 0.76, 1);
+    earthMaterial.color.copy(earthBaseColor).lerp(earthHazeColor, abstraction * 0.86);
+    const literal = 1 - THREE.MathUtils.smoothstep(progress, abstractionEnd - 0.08, abstractionEnd);
     earthMaterial.opacity = literal;
     earthMaterial.transparent = literal < 0.999;
     earth.visible = literal > 0.001;
-    atmosphereMaterial.uniforms.uOpacity.value = 0.18 + abstraction * 1.75;
+    atmosphereMaterial.uniforms.uOpacity.value = 0.18 + abstraction * 1.12;
     starsMaterial.opacity = 0.28 + THREE.MathUtils.smoothstep(progress, 0.72, 1) * 0.34;
     render();
   };

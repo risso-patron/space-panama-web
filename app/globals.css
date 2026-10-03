@@ -256,7 +256,10 @@ h2 { max-width: 12ch; margin-bottom: 1.25rem; font-size: clamp(3rem,8vw,7rem); l
 .hero__atmosphere { right:-3vw; top:18%; }
 .story-act--manifesto { z-index:2; margin-top:-14vh; background:linear-gradient(180deg,rgba(32,42,56,0) 0%,rgba(32,42,56,.24) 18%,rgba(32,42,56,.72) 48%,#202a38 82%); }
 .immersive .scene--manifesto { min-height:auto; background:none; }
-.immersive .scene--manifesto .manifesto-step:first-child { opacity:var(--earth-manifest-entry,1); }
+.immersive .scene--manifesto .manifesto-step:first-child { opacity:1; }
+.immersive .scene--manifesto .manifesto-step:first-child .manifesto-step__index { opacity:var(--manifest-index,1); }
+.immersive .scene--manifesto .manifesto-step:first-child h3 { opacity:var(--manifest-title,1); }
+.immersive .scene--manifesto .manifesto-step:first-child p { opacity:var(--manifest-copy,1); }
 .immersive .manifesto__stage { min-height:100svh; padding:clamp(2rem,6vw,6rem); }
 .manifesto__track { position:absolute; z-index:0; left:8%; top:0; bottom:0; width:1px; background:linear-gradient(transparent,rgba(255,211,36,.5),transparent); transform:scaleY(0); transform-origin:top; }
 .manifesto__intro { max-width:29rem; }
