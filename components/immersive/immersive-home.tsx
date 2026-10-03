@@ -4,6 +4,7 @@ import { Manifesto } from "@/components/manifesto";
 import { ImmersiveMotion } from "@/components/immersive/immersive-motion";
 import { AtmosphericMotion } from "@/components/immersive/atmospheric-motion";
 import { SelectedWork } from "@/components/selected-work";
+import { AssetStoryScene } from "@/components/immersive/asset-story-scene";
 import type { SiteContent } from "@/lib/space-content";
 
 const worlds = [
@@ -56,6 +57,7 @@ export function ImmersiveHome({ content }: { content: SiteContent }) {
           <div className="worlds-progress" role="progressbar" aria-label="Progreso por los cuatro mundos" aria-valuemin={1} aria-valuemax={4} aria-valuenow={1}><span /></div>
         </div>
       </section>
+      <AssetStoryScene />
       <section className="digital-act" data-act="digital" aria-labelledby="digital-title">
         <div className="digital-act__lead"><p className="eyebrow">Ideas que toman forma en pantalla</p><h2 id="digital-title"><span className="digital-act__word">Digital</span><br /><em>en movimiento.</em></h2><p>Una presencia web clara, útil y pensada alrededor de cada marca.</p></div>
         <div className="digital-orbit" aria-label="Proyectos digitales"><span className="digital-orbit__line" aria-hidden="true" />{digitalNames.map((name, i) => <p className={`digital-name digital-name--${i + 1}`} key={name}><span>0{i + 1}</span>{name}</p>)}</div>
