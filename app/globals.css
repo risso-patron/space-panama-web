@@ -247,15 +247,16 @@ h2 { max-width: 12ch; margin-bottom: 1.25rem; font-size: clamp(3rem,8vw,7rem); l
 .story-thread__line { position:absolute; left:50%; top:0; bottom:0; width:1px; background:linear-gradient(transparent,rgba(255,211,36,.45) 20%,rgba(245,234,216,.12) 76%,transparent); transform-origin:top; }
 .story-thread__index { position:absolute; top:1.3rem; left:-.5rem; writing-mode:vertical-rl; color:rgba(245,234,216,.52); font-size:.55rem; letter-spacing:.28em; }
 .story-act,.brand-work,.thesis-pause,.worlds-act,.digital-act,.method-act,.space-conclusion,.final-act { position:relative; }
-.story-act--opening { z-index:1; background:radial-gradient(ellipse at 75% 53%,rgba(94,112,141,.22),transparent 35%),linear-gradient(180deg,transparent,rgba(23,32,44,.2)); }
+.story-act--opening { z-index:1; background:transparent; }
 .immersive .scene--hero { min-height:112svh; }
 .immersive .hero__content { max-width:74rem; padding-block:8vh 18vh; }
 .immersive h1 { max-width:13ch; font-size:clamp(3.7rem,8.2vw,8rem); line-height:.9; }
 .immersive .hero__brand { margin-bottom:clamp(1rem,2vw,2rem); }
 .immersive .hero__deck { max-width:36rem; }
 .hero__atmosphere { right:-3vw; top:18%; }
-.story-act--manifesto { z-index:2; margin-top:-14vh; background:linear-gradient(180deg,rgba(38,50,67,.24),rgba(34,43,57,.94) 24%,rgba(28,39,51,.94)); }
+.story-act--manifesto { z-index:2; margin-top:-14vh; background:linear-gradient(180deg,rgba(32,42,56,0) 0%,rgba(32,42,56,.24) 18%,rgba(32,42,56,.72) 48%,#202a38 82%); }
 .immersive .scene--manifesto { min-height:auto; background:none; }
+.immersive .scene--manifesto .manifesto-step:first-child { opacity:var(--earth-manifest-entry,1); }
 .immersive .manifesto__stage { min-height:100svh; padding:clamp(2rem,6vw,6rem); }
 .manifesto__track { position:absolute; z-index:0; left:8%; top:0; bottom:0; width:1px; background:linear-gradient(transparent,rgba(255,211,36,.5),transparent); transform:scaleY(0); transform-origin:top; }
 .manifesto__intro { max-width:29rem; }
@@ -564,8 +565,8 @@ h2 { max-width: 12ch; margin-bottom: 1.25rem; font-size: clamp(3rem,8vw,7rem); l
 .thesis-pause,.worlds-act,.digital-act,.method-act,.space-conclusion,.final-act {
   background-color:transparent;
 }
-.story-act--opening { background-image:linear-gradient(180deg,rgba(17,26,37,.025),rgba(17,26,37,.11)); }
-.story-act--manifesto { background-image:linear-gradient(180deg,rgba(17,26,37,.035),rgba(17,26,37,.16) 48%,rgba(17,26,37,.1)); }
+.story-act--opening { background-image:none; }
+.story-act--manifesto { background-image:none; }
 .story-act--ceviche { background-image:linear-gradient(180deg,rgba(17,26,37,.12),rgba(17,26,37,.08) 56%,rgba(17,26,37,.14)); }
 .brand-work { background-image:linear-gradient(180deg,rgba(17,26,37,.1),rgba(17,26,37,.16) 50%,rgba(17,26,37,.12)); }
 .brand-work--sissy,.brand-work--psicojazmin { background-image:none; }

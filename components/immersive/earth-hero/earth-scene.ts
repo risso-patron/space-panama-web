@@ -33,6 +33,8 @@ export async function createEarthScene(canvas: HTMLCanvasElement, onReady: () =>
   });
   const atmosphere = new THREE.Mesh(atmosphereGeometry, atmosphereMaterial);
   scene.add(atmosphere);
+  const earthBaseColor = new THREE.Color(0xffffff);
+  const earthHazeColor = new THREE.Color(0x8fa2b4);
 
   const starsGeometry = new THREE.BufferGeometry();
   const starPositions = new Float32Array(450 * 3);
@@ -81,12 +83,19 @@ export async function createEarthScene(canvas: HTMLCanvasElement, onReady: () =>
       : panamaRotation;
     earth.quaternion.copy(orientation);
     atmosphere.quaternion.copy(orientation);
-    const zoom = THREE.MathUtils.smoothstep(progress, 0.45, 0.72);
-    camera.position.z = THREE.MathUtils.lerp(4.05, 2.45, zoom);
-    const literal = 1 - THREE.MathUtils.smoothstep(progress, 0.70, 0.92);
-    earthMaterial.opacity = Math.max(0, literal);
+    const zoom = THREE.MathUtils.smoothstep(progress, 0.45, 1);
+    const abstraction = THREE.MathUtils.smoothstep(progress, 0.72, 1);
+    camera.position.z = THREE.MathUtils.lerp(4.05, 2.18, zoom);
+    earth.position.set(abstraction * 0.13, abstraction * -0.035, 0);
+    earth.scale.setScalar(1 + abstraction * 0.025);
+    atmosphere.position.copy(earth.position);
+    atmosphere.scale.setScalar(1 + abstraction * 0.2);
+    earthMaterial.color.copy(earthBaseColor).lerp(earthHazeColor, abstraction * 0.72);
+    const literal = 1 - THREE.MathUtils.smoothstep(progress, 0.76, 1);
+    earthMaterial.opacity = literal;
     earthMaterial.transparent = literal < 0.999;
-    atmosphereMaterial.uniforms.uOpacity.value = 0.18 + THREE.MathUtils.smoothstep(progress, 0.68, 0.95) * 1.55;
+    earth.visible = literal > 0.001;
+    atmosphereMaterial.uniforms.uOpacity.value = 0.18 + abstraction * 1.75;
     starsMaterial.opacity = 0.28 + THREE.MathUtils.smoothstep(progress, 0.72, 1) * 0.34;
     render();
   };

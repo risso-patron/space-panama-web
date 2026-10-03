@@ -7,7 +7,7 @@ import { EARTH_TEXTURE } from "./earth-config";
 import { EarthMotion } from "./earth-motion";
 import styles from "./earth-hero.module.css";
 
-export function EarthHero({ hero }: { hero: SiteContent["hero"] }) {
+export function EarthHero({ hero, manifesto }: { hero: SiteContent["hero"]; manifesto: SiteContent["manifesto"] }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const sceneRef = useRef<import("./earth-scene").EarthSceneHandle | null>(null);
   const [ready, setReady] = useState(false);
@@ -56,6 +56,12 @@ export function EarthHero({ hero }: { hero: SiteContent["hero"] }) {
         <div className={styles.halo} />
         <canvas ref={canvasRef} className={styles.canvas} aria-hidden="true" />
         <span className={styles.panama}>PANAMÁ</span>
+      </div>
+      <div className={styles.handoffField} aria-hidden="true"><span /><i /></div>
+      <div className={styles.manifestoBridge} aria-hidden="true">
+        <span className={styles.bridgeIndex}>01 / {String(manifesto.terms.length).padStart(2, "0")}</span>
+        <h2>{manifesto.terms[0]?.term}</h2>
+        <p>{manifesto.terms[0]?.definition}</p>
       </div>
       <div className={`hero__content ${styles.content}`}>
         <div className="hero__brand"><Image src="/assets/space/logo.png" alt="Space Panamá" width={260} height={134} priority /></div>
