@@ -8,13 +8,15 @@ export async function createEarthScene(canvas: HTMLCanvasElement, onReady: () =>
   const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: "low-power" });
   renderer.setClearColor(0x000000, 0);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.22;
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 30);
   camera.position.z = 4.05;
   // Keep the fill light cool, but let the directional sun recover land/ocean separation.
   scene.add(new THREE.AmbientLight(0x899bb3, 1.95));
   const sun = new THREE.DirectionalLight(0xffe7c1, 2.2);
-  sun.intensity = 3.12;
+  sun.intensity = 3.3;
   sun.position.set(-3.5, 2.2, 4);
   scene.add(sun);
 
