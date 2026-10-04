@@ -15,13 +15,11 @@
 .root[data-render-state="ready"] .staticGlobe { opacity:0; }
 .halo { z-index:0; border-radius:50%; background:radial-gradient(circle,rgba(100,142,185,.18),rgba(67,91,123,.08) 42%,transparent 69%); transform:scale(1.1); }
 .panama { position:absolute; z-index:3; left:50%; top:50%; transform:translate(-50%,-50%); opacity:var(--earth-panama,0); color:#e0c99f; font-size:.66rem; letter-spacing:.32em; text-shadow:0 0 1rem #111; transition:opacity .3s ease; }
-.handoffField { position:absolute; z-index:2; inset:-8%; overflow:hidden; opacity:var(--earth-handoff,0); pointer-events:none; background:radial-gradient(ellipse at 72% 48%,rgba(126,150,174,.16),transparent 42%),radial-gradient(ellipse at 38% 66%,rgba(76,98,124,.12),transparent 48%),linear-gradient(135deg,rgba(38,50,67,.08),rgba(32,42,56,.42)); backdrop-filter:blur(3px) saturate(.72) contrast(.88); }
-.handoffField::before,.handoffField::after { content:""; position:absolute; width:78vw; height:42vw; max-height:54rem; left:38%; top:47%; border:1px solid rgba(183,202,220,.09); border-radius:50%; transform:translate(-50%,-50%) rotate(-24deg) scaleY(.38); box-shadow:0 0 2rem rgba(137,166,194,.045),inset 0 0 1.5rem rgba(137,166,194,.025); }
-.handoffField::after { width:64vw; height:28vw; left:55%; top:60%; transform:translate(-50%,-50%) rotate(20deg) scaleY(.5); border-color:rgba(183,202,220,.06); }
-.manifestoBridge { position:absolute; z-index:4; top:56%; left:52%; width:min(38rem,36%); transform:translateY(var(--earth-bridge-y,10px)); opacity:var(--earth-bridge-opacity,0); pointer-events:none; }
-.bridgeIndex { display:block; margin-bottom:clamp(.8rem,3vh,2rem); color:rgba(209,174,118,.82); font-size:.75rem; letter-spacing:.24em; opacity:var(--earth-bridge-index,0); }
-.manifestoBridge h2 { max-width:10ch; margin:0; color:#fff6e8; font:500 clamp(3.3rem,6.2vw,6.8rem)/.9 Georgia,"Times New Roman",serif; letter-spacing:-.075em; opacity:var(--earth-bridge-title,0); }
-.manifestoBridge p { max-width:30rem; margin:1.25rem 0 0; color:rgba(245,234,216,.7); font-size:clamp(.95rem,1.25vw,1.15rem); line-height:1.6; opacity:var(--earth-bridge-copy,0); }
+.cloudWipe { position:absolute; z-index:4; inset:0; overflow:hidden; opacity:var(--earth-cloud-opacity,0); pointer-events:none; background:radial-gradient(ellipse at 15% 42%,rgba(153,169,183,.42),transparent 37%),radial-gradient(ellipse at 82% 69%,rgba(105,124,143,.54),transparent 43%),linear-gradient(118deg,rgba(59,73,91,.92),rgba(119,132,148,.94) 48%,rgba(54,69,87,.96)); }
+.cloudWipe span { position:absolute; inset:-18%; display:block; will-change:transform; }
+.cloudLayerBack { opacity:.82; background:radial-gradient(ellipse at 18% 34%,rgba(183,194,204,.72) 0 11%,transparent 42%),radial-gradient(ellipse at 72% 24%,rgba(128,146,163,.72) 0 13%,transparent 46%),radial-gradient(ellipse at 57% 82%,rgba(152,165,178,.64) 0 18%,transparent 52%); filter:blur(22px); transform:translate3d(var(--earth-cloud-back-x,0),-2%,0) scale(1.12); }
+.cloudLayerMid { opacity:.8; background:radial-gradient(ellipse at 38% 14%,rgba(201,207,211,.8) 0 9%,transparent 38%),radial-gradient(ellipse at 89% 57%,rgba(120,138,156,.78) 0 15%,transparent 48%),radial-gradient(ellipse at 25% 80%,rgba(173,183,192,.66) 0 12%,transparent 43%); filter:blur(32px); transform:translate3d(var(--earth-cloud-mid-x,0),2%,0) scale(1.18); }
+.cloudLayerFront { opacity:.64; background:radial-gradient(ellipse at 8% 60%,rgba(207,211,213,.7) 0 9%,transparent 34%),radial-gradient(ellipse at 62% 42%,rgba(138,152,166,.6) 0 17%,transparent 49%),radial-gradient(ellipse at 93% 90%,rgba(180,190,198,.66) 0 13%,transparent 42%); filter:blur(42px); transform:translate3d(var(--earth-cloud-front-x,0),-1%,0) scale(1.22); }
 .content :global(.hero__brand),.content :global(.eyebrow),.content :global(.motion-headline),.content :global(.hero__deck),.skip { opacity:var(--earth-copy,1); }
 .rail,.scrollHint { opacity:var(--earth-copy,1); }
 .skip { display:inline-flex; gap:.65rem; align-items:center; margin-top:1.25rem; padding:.5rem 0; color:rgba(245,234,216,.72); font-size:.78rem; letter-spacing:.12em; text-transform:uppercase; text-underline-offset:.35em; }
@@ -44,20 +42,17 @@
  .visual { top:auto; bottom:-4rem; right:-21vw; width:92vw; transform:none; }
  .scrollHint { left:1.25rem; bottom:1.3rem; font-size:.58rem; }
  .skip { margin-top:.7rem; font-size:.68rem; }
- .handoffField { inset:-2%; backdrop-filter:blur(2px) saturate(.82); }
- .handoffField::before { width:130vw; height:76vw; left:72%; }
- .handoffField::after { width:104vw; height:58vw; left:62%; }
- .manifestoBridge { top:auto; bottom:12%; left:1.25rem; width:min(25rem,calc(100% - 2.5rem)); }
- .manifestoBridge h2 { font-size:clamp(2.8rem,11vw,4.2rem); }
- .manifestoBridge p { max-width:25rem; margin-top:.7rem; font-size:.88rem; }
+ .cloudLayerBack { filter:blur(12px); }
+ .cloudLayerMid { filter:blur(17px); }
+ .cloudLayerFront { display:none!important; }
+ .cloudWipe { background:linear-gradient(118deg,rgba(59,73,91,.96),rgba(119,132,148,.96) 48%,rgba(54,69,87,.97)); }
 }
 @media(prefers-reduced-motion:reduce) {
  .root .scene { min-height:92svh; }
  .canvas { display:none; }
  .staticGlobe { opacity:.88!important; }
  .panama { opacity:0!important; }
- .handoffField { opacity:.3; backdrop-filter:none; }
- .manifestoBridge { display:none; }
+ .cloudWipe { display:none; }
  .content :global(.hero__brand),.content :global(.eyebrow),.content :global(.motion-headline),.content :global(.hero__deck),.skip { opacity:1; }
  .skip { transition:none; }
 }

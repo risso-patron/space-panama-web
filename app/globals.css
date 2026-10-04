@@ -260,6 +260,7 @@ h2 { max-width: 12ch; margin-bottom: 1.25rem; font-size: clamp(3rem,8vw,7rem); l
 .immersive .scene--manifesto .manifesto-step:first-child .manifesto-step__index { opacity:var(--manifest-index,1); }
 .immersive .scene--manifesto .manifesto-step:first-child h3 { opacity:var(--manifest-title,1); }
 .immersive .scene--manifesto .manifesto-step:first-child p { opacity:var(--manifest-copy,1); }
+.immersive .scene--manifesto .manifesto__intro { opacity:var(--manifest-intro,1); transform:translateY(var(--manifest-intro-y,0)); }
 .immersive .manifesto__stage { min-height:100svh; padding:clamp(2rem,6vw,6rem); }
 .manifesto__track { position:absolute; z-index:0; left:8%; top:0; bottom:0; width:1px; background:linear-gradient(transparent,rgba(255,211,36,.5),transparent); transform:scaleY(0); transform-origin:top; }
 .manifesto__intro { max-width:29rem; }
