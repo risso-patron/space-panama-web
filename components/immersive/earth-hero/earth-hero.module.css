@@ -9,9 +9,9 @@
 .content :global(.hero__deck) { max-width:34rem; font-size:clamp(1rem,1.5vw,1.25rem); }
 .visual { position:absolute; z-index:1; right:clamp(-10rem,2vw,2rem); top:50%; width:min(55vw,54rem); aspect-ratio:1; transform:translateY(-50%); pointer-events:none; }
 .canvas,.staticGlobe,.halo { position:absolute; inset:0; width:100%; height:100%; }
-.canvas { z-index:2; opacity:0; transition:opacity .7s ease; -webkit-mask-image:radial-gradient(circle, #000 0%, #000 42%, transparent 56%); mask-image:radial-gradient(circle, #000 0%, #000 42%, transparent 56%); }
+.canvas { z-index:2; opacity:0; filter:saturate(1.12) contrast(1.06); transition:opacity .7s ease; -webkit-mask-image:radial-gradient(circle, #000 0%, #000 42%, transparent 56%); mask-image:radial-gradient(circle, #000 0%, #000 42%, transparent 56%); }
 .root[data-render-state="ready"] .canvas { opacity:1; }
-.staticGlobe { z-index:1; left:8%; top:8%; width:84%; height:84%; border-radius:50%; background-color:#263b51; background-size:100% 100%,220% 110%; background-position:center,52% 46%; opacity:var(--earth-globe-opacity,.82); filter:saturate(.78) brightness(.77); box-shadow:inset -2rem -1rem 3rem rgba(2,9,17,.7),0 0 4rem rgba(114,151,188,.12); }
+.staticGlobe { z-index:1; left:8%; top:8%; width:84%; height:84%; border-radius:50%; background-color:#263b51; background-size:100% 100%,220% 110%; background-position:center,52% 46%; opacity:var(--earth-globe-opacity,.82); filter:saturate(.96) brightness(.79) contrast(1.05); box-shadow:inset -2rem -1rem 3rem rgba(2,9,17,.7),0 0 4rem rgba(114,151,188,.12); }
 .root[data-render-state="ready"] .staticGlobe { opacity:0; }
 .halo { z-index:0; border-radius:50%; background:radial-gradient(circle,rgba(100,142,185,.18),rgba(67,91,123,.08) 42%,transparent 69%); transform:scale(1.1); }
 .panama { position:absolute; z-index:3; left:50%; top:50%; transform:translate(-50%,-50%); opacity:var(--earth-panama,0); color:#e0c99f; font-size:.66rem; letter-spacing:.32em; text-shadow:0 0 1rem #111; transition:opacity .3s ease; }
