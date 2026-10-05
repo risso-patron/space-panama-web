@@ -36,13 +36,12 @@ export function EarthMotion({ active }: { active: boolean }) {
       const releaseBuffer = desktop ? 20 : tablet ? 14 : 8;
       const copyExit = desktop ? [0.74, 0.84] : tablet ? [0.66, 0.76] : [0.6, 0.71];
       const handoffStart = desktop ? 0.82 : tablet ? 0.75 : 0.68;
-      const cloudRange = desktop ? [0.835, 0.97] : tablet ? [0.755, 0.94] : [0.715, 0.91];
+      const cloudRange = desktop ? [0.76, 0.92] : tablet ? [0.7, 0.88] : [0.62, 0.82];
+      const manifestoEntryRange = desktop ? [0.82, 1] : tablet ? [0.77, 0.98] : [0.7, 0.9];
       const reveal = (value: number, range: number[]) => {
         const linear = gsap.utils.clamp(0, 1, (value - range[0]) / (range[1] - range[0]));
         return linear * linear * (3 - 2 * linear);
       };
-      const firstStep = manifesto.querySelector<HTMLElement>(".manifesto-step");
-      const manifestoIntro = manifesto.querySelector<HTMLElement>(".manifesto__intro");
       const setTransition = (progress: number) => {
         const handoff = reveal(progress, [handoffStart, 1]);
         const panamaIn = reveal(progress, [0.38, 0.55]);
@@ -54,25 +53,16 @@ export function EarthMotion({ active }: { active: boolean }) {
         root.style.setProperty("--earth-copy", String(1 - reveal(progress, copyExit)));
         const cloudCover = reveal(progress, cloudRange);
         root.style.setProperty("--earth-cloud-cover", String(cloudCover));
-        root.style.setProperty("--earth-cloud-opacity", String(cloudCover * (1 - reveal(Number(root.style.getPropertyValue("--earth-manifest-entry")) || 0, [0, 0.62]))));
+        const manifestEntry = reveal(progress, manifestoEntryRange);
+        root.style.setProperty("--earth-manifest-entry", String(manifestEntry));
+        root.style.setProperty("--earth-manifest-index", String(reveal(manifestEntry, [0, 0.24])));
+        root.style.setProperty("--earth-manifest-title", String(reveal(manifestEntry, [0.18, 0.64])));
+        root.style.setProperty("--earth-manifest-copy", String(reveal(manifestEntry, [0.58, 0.96])));
+        root.style.setProperty("--earth-cloud-opacity", String(cloudCover * (1 - reveal(manifestEntry, [0.52, 0.88]))));
         root.style.setProperty("--earth-cloud-back-x", `${(progress - 0.5) * -9}vw`);
         root.style.setProperty("--earth-cloud-mid-x", `${(progress - 0.5) * 13}vw`);
         root.style.setProperty("--earth-cloud-front-x", `${(progress - 0.5) * -17}vw`);
         window.dispatchEvent(new CustomEvent("earth-hero-progress", { detail: { progress } }));
-      };
-      const updateManifestEntry = (progress: number) => {
-        root.style.setProperty("--earth-manifest-entry", String(progress));
-        const cloudCover = Number(root.style.getPropertyValue("--earth-cloud-cover")) || 0;
-        root.style.setProperty("--earth-cloud-opacity", String(cloudCover * (1 - reveal(progress, [0, 0.62]))));
-        if (firstStep) {
-          firstStep.style.opacity = "1";
-          firstStep.style.visibility = progress > 0.001 ? "visible" : "hidden";
-          firstStep.style.setProperty("--manifest-index", String(reveal(progress, [0, 0.25])));
-          firstStep.style.setProperty("--manifest-title", String(reveal(progress, [0.3, 0.7])));
-          firstStep.style.setProperty("--manifest-copy", String(reveal(progress, [0.65, 1])));
-        }
-        manifestoIntro?.style.setProperty("--manifest-intro", String(reveal(progress, [0.76, 1])));
-        manifestoIntro?.style.setProperty("--manifest-intro-y", `${(1 - reveal(progress, [0.76, 1])) * 12}px`);
       };
       root.classList.add("earth-hero--motion-ready");
       const timeline = gsap.timeline({
@@ -87,25 +77,8 @@ export function EarthMotion({ active }: { active: boolean }) {
       timeline.to({}, { duration: 0.25 });
       timeline.to({}, { duration: 0.25 });
       timeline.to({}, { duration: 0.2 });
-      const entry = ScrollTrigger.create({
-        trigger: manifesto, start: "top 94%", end: "top 32%", scrub: true, invalidateOnRefresh: true,
-        onUpdate: (self) => {
-          updateManifestEntry(self.progress);
-        },
-        onRefresh: (self) => updateManifestEntry(self.progress),
-      });
       requestAnimationFrame(() => { ScrollTrigger.sort(); ScrollTrigger.refresh(); });
       return () => {
-        entry.kill();
-        if (firstStep) {
-          firstStep.style.removeProperty("opacity");
-          firstStep.style.removeProperty("visibility");
-          firstStep.style.removeProperty("--manifest-index");
-          firstStep.style.removeProperty("--manifest-title");
-          firstStep.style.removeProperty("--manifest-copy");
-        }
-        manifestoIntro?.style.removeProperty("--manifest-intro");
-        manifestoIntro?.style.removeProperty("--manifest-intro-y");
         root.classList.remove("earth-hero--motion-ready");
         root.style.removeProperty("--earth-progress");
         root.style.removeProperty("--earth-panama");
@@ -118,6 +91,9 @@ export function EarthMotion({ active }: { active: boolean }) {
         root.style.removeProperty("--earth-cloud-mid-x");
         root.style.removeProperty("--earth-cloud-front-x");
         root.style.removeProperty("--earth-manifest-entry");
+        root.style.removeProperty("--earth-manifest-index");
+        root.style.removeProperty("--earth-manifest-title");
+        root.style.removeProperty("--earth-manifest-copy");
       };
     });
     return () => media.revert();

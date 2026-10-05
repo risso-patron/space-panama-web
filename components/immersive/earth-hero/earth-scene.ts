@@ -9,15 +9,17 @@ export async function createEarthScene(canvas: HTMLCanvasElement, onReady: () =>
   renderer.setClearColor(0x000000, 0);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.22;
+  renderer.toneMappingExposure = 1.35;
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 30);
   camera.position.z = 4.05;
-  // Keep the fill light cool, but let the directional sun recover land/ocean separation.
-  scene.add(new THREE.AmbientLight(0x899bb3, 1.95));
+  // A directional sun gives Panama a clear day-side; restrained sky/ground fill keeps nights deep.
+  const skyFill = new THREE.HemisphereLight(0xa8c5e4, 0x172019, 2.25);
+  skyFill.position.set(0, 1, 0);
+  scene.add(skyFill);
   const sun = new THREE.DirectionalLight(0xffe7c1, 2.2);
-  sun.intensity = 3.3;
-  sun.position.set(-3.5, 2.2, 4);
+  sun.intensity = 4.5;
+  sun.position.set(-3, 4.5, 5);
   scene.add(sun);
 
   const geometry = new THREE.SphereGeometry(1, 96, 64);
@@ -93,10 +95,13 @@ export async function createEarthScene(canvas: HTMLCanvasElement, onReady: () =>
     const zoom = THREE.MathUtils.smoothstep(progress, 0.45, abstractionEnd);
     const abstraction = THREE.MathUtils.smoothstep(progress, abstractionStart, abstractionEnd);
     camera.position.z = THREE.MathUtils.lerp(4.05, 2.18, zoom);
-    earth.position.set(abstraction * (mobile ? 0.26 : 0.18), abstraction * -0.04, 0);
-    earth.scale.setScalar(1 + abstraction * 0.025);
+    // Keep the globe centered on portrait viewports: world-space X projects much farther
+    // horizontally when the camera aspect ratio is narrow.
+    const horizontalOffset = mobile ? 0.08 : tablet ? 0.35 : 0.72;
+    earth.position.set(horizontalOffset + abstraction * (mobile ? 0.04 : 0.15), abstraction * -0.04, 0);
+    earth.scale.setScalar(2.05 + abstraction * 0.08);
     atmosphere.position.copy(earth.position);
-    atmosphere.scale.setScalar(1 + abstraction * 0.2);
+    atmosphere.scale.setScalar(earth.scale.x * (1.035 + abstraction * 0.025));
     earthMaterial.color.copy(earthBaseColor).lerp(earthHazeColor, abstraction * 0.86);
     const literal = 1 - THREE.MathUtils.smoothstep(progress, abstractionEnd - 0.08, abstractionEnd);
     earthMaterial.opacity = literal;
