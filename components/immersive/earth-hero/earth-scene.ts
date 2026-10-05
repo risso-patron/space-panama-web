@@ -9,17 +9,16 @@ export async function createEarthScene(canvas: HTMLCanvasElement, onReady: () =>
   renderer.setClearColor(0x000000, 0);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.35;
+  renderer.toneMappingExposure = 1.28;
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 30);
   camera.position.z = 4.05;
-  // A directional sun gives Panama a clear day-side; restrained sky/ground fill keeps nights deep.
-  const skyFill = new THREE.HemisphereLight(0xa8c5e4, 0x172019, 2.25);
+  // Keep the globe legible as a sunlit object while preserving a gentle night-side falloff.
+  const skyFill = new THREE.HemisphereLight(0xb9d5f2, 0x293326, 2.65);
   skyFill.position.set(0, 1, 0);
   scene.add(skyFill);
-  const sun = new THREE.DirectionalLight(0xffe7c1, 2.2);
-  sun.intensity = 4.5;
-  sun.position.set(-3, 4.5, 5);
+  const sun = new THREE.DirectionalLight(0xfff0d5, 3.8);
+  sun.position.set(-1.5, 2.5, 7);
   scene.add(sun);
 
   const geometry = new THREE.SphereGeometry(1, 96, 64);
@@ -87,19 +86,27 @@ export async function createEarthScene(canvas: HTMLCanvasElement, onReady: () =>
     const tablet = window.innerWidth <= 1100;
     const abstractionStart = mobile ? 0.68 : tablet ? 0.75 : 0.82;
     const abstractionEnd = mobile ? 0.82 : tablet ? 0.88 : 0.93;
-    const orientation = progress < 0.45
-      ? startRotation.clone().slerp(panamaRotation, THREE.MathUtils.smoothstep(progress, 0.2, 0.45))
+    const orientationEnd = mobile ? 0.43 : 0.4;
+    const zoomStart = mobile ? 0.53 : 0.48;
+    const zoomEnd = mobile ? abstractionEnd - 0.08 : abstractionEnd - 0.12;
+    const orientation = progress < orientationEnd
+      ? startRotation.clone().slerp(panamaRotation, THREE.MathUtils.smoothstep(progress, 0.06, orientationEnd))
       : panamaRotation;
     earth.quaternion.copy(orientation);
     atmosphere.quaternion.copy(orientation);
-    const zoom = THREE.MathUtils.smoothstep(progress, 0.45, abstractionEnd);
+    const zoom = THREE.MathUtils.smoothstep(progress, zoomStart, zoomEnd);
     const abstraction = THREE.MathUtils.smoothstep(progress, abstractionStart, abstractionEnd);
-    camera.position.z = THREE.MathUtils.lerp(4.05, 2.18, zoom);
-    // Keep the globe centered on portrait viewports: world-space X projects much farther
-    // horizontally when the camera aspect ratio is narrow.
-    const horizontalOffset = mobile ? 0.08 : tablet ? 0.35 : 0.72;
+    camera.position.z = THREE.MathUtils.lerp(4.25, 2.55, zoom);
+    // Begin centered and fully framed; move toward the established cinematic crop only
+    // after the globe has completed its rotation toward Panama.
+    const framing = zoom;
+    const initialX = 0;
+    const finalX = mobile ? 0.08 : tablet ? 0.35 : 0.72;
+    const horizontalOffset = THREE.MathUtils.lerp(initialX, finalX, framing);
     earth.position.set(horizontalOffset + abstraction * (mobile ? 0.04 : 0.15), abstraction * -0.04, 0);
-    earth.scale.setScalar(2.05 + abstraction * 0.08);
+    const initialScale = mobile ? 0.82 : tablet ? 1.15 : 1.42;
+    const zoomScale = mobile ? 0.63 : tablet ? 0.67 : 0.63;
+    earth.scale.setScalar(initialScale + zoom * zoomScale + abstraction * 0.04);
     atmosphere.position.copy(earth.position);
     atmosphere.scale.setScalar(earth.scale.x * (1.035 + abstraction * 0.025));
     earthMaterial.color.copy(earthBaseColor).lerp(earthHazeColor, abstraction * 0.86);
@@ -107,7 +114,7 @@ export async function createEarthScene(canvas: HTMLCanvasElement, onReady: () =>
     earthMaterial.opacity = literal;
     earthMaterial.transparent = literal < 0.999;
     earth.visible = literal > 0.001;
-    atmosphereMaterial.uniforms.uOpacity.value = 0.18 + abstraction * 1.12;
+    atmosphereMaterial.uniforms.uOpacity.value = 0.11 + abstraction * 0.34;
     starsMaterial.opacity = 0.28 + THREE.MathUtils.smoothstep(progress, 0.72, 1) * 0.34;
     render();
   };
