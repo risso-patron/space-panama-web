@@ -9,22 +9,29 @@ export async function createEarthScene(canvas: HTMLCanvasElement, onReady: () =>
   renderer.setClearColor(0x000000, 0);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.28;
+  renderer.toneMappingExposure = 1.36;
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 30);
   camera.position.z = 4.05;
   // Keep the globe legible as a sunlit object while preserving a gentle night-side falloff.
-  const skyFill = new THREE.HemisphereLight(0xb9d5f2, 0x293326, 2.65);
+  const skyFill = new THREE.HemisphereLight(0xc8e2ff, 0x34402f, 2.9);
   skyFill.position.set(0, 1, 0);
   scene.add(skyFill);
-  const sun = new THREE.DirectionalLight(0xfff0d5, 3.8);
-  sun.position.set(-1.5, 2.5, 7);
+  const sun = new THREE.DirectionalLight(0xfff3df, 4.1);
+  sun.position.set(-0.6, 1.8, 8);
   scene.add(sun);
 
   const geometry = new THREE.SphereGeometry(1, 96, 64);
   texture.colorSpace = THREE.SRGBColorSpace;
   texture.anisotropy = Math.min(4, renderer.capabilities.getMaxAnisotropy());
-  const earthMaterial = new THREE.MeshStandardMaterial({ map: texture, roughness: 1, metalness: 0 });
+  const earthMaterial = new THREE.MeshStandardMaterial({
+    map: texture,
+    roughness: 1,
+    metalness: 0,
+    // A restrained blue ambient emission lifts the ocean shadows without flattening day-side detail.
+    emissive: 0x081b3a,
+    emissiveIntensity: 0.5,
+  });
   const earth = new THREE.Mesh(geometry, earthMaterial);
   scene.add(earth);
 
@@ -86,26 +93,30 @@ export async function createEarthScene(canvas: HTMLCanvasElement, onReady: () =>
     const tablet = window.innerWidth <= 1100;
     const abstractionStart = mobile ? 0.68 : tablet ? 0.75 : 0.82;
     const abstractionEnd = mobile ? 0.82 : tablet ? 0.88 : 0.93;
-    const orientationEnd = mobile ? 0.43 : 0.4;
-    const zoomStart = mobile ? 0.53 : 0.48;
+    const orientationEnd = mobile ? 0.44 : tablet ? 0.42 : 0.4;
+    const zoomStart = mobile ? 0.5 : 0.47;
     const zoomEnd = mobile ? abstractionEnd - 0.08 : abstractionEnd - 0.12;
+    const orientationProgress = THREE.MathUtils.clamp(progress / orientationEnd, 0, 1);
+    // Ease-out starts moving as soon as scroll progress changes (smoothstep has
+    // a zero-velocity start that made the first part of the interaction feel inert).
+    const orientationAmount = 1 - (1 - orientationProgress) ** 2;
     const orientation = progress < orientationEnd
-      ? startRotation.clone().slerp(panamaRotation, THREE.MathUtils.smoothstep(progress, 0.06, orientationEnd))
+      ? startRotation.clone().slerp(panamaRotation, orientationAmount)
       : panamaRotation;
     earth.quaternion.copy(orientation);
     atmosphere.quaternion.copy(orientation);
     const zoom = THREE.MathUtils.smoothstep(progress, zoomStart, zoomEnd);
     const abstraction = THREE.MathUtils.smoothstep(progress, abstractionStart, abstractionEnd);
-    camera.position.z = THREE.MathUtils.lerp(4.25, 2.55, zoom);
-    // Begin centered and fully framed; move toward the established cinematic crop only
-    // after the globe has completed its rotation toward Panama.
-    const framing = zoom;
-    const initialX = 0;
-    const finalX = mobile ? 0.08 : tablet ? 0.35 : 0.72;
-    const horizontalOffset = THREE.MathUtils.lerp(initialX, finalX, framing);
+    camera.position.z = THREE.MathUtils.lerp(4.45, 2.7, zoom);
+    // Keep the opening globe on the right of the editorial copy. During the zoom,
+    // ease it toward the optical center so the Panama vector (rotated to +Z) is
+    // centered by the camera instead of drifting toward open ocean.
+    const initialX = mobile ? camera.aspect * 1.03 : tablet ? 0.82 : 1.05;
+    const finalX = mobile ? 0.02 : tablet ? 0.04 : 0.06;
+    const horizontalOffset = THREE.MathUtils.lerp(initialX, finalX, zoom);
     earth.position.set(horizontalOffset + abstraction * (mobile ? 0.04 : 0.15), abstraction * -0.04, 0);
-    const initialScale = mobile ? 0.82 : tablet ? 1.15 : 1.42;
-    const zoomScale = mobile ? 0.63 : tablet ? 0.67 : 0.63;
+    const initialScale = mobile ? Math.min(0.48, camera.aspect * 0.62) : tablet ? 0.98 : 1.08;
+    const zoomScale = mobile ? 0.68 : tablet ? 0.72 : 0.72;
     earth.scale.setScalar(initialScale + zoom * zoomScale + abstraction * 0.04);
     atmosphere.position.copy(earth.position);
     atmosphere.scale.setScalar(earth.scale.x * (1.035 + abstraction * 0.025));

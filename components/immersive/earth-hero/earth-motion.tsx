@@ -68,7 +68,7 @@ export function EarthMotion({ active }: { active: boolean }) {
       const timeline = gsap.timeline({
         scrollTrigger: {
           trigger: section, start: "top top", end: () => `+=${window.innerHeight * (distance + releaseBuffer) / 100}`,
-          pin: section, scrub: 0.8, anticipatePin: 1, invalidateOnRefresh: true,
+          pin: section, scrub: 0.4, anticipatePin: 1, invalidateOnRefresh: true,
           onUpdate: (self) => setTransition(self.progress),
           onRefresh: (self) => setTransition(self.progress),
         },
