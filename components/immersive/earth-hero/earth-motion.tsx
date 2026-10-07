@@ -37,28 +37,18 @@ export function EarthMotion({ active }: { active: boolean }) {
       const copyExit = desktop ? [0.74, 0.84] : tablet ? [0.66, 0.76] : [0.6, 0.71];
       const handoffStart = desktop ? 0.82 : tablet ? 0.75 : 0.68;
       const cloudRange = desktop ? [0.76, 0.92] : tablet ? [0.7, 0.88] : [0.62, 0.82];
-      const manifestoEntryRange = desktop ? [0.82, 1] : tablet ? [0.77, 0.98] : [0.7, 0.9];
       const reveal = (value: number, range: number[]) => {
         const linear = gsap.utils.clamp(0, 1, (value - range[0]) / (range[1] - range[0]));
         return linear * linear * (3 - 2 * linear);
       };
       const setTransition = (progress: number) => {
         const handoff = reveal(progress, [handoffStart, 1]);
-        const panamaIn = reveal(progress, [0.38, 0.55]);
-        const panamaOut = reveal(progress, desktop ? [0.74, 0.82] : [0.64, 0.72]);
         root.style.setProperty("--earth-progress", String(progress));
-        root.style.setProperty("--earth-panama", String(panamaIn * (1 - panamaOut)));
         root.style.setProperty("--earth-handoff", String(handoff));
         root.style.setProperty("--earth-globe-opacity", String(0.82 * (1 - handoff)));
         root.style.setProperty("--earth-copy", String(1 - reveal(progress, copyExit)));
         const cloudCover = reveal(progress, cloudRange);
-        root.style.setProperty("--earth-cloud-cover", String(cloudCover));
-        const manifestEntry = reveal(progress, manifestoEntryRange);
-        root.style.setProperty("--earth-manifest-entry", String(manifestEntry));
-        root.style.setProperty("--earth-manifest-index", String(reveal(manifestEntry, [0, 0.24])));
-        root.style.setProperty("--earth-manifest-title", String(reveal(manifestEntry, [0.18, 0.64])));
-        root.style.setProperty("--earth-manifest-copy", String(reveal(manifestEntry, [0.58, 0.96])));
-        root.style.setProperty("--earth-cloud-opacity", String(cloudCover * (1 - reveal(manifestEntry, [0.52, 0.88]))));
+        root.style.setProperty("--earth-cloud-opacity", String(cloudCover * (1 - reveal(progress, [0.92, 1]))));
         root.style.setProperty("--earth-cloud-back-x", `${(progress - 0.5) * -9}vw`);
         root.style.setProperty("--earth-cloud-mid-x", `${(progress - 0.5) * 13}vw`);
         root.style.setProperty("--earth-cloud-front-x", `${(progress - 0.5) * -17}vw`);
@@ -81,19 +71,13 @@ export function EarthMotion({ active }: { active: boolean }) {
       return () => {
         root.classList.remove("earth-hero--motion-ready");
         root.style.removeProperty("--earth-progress");
-        root.style.removeProperty("--earth-panama");
         root.style.removeProperty("--earth-handoff");
         root.style.removeProperty("--earth-globe-opacity");
         root.style.removeProperty("--earth-copy");
-        root.style.removeProperty("--earth-cloud-cover");
         root.style.removeProperty("--earth-cloud-opacity");
         root.style.removeProperty("--earth-cloud-back-x");
         root.style.removeProperty("--earth-cloud-mid-x");
         root.style.removeProperty("--earth-cloud-front-x");
-        root.style.removeProperty("--earth-manifest-entry");
-        root.style.removeProperty("--earth-manifest-index");
-        root.style.removeProperty("--earth-manifest-title");
-        root.style.removeProperty("--earth-manifest-copy");
       };
     });
     return () => media.revert();

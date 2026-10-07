@@ -28,7 +28,7 @@ export function ImmersiveHome({ content }: { content: SiteContent }) {
         <span className="atmosphere-canvas__orbit" />
       </div>
       <div className="story-thread" aria-hidden="true"><span className="story-thread__line" /><span className="story-thread__index">SPACE / PANAMÁ</span></div>
-      <div className="story-act story-act--opening" data-act="opening"><EarthHero hero={content.hero} manifesto={content.manifesto} /></div>
+      <div className="story-act story-act--opening" data-act="opening"><EarthHero hero={content.hero} /></div>
       <div className="story-act story-act--manifesto" data-act="manifesto"><Manifesto manifesto={content.manifesto} /></div>
       <div className="selected-work-chapter" id="trabajo" aria-label="Trabajo seleccionado" data-selected-work>
         <header className="selected-work-chapter__rail"><p className="eyebrow">Selected work</p><span data-work-progress>01 / 03</span><span className="selected-work-chapter__progress"><i /></span></header>

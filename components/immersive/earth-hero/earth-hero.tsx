@@ -7,7 +7,7 @@ import { EARTH_TEXTURE } from "./earth-config";
 import { EarthMotion } from "./earth-motion";
 import styles from "./earth-hero.module.css";
 
-export function EarthHero({ hero, manifesto }: { hero: SiteContent["hero"]; manifesto: SiteContent["manifesto"] }) {
+export function EarthHero({ hero }: { hero: SiteContent["hero"] }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const sceneRef = useRef<import("./earth-scene").EarthSceneHandle | null>(null);
   const [ready, setReady] = useState(false);
@@ -55,17 +55,11 @@ export function EarthHero({ hero, manifesto }: { hero: SiteContent["hero"]; mani
         <div className={styles.staticGlobe} style={{ backgroundImage: `linear-gradient(145deg,rgba(105,146,183,.12),rgba(3,8,14,.3)),url("${EARTH_TEXTURE}")` }} />
         <div className={styles.halo} />
         <canvas ref={canvasRef} className={styles.canvas} aria-hidden="true" />
-        <span className={styles.panama}>PANAMÁ</span>
       </div>
       <div className={styles.cloudWipe} aria-hidden="true">
         <span className={styles.cloudLayerBack} />
         <span className={styles.cloudLayerMid} />
         <span className={styles.cloudLayerFront} />
-      </div>
-      <div className={styles.manifestoHandoff} aria-hidden="true">
-        <span className={styles.manifestoHandoffIndex}>01 / {String(manifesto.terms.length).padStart(2, "0")}</span>
-        <h2 className={styles.manifestoHandoffTitle}>{manifesto.terms[0]?.term}</h2>
-        <p className={styles.manifestoHandoffCopy}>{manifesto.terms[0]?.definition}</p>
       </div>
       <div className={`hero__content ${styles.content}`}>
         <div className="hero__brand"><Image src="/assets/space/logo.png" alt="Space Panamá" width={260} height={134} priority /></div>
