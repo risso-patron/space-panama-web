@@ -263,6 +263,10 @@ Rastreador local (`.local-review/session-11/tools/linkcheck.cjs`, Chrome con Jav
 - **Externos** (solo lectura): `wa.me/50767847093` → 200 (redirige a WhatsApp), `instagram.com/agenciaspacepanama/` → 200; `mailto:info@spaceventos.com` y `tel:+50767847093` con formato válido (no se abrieron).
 - **Redirecciones antiguas**: las 5 de servicios y las 3 del blog responden 308 al destino correcto; `sitemap.xml` y `robots.txt` 200; una ruta inexistente da 404.
 
+## 3x. Consejos de revisión externa: títulos y esquinas (2026-11-24)
+
+Comentarios de Luis Moreno sobre la vista previa: títulos muy grandes y redondeo inconsistente entre contenedores y botones. Cambios: escala tipográfica reducida (títulos de página 99 → 70 px a 1440 px; títulos de sección 76–105 → 49–63 px; títulos de caso 62 → 46 px, con equivalentes en móvil) y una sola regla de esquinas: contenedores 16 px, piezas internas 10 px y botones en píldora (Hablemos, Explorar, Contactar, Ver todo el trabajo). Respaldo: `.local-review/session-11/feedback-before/`. Lint, 28/28 pruebas, build, smoke, 24/24 vistas sin incidencias.
+
 ## 4. Verificaciones ejecutadas (servidor de producción en http://127.0.0.1:3218)
 
 | Comprobación | Resultado |

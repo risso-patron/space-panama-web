@@ -52,7 +52,7 @@
   max-width: 15ch;
   margin-bottom: 1.5rem;
   color: var(--site-ink);
-  font-size: clamp(3.25rem, 7vw, 6.2rem);
+  font-size: clamp(2.6rem, 5vw, 4.4rem);
   line-height: .98;
   letter-spacing: -.055em;
 }
@@ -266,6 +266,9 @@ ul.caseGallery { margin: 0; padding: 0; list-style: none; }
 }
 
 .callout {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 22px 40px rgba(23, 35, 59, .18);
   width: min(100% - 3rem, 1180px);
   margin: 0 auto clamp(4rem, 8vw, 7rem);
   padding: clamp(2rem, 5vw, 4rem);
@@ -285,7 +288,7 @@ ul.caseGallery { margin: 0; padding: 0; list-style: none; }
   max-width: 17ch;
   margin-bottom: 1rem;
   color: var(--site-white);
-  font-size: clamp(2.3rem, 4.2vw, 4rem);
+  font-size: clamp(2.1rem, 3.4vw, 3.2rem);
   line-height: 1.03;
   letter-spacing: -.04em;
 }
@@ -297,6 +300,7 @@ ul.caseGallery { margin: 0; padding: 0; list-style: none; }
 }
 
 .calloutLink {
+  border-radius: 999px;
   display: inline-flex;
   flex-shrink: 0;
   min-height: 48px;
@@ -341,7 +345,7 @@ ul.caseGallery { margin: 0; padding: 0; list-style: none; }
   margin-bottom: 1rem;
   color: var(--site-ink);
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  font-size: clamp(2rem, 3.2vw, 3rem);
   font-weight: 500;
   line-height: 1.04;
   letter-spacing: -.04em;
@@ -367,7 +371,7 @@ ul.caseGallery { margin: 0; padding: 0; list-style: none; }
   max-width: 15ch;
   margin-bottom: 1rem;
   color: var(--site-ink);
-  font-size: clamp(2.4rem, 5vw, 4.5rem);
+  font-size: clamp(2.1rem, 3.4vw, 3.2rem);
   line-height: 1.05;
   letter-spacing: -.045em;
 }
@@ -422,7 +426,7 @@ ul.caseGallery { margin: 0; padding: 0; list-style: none; }
   max-width: 12ch;
   margin-bottom: 1rem;
   color: var(--site-ink);
-  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  font-size: clamp(2rem, 3.2vw, 3rem);
   line-height: 1.04;
   letter-spacing: -.04em;
 }
@@ -532,7 +536,7 @@ ul.caseGallery { margin: 0; padding: 0; list-style: none; }
   }
 
   .pageTitle {
-    font-size: clamp(2.8rem, 13vw, 4rem);
+    font-size: clamp(2.3rem, 10vw, 3.2rem);
   }
 
   .contactCards {
