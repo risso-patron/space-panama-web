@@ -1,0 +1,137 @@
+.opening {
+  position: relative;
+  z-index: 9;
+  color: var(--cream);
+  background: var(--ink);
+}
+.wrap {
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: clamp(24px, 5vw, 72px);
+}
+.opening .hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: min(860px, 100svh);
+  color: var(--cream-strong);
+  background: var(--ink);
+}
+.hero > .wrap { position: relative; z-index: 1; }
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(90deg, var(--ink) 0%, color-mix(in srgb, var(--ink) 86%, transparent) 38%, transparent 76%), linear-gradient(180deg, color-mix(in srgb, var(--ink) 58%, transparent), transparent 70%);
+}
+.media {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background: var(--ink) url("/assets/space/hero-orbit-poster.webp") 68% center / cover no-repeat;
+}
+.video { width: 100%; height: 100%; object-fit: cover; object-position: 68% center; }
+.video[data-failed="true"] { visibility: hidden; }
+.mast {
+  min-height: 112px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  border-bottom: 1px solid var(--line);
+}
+.logo {
+  display: block;
+  width: 134px;
+  height: auto;
+  mix-blend-mode: normal;
+  filter: none;
+}
+.logoPlate { display: block; flex-shrink: 0; padding: 8px 12px; }
+.eyebrow {
+  margin: 0;
+  color: var(--gold);
+  font-size: 12px;
+  line-height: 1.6;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.mast .eyebrow { text-align: right; }
+/* Outrank the legacy .immersive h1 without changing shared typography. */
+.opening .title {
+  max-width: 1180px;
+  margin: 0;
+  padding-block: 34px 30px;
+  font-size: clamp(64px, 6.53vw, 94px);
+  line-height: 1.03;
+  letter-spacing: -.048em;
+  overflow-wrap: break-word;
+}
+.title em { color: inherit; }
+.stage {
+  padding-block: 48px 100px;
+  border-top: 1px solid var(--line);
+}
+.statement { min-width: 0; padding-bottom: 12px; }
+.deck { max-width: 500px; margin: 0; font-size: 18px; line-height: 1.65; }
+.opening .manifesto {
+  position: relative;
+  z-index: 2;
+  margin-top: clamp(-7rem, -8vh, -4rem);
+  padding-block: 48px 80px;
+  color: var(--cream-strong);
+  background-color: var(--ink);
+  background-image: linear-gradient(180deg, var(--ink) 0%, transparent 16rem), url("/assets/space/orbital-starfield.webp");
+  background-position: center top;
+  background-size: 100% 16rem, 1280px 2160px;
+  background-repeat: no-repeat, repeat;
+  border-top: 0;
+}
+.manifesto .eyebrow { margin-bottom: 25px; }
+.manifestIntro, .term { display: grid; grid-template-columns: 1.25fr 1fr; gap: 90px; }
+.manifestIntro h2 {
+  max-width: 680px;
+  margin: 0;
+  font-size: clamp(48px, 4.3vw, 62px);
+  line-height: 1.07;
+  letter-spacing: -.043em;
+}
+.manifestIntro > p { margin: 0; padding-top: 7px; font-size: 19px; line-height: 1.7; }
+.terms { margin-top: 55px; }
+.term { border-top: 1px solid var(--line); padding-block: 28px; }
+.index { color: var(--gold); font-size: 11px; letter-spacing: 2px; }
+.term h3 { margin: 10px 0 0; font-size: 42px; line-height: 1.15; letter-spacing: -1px; overflow-wrap: anywhere; }
+.term p { max-width: 480px; margin: 0; padding-top: 28px; font-size: 18px; line-height: 1.65; }
+@media (max-width: 1100px) and (min-width: 701px) {
+  .deck { max-width: 43%; }
+  .deck { font-size: 16px; }
+  .manifestIntro, .term { gap: 40px; }
+  .term h3 { font-size: 34px; }
+}
+@media (max-width: 700px) {
+  .wrap { padding-inline: 24px; }
+  .mast { min-height: 96px; gap: 20px; }
+  .logo { width: 103px; }
+  .opening .hero { min-height: 0; }
+  .media { inset: auto 0 0; height: 440px; background-position: 72% center; }
+  .video { object-position: 72% center; }
+  .hero::after { background: linear-gradient(180deg, var(--ink) 0%, var(--ink) 36%, color-mix(in srgb, var(--ink) 86%, transparent) 54%, transparent 78%, color-mix(in srgb, var(--ink) 30%, transparent)); }
+  .mast .eyebrow { max-width: 135px; font-size: 9px; letter-spacing: 1px; }
+  .opening .title { max-width: none; padding-block: 28px 24px; font-size: clamp(40px, 12.4vw, 66px); line-height: 1.04; letter-spacing: -.045em; }
+  .stage { padding-block: 24px 260px; }
+  .statement { padding-bottom: 0; }
+  .deck { font-size: 15px; }
+  .opening .manifesto { padding-block: 36px 48px; }
+  .manifesto .eyebrow { margin-bottom: 23px; font-size: 10px; }
+  .manifestIntro, .term { display: block; }
+  .manifestIntro h2 { font-size: clamp(36px, 10.77vw, 52px); line-height: 1.08; letter-spacing: -.04em; }
+  .manifestIntro > p { padding-top: 24px; font-size: 16px; }
+  .terms { margin-top: 31px; }
+  .term { padding-block: 24px; }
+  .term h3 { font-size: clamp(26px, 7.95vw, 36px); }
+  .term p { padding-top: 17px; font-size: 15px; }
+}

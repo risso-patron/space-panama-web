@@ -4,7 +4,7 @@ type ManifestoProps = { manifesto: SiteContent["manifesto"] };
 
 export function Manifesto({ manifesto }: ManifestoProps) {
   return (
-    <section className="scene scene--manifesto motion-scope" id="manifiesto" aria-labelledby="manifesto-title">
+    <section className="scene scene--manifesto motion-scope" id="manifiesto" aria-labelledby="manifesto-title" tabIndex={-1}>
       <div className="manifesto__track" aria-hidden="true" />
       <div className="manifesto__stage">
         <div className="manifesto__intro">

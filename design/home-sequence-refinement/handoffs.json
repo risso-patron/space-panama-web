@@ -1,0 +1,146 @@
+{
+  "version": 1,
+  "chosen": "01-continuidad.html",
+  "localRevision": {
+    "direction": "01-continuidad.html",
+    "board": "09-cuatro-mundos.html",
+    "status": "implemented-awaiting-owner-visual-review",
+    "previewUrl": "http://127.0.0.1:3218/",
+    "capturedAt": "2026-11-12T17:39:28.435410+00:00",
+    "sequence": [
+      "Hero",
+      "Manifiesto",
+      "Selected Work",
+      "Cuatro Mundos",
+      "Digital",
+      "Método",
+      "cierre"
+    ],
+    "note": "Static default, explicit optional footer start/stop, keyboard-only quick stop outside navigation/Hero, system reduction priority; no restored autoplay/localStorage. No diagonal arrows, actual focus/hover links. Responsive2/1 worlds: own institutional mark, realDonCeviche piece, two authorized ambient photos; Digital editorial without simulated website capture. Verifiable work list separates5localcases,ARTE2020/2021,Pappagallo,otherpending/historynames andservicegaps. OriginalSVG/Earthsize/sceneTop preserved8widths;CTA reflowonly768aftericonremoval.12tests,lint,build,smoke,20Chromeviews,keyboard/noJS/reduced/optin/fallback/cyclechecksPASS. Awaitingownerreview,noGitpublication.",
+    "verification": "../../docs/worlds-and-accessibility-review.md",
+    "inventory": "../../docs/resource-review/README.md"
+  },
+  "handoffs": {
+    "01-continuidad.html": {
+      "status": "implemented",
+      "queued": false,
+      "sentAt": "2026-10-28T19:07:15.806Z",
+      "startedAt": "2026-10-28T19:11:33.975Z",
+      "implementedAt": "2026-10-28T19:33:08.780Z",
+      "note": "Local preview process was refreshed after the old server became unresponsive; HTTP 200 now confirmed at port 3000. Lint/build and SSR checks passed. Browser-based visual review remains pending.",
+      "previewUrl": "http://127.0.0.1:3000/"
+    }
+  },
+  "localRevisionHistory": [
+    {
+      "outcome": "Owner requests no motion control in navigation, no diagonal arrows, a verifiable work list and visual worlds. Revision08 is history, not final site approval.",
+      "revision": {
+        "direction": "01-continuidad.html",
+        "board": "08-movimiento-y-trabajo.html",
+        "status": "implemented-awaiting-owner-visual-review",
+        "previewUrl": "http://127.0.0.1:3218/",
+        "capturedAt": "2026-11-12T02:23:50.400Z",
+        "sequence": [
+          "Hero",
+          "Manifiesto",
+          "Selected Work",
+          "Cuatro Mundos",
+          "Digital",
+          "Método",
+          "cierre"
+        ],
+        "note": "Hero has no control/bar; native Reduce Motion preference in desktop navigation/mobile menu with local persistence, cross-tab sync and system priority. SVG and Hero geometry retained. Five-page editorial cleanup and two complete historical S10-authorized composites for Prevengo/Heroes, no software/photo/logo/results credits inferred.11tests,lint,build,smoke,20route/viewport checks,8composition widths,keyboard/persistence/reduced/noJS/fallback pass. Local review only, not final approval or deployment.",
+        "verification": "../../docs/site-review-and-motion.md",
+        "inventory": "../../docs/resource-review/README.md"
+      }
+    },
+    {
+      "outcome": "Owner accepts numerical cleanup but requests no Hero control, a site-wide motion preference, editorial audit and verified portfolio variety. Not final site approval.",
+      "revision": {
+        "direction": "01-continuidad.html",
+        "board": "07-edicion-editorial.html",
+        "status": "implemented-awaiting-owner-visual-review",
+        "previewUrl": "http://127.0.0.1:3218/",
+        "capturedAt": "2026-11-11T21:58:31.457Z",
+        "sequence": [
+          "Hero",
+          "Manifiesto",
+          "Selected Work",
+          "Cuatro Mundos",
+          "Digital",
+          "Método",
+          "cierre"
+        ],
+        "note": "Editorial labels only: no duration/static-state note, Apertura or decorative numbering; actual Method order1–6 retained. Pause/resume labels say animación. SVG/motion source before controls byte-identical; Hero copy/scene geometry exactly unchanged across8widths. Lint,9tests,build,smoke,20route/viewport checks,actual keyboard pause/resume,live and initial reduced-motion/noJS/fallback checks pass. Local review only, no final approval or publication.",
+        "verification": "../../docs/editorial-home-review.md",
+        "inventory": "../../docs/resource-review/README.md"
+      }
+    },
+    {
+      "outcome": "Owner prefers composition06 and requests editorial cleanup, not a redesign or final site approval",
+      "revision": {
+        "direction": "01-continuidad.html",
+        "board": "06-composicion-planetaria.html",
+        "status": "implemented-awaiting-owner-visual-review",
+        "previewUrl": "http://127.0.0.1:3218/",
+        "capturedAt": "2026-11-11T20:43:27.332Z",
+        "sequence": [
+          "Hero",
+          "Manifiesto",
+          "Selected Work",
+          "Cuatro Mundos",
+          "Digital",
+          "Método",
+          "cierre"
+        ],
+        "note": "Hero composition06 only: same copy in three intentional lines; larger detailed Earth and bounded visible lunar orbit10s; readable note/pause control. Original logo/CTAs and non-Hero source retained. Eight native tests, lint/build/smoke,20 route/viewport checks,8 composition widths, full-cycle geometry/static fallbacks and timestamped12s desktop/mobile Chrome recordings verified. Not visually approved; no publication or external media import.",
+        "verification": "../../docs/verification.md",
+        "inventory": "../../docs/resource-review/README.md"
+      }
+    },
+    {
+      "outcome": "Owner explicitly did not approve Hero05; revised scale/hierarchy only, not a new site direction",
+      "revision": {
+        "direction": "01-continuidad.html",
+        "board": "05-hero-tierra-luna.html",
+        "status": "implemented-awaiting-owner-visual-review",
+        "previewUrl": "http://127.0.0.1:3218/",
+        "capturedAt": "2026-11-11T17:59:34.767Z",
+        "sequence": [
+          "Hero",
+          "Manifiesto",
+          "Selected Work",
+          "Cuatro Mundos",
+          "Digital",
+          "Método",
+          "cierre"
+        ],
+        "note": "Only Hero changed: original inline SVG Earth/Moon, CSS orbit10s, keyboard pause, static SSR/no-JS/reduced-motion and CSS visual fallback. Copy/logo/CTAs and all other chapters retained. Eight native tests, lint/build/smoke,20 Chrome route/viewport checks and geometry/fallback checks pass. No visual approval, external media import or publication.",
+        "verification": "../../docs/verification.md",
+        "inventory": "../../docs/resource-review/README.md"
+      }
+    },
+    {
+      "outcome": "not visually approved; superseded by owner-requested Hero-only revision",
+      "revision": {
+        "direction": "01-continuidad.html",
+        "board": "04-recuperacion-local.html",
+        "status": "implemented-awaiting-owner-visual-review",
+        "previewUrl": "http://127.0.0.1:3218/",
+        "capturedAt": "2026-11-11T16:43:37.491Z",
+        "sequence": [
+          "Hero",
+          "Manifiesto",
+          "Selected Work",
+          "Cuatro Mundos",
+          "Digital",
+          "Método",
+          "cierre"
+        ],
+        "note": "Recuperación editorial estática de la dirección elegida. Tierra/video no obligatorios; foco en trabajo autorizado de Don Ceviche y EMC. Boda solo en Trabajo. Siete pruebas, lint/build/smoke y revisión Chrome en 20 combinaciones pasan; no equivale a aprobación visual del dueño. Permiso de clientes nuevos solo local; ningún despliegue autorizado.",
+        "verification": "../../docs/verification.md",
+        "inventory": "../../docs/visual-resource-inventory.json"
+      }
+    }
+  ]
+}

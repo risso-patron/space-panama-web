@@ -1,0 +1,13 @@
+{
+  "title": "Manifiesto y recorrido de la Home",
+  "brief": "Continuación visual de la Home de Space Panamá en la dirección ya elegida “La Tierra cede el foco”. Diseño de un único recorrido vertical desde el Manifiesto hacia Selected Work, capacidades, proyectos digitales, método y contacto. Usa textos reales del repositorio. Muestra únicamente assets reales Don Ceviche y EMC Panamá, con permisos/créditos pendientes; no incluye imágenes de Psico Jazmín ni AsuMesa. Sin nuevas direcciones y sin cambios de producción.",
+  "artboards": [
+    {
+      "file": "01-manifiesto-y-recorrido.html",
+      "title": "Manifiesto y recorrido editorial",
+      "tradeoff": "Conserva lectura continua y contenido visible en los capítulos; los casos digitales se mantienen tipográficos hasta recibir capturas reales y permisos, y la licencia de los assets mostrados sigue pendiente.",
+      "width": 1440,
+      "height": 900
+    }
+  ]
+}

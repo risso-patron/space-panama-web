@@ -1,6 +1,5 @@
 import { BrandWorkScenes } from "@/components/brand-work-scenes";
-import { Hero } from "@/components/hero";
-import { Manifesto } from "@/components/manifesto";
+import { EditorialOpening } from "@/components/immersive/editorial-opening";
 import { ImmersiveMotion } from "@/components/immersive/immersive-motion";
 import { AtmosphericMotion } from "@/components/immersive/atmospheric-motion";
 import { SelectedWork } from "@/components/selected-work";
@@ -28,8 +27,7 @@ export function ImmersiveHome({ content }: { content: SiteContent }) {
         <span className="atmosphere-canvas__orbit" />
       </div>
       <div className="story-thread" aria-hidden="true"><span className="story-thread__line" /><span className="story-thread__index">SPACE / PANAMÁ</span></div>
-      <div className="story-act story-act--opening" data-act="opening"><Hero hero={content.hero} /></div>
-      <div className="story-act story-act--manifesto" data-act="manifesto"><Manifesto manifesto={content.manifesto} /></div>
+      <EditorialOpening content={content} />
       <div className="selected-work-chapter" id="trabajo" aria-label="Trabajo seleccionado" data-selected-work>
         <header className="selected-work-chapter__rail"><p className="eyebrow">Selected work</p><span data-work-progress>01 / 03</span><span className="selected-work-chapter__progress"><i /></span></header>
         <div className="selected-work-viewport">

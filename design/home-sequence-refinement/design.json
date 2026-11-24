@@ -1,0 +1,9 @@
+{
+  "title": "Refinamiento de la secuencia Hero → Manifiesto → Selected Work",
+  "brief": "Propuesta visual para refinar la Home actual de Space Panamá, enfocada en la secuencia Hero → Manifiesto → entrada a Selected Work, sin rediseñar toda la página. Audiencia: empresas y marcas que evalúan contratar una agencia creativa en Panamá. Preservar la narrativa editorial y mostrar trabajo real. Explorar tres direcciones: transición continua de la Tierra al Manifiesto; relevo editorial explícito; transición hacia un caso real de Selected Work. No añadir pantallas de ESTRATEGIA ni PANAMÁ sobre la Tierra. Incluir escritorio, móvil y movimiento reducido/fallos de medios. Solo materiales reales del proyecto; excluir Psico Jazmín y AsuMesa; derechos y créditos no confirmados quedan pendientes. Solo propuesta, sin cambios de producción, assets ni Git.",
+  "artboards": [
+    { "file": "01-continuidad.html", "title": "La Tierra cede el foco", "tradeoff": "Mantiene continuidad atmosférica; puede diluir el límite entre Hero y Manifiesto", "width": 1440, "height": 900 },
+    { "file": "02-capitulo-editorial.html", "title": "Cambio de capítulo limpio", "tradeoff": "Hace inequívoca la lectura editorial; sacrifica continuidad visual del Hero", "width": 1440, "height": 900 },
+    { "file": "03-hacia-caso.html", "title": "Del Hero al caso real", "tradeoff": "Hace tangible el trabajo pronto; requiere proteger el espacio de lectura del Manifiesto y validar permisos del caso", "width": 1440, "height": 900 }
+  ]
+}

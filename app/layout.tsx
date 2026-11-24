@@ -1,34 +1,40 @@
 import type { Metadata } from "next";
 import { getSiteUrl } from "@/lib/site-url";
+import { SiteShell } from "@/components/site/site-shell";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Space Panamá — Estrategia, creatividad y dirección digital",
+  title: {
+    default: "Space Panamá — Agencia creativa de marketing digital",
+    template: "%s | Space Panamá",
+  },
   description:
-    "Estudio creativo en Panamá. Unimos estrategia, creatividad y dirección digital para convertir ideas en experiencias de marca claras y memorables.",
+    "Agencia creativa en Ciudad de Panamá. Estrategia de marketing digital, identidad visual, contenido, desarrollo web, packaging y organización de eventos.",
   metadataBase: getSiteUrl(),
   alternates: { canonical: "/" },
   openGraph: {
-    title: "Space Panamá — Estrategia, creatividad y dirección digital",
+    title: "Space Panamá — Agencia creativa de marketing digital",
     description:
-      "Estudio creativo en Panamá. Estrategia, creatividad y dirección digital para marcas.",
+      "Estrategia de marketing digital, identidad visual, contenido, desarrollo web y organización de eventos en Ciudad de Panamá.",
     type: "website",
+    siteName: "Space Panamá",
+    url: "/",
     locale: "es_PA",
-    images: [{ url: "/assets/space/logo.png", width: 2275, height: 1166, alt: "Logo de Space Panamá" }],
+    images: [{ url: "/assets/space/social-card.jpg", width: 1200, height: 630, alt: "Space Panamá" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Space Panamá — Estrategia, creatividad y dirección digital",
+    title: "Space Panamá — Agencia creativa de marketing digital",
     description:
-      "Estudio creativo en Panamá. Estrategia, creatividad y dirección digital para marcas.",
-    images: ["/assets/space/logo.png"],
+      "Estrategia de marketing digital, identidad visual, contenido, desarrollo web y organización de eventos en Ciudad de Panamá.",
+    images: ["/assets/space/social-card.jpg"],
   },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="es">
-      <body>{children}</body>
+      <body><SiteShell>{children}</SiteShell></body>
     </html>
   );
 }

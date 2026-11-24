@@ -1,7 +1,5 @@
-import { ImmersiveHome } from "@/components/immersive/immersive-home";
-import { resolveContentAdapter } from "@/lib/adapters/content-adapter";
+import { SiteHome } from "@/components/site/site-home";
 
-export default async function Home() {
-  const content = await resolveContentAdapter().getSiteContent();
-  return <ImmersiveHome content={content} />;
+export default function Home() {
+  return <SiteHome />;
 }
