@@ -1,0 +1,49 @@
+.path { position: relative; margin-top: clamp(2.5rem, 5vw, 3.5rem); }
+.drawing { display: block; width: 100%; height: auto; overflow: visible; }
+.drawingVertical { display: none; }
+.strategy, .creativity { fill: none; stroke-linecap: round; stroke-dasharray: 1 1; stroke-dashoffset: 0; }
+/* The vertical drawing stretches (preserveAspectRatio="none"), so only it keeps hairline strokes. */
+.drawingVertical .strategy, .drawingVertical .creativity { vector-effect: non-scaling-stroke; }
+/* Estrategia: the brand blue, lifted for the dark ground. Creatividad: the editorial cream. */
+.strategy { stroke: var(--path-strategy, #6f8fc4); stroke-width: 2; }
+.drawing .strategy { stroke: url(#mp-strategy); stroke-width: 3.5; }
+.drawing .creativity { stroke: url(#mp-creativity); stroke-width: 3; stroke-opacity: 1; }
+.shadow path { fill: none; stroke: #17233b; stroke-opacity: .12; stroke-width: 5; stroke-linecap: round; }
+.stationShadows circle { fill: #17233b; fill-opacity: .16; stroke: none !important; }
+.creativity { stroke: var(--path-creativity, #f2f5fb); stroke-opacity: .85; stroke-width: 1.8; }
+.stations circle { fill: url(#mp-gold); stroke: var(--editorial-ink, #1b2a46); stroke-width: 3; }
+.stations .cross { fill: url(#mp-blue); }
+.stations .growth { fill: url(#mp-gold); stroke: var(--editorial-ink, #1b2a46); stroke-width: 3; }
+.stations .growthHalo { fill: #e0bf8b; fill-opacity: .22; stroke: none; }
+.stations .brief { fill: url(#mp-grey); }
+.briefLabel { fill: var(--editorial-muted, #c4cfdf); font: 700 15px/1 system-ui, sans-serif; letter-spacing: .16em; text-transform: uppercase; }
+
+/* Labels sit in five equal columns under their stations (station x: 120 · 360 · 600 · 840 · 1080 of 1200). */
+.path :global(ul) { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1.5rem; margin: 1.25rem 0 0; padding: 0; border: 0; list-style: none; }
+.path :global(li) { display: block; padding: 0; border: 0; text-align: center; }
+.path :global(li h3) { font-size: clamp(1.35rem, 2vw, 1.9rem); letter-spacing: -.025em; }
+.path :global(li p) { max-width: 18ch; margin: .45rem auto 0; color: var(--editorial-muted, #c4cfdf); font-size: .84rem; line-height: 1.55; }
+
+/* Draw once: only after the component armed itself off screen (JS, motion allowed). */
+.path[data-stage="armed"] .strategy, .path[data-stage="armed"] .creativity { stroke-dashoffset: 1; }
+.path[data-stage="armed"] .stations, .path[data-stage="armed"] .briefLabel, .path[data-stage="armed"] .shadow { opacity: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .path[data-stage="play"] .strategy { transition: stroke-dashoffset 1.6s cubic-bezier(.3, .6, .2, 1); }
+  .path[data-stage="play"] .creativity { transition: stroke-dashoffset 1.9s cubic-bezier(.3, .6, .2, 1) .15s; }
+  .path[data-stage="play"] .stations, .path[data-stage="play"] .briefLabel, .path[data-stage="play"] .shadow { transition: opacity .6s ease-out 1.4s; }
+}
+
+@media (max-width: 760px) {
+  .drawing { display: none; }
+  .drawingVertical { position: absolute; left: 0; top: .2rem; bottom: .2rem; display: block; width: 48px; height: calc(100% - .4rem); overflow: visible; }
+  .path :global(ul) { grid-template-columns: 1fr; gap: 0; margin-top: 0; padding-left: 3.4rem; }
+  .path :global(li) { position: relative; min-height: 100px; padding-block: .9rem; text-align: left; }
+  .path :global(li)::before { content: ""; position: absolute; left: calc(-3.4rem + 18px); top: 1.55rem; width: 11px; aspect-ratio: 1; border: 3px solid var(--editorial-ink, #1b2a46); border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff3d6, #e0bf8b 45%, #9c7a45); box-shadow: 0 4px 8px rgba(23, 35, 59, .25); transform: translateX(-50%); }
+  .path :global(li:nth-child(3))::before, .path :global(li:nth-child(4))::before { width: 15px; background: radial-gradient(circle at 35% 30%, #c9d9f2, #3b598d 45%, #1b2a46); }
+  .path :global(li:last-child)::before { width: 19px; box-shadow: 0 0 0 5px #e0bf8b40; }
+  .path :global(li p) { max-width: 32ch; margin-left: 0; }
+  .path[data-stage="armed"] :global(li)::before { opacity: 0; }
+}
+@media (max-width: 760px) and (prefers-reduced-motion: no-preference) {
+  .path[data-stage="play"] :global(li)::before { transition: opacity .6s ease-out 1.4s; }
+}

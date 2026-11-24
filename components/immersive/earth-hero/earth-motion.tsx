@@ -28,6 +28,7 @@ export function EarthMotion({ active }: { active: boolean }) {
     const section = root?.querySelector<HTMLElement>(".scene--hero");
     const manifesto = document.querySelector<HTMLElement>("#manifiesto");
     if (!root || !section || !manifesto) return;
+    const manifestoAct = manifesto.closest<HTMLElement>(".story-act--manifesto");
     const media = gsap.matchMedia();
     media.add({ desktop: "(min-width: 1101px)", tablet: "(min-width: 701px) and (max-width: 1100px)", mobile: "(max-width: 700px)", motion: "(prefers-reduced-motion: no-preference)" }, ({ conditions }) => {
       const { desktop, tablet, motion } = conditions as { desktop: boolean; tablet: boolean; mobile: boolean; motion: boolean };
@@ -36,7 +37,6 @@ export function EarthMotion({ active }: { active: boolean }) {
       const releaseBuffer = desktop ? 20 : tablet ? 14 : 8;
       const copyExit = desktop ? [0.74, 0.84] : tablet ? [0.66, 0.76] : [0.6, 0.71];
       const handoffStart = desktop ? 0.82 : tablet ? 0.75 : 0.68;
-      const cloudRange = desktop ? [0.76, 0.92] : tablet ? [0.7, 0.88] : [0.62, 0.82];
       const reveal = (value: number, range: number[]) => {
         const linear = gsap.utils.clamp(0, 1, (value - range[0]) / (range[1] - range[0]));
         return linear * linear * (3 - 2 * linear);
@@ -47,14 +47,10 @@ export function EarthMotion({ active }: { active: boolean }) {
         root.style.setProperty("--earth-handoff", String(handoff));
         root.style.setProperty("--earth-globe-opacity", String(0.82 * (1 - handoff)));
         root.style.setProperty("--earth-copy", String(1 - reveal(progress, copyExit)));
-        const cloudCover = reveal(progress, cloudRange);
-        root.style.setProperty("--earth-cloud-opacity", String(cloudCover * (1 - reveal(progress, [0.92, 1]))));
-        root.style.setProperty("--earth-cloud-back-x", `${(progress - 0.5) * -9}vw`);
-        root.style.setProperty("--earth-cloud-mid-x", `${(progress - 0.5) * 13}vw`);
-        root.style.setProperty("--earth-cloud-front-x", `${(progress - 0.5) * -17}vw`);
         window.dispatchEvent(new CustomEvent("earth-hero-progress", { detail: { progress } }));
       };
       root.classList.add("earth-hero--motion-ready");
+      if (desktop) manifestoAct?.classList.add("earth-manifesto--overlap");
       const timeline = gsap.timeline({
         scrollTrigger: {
           trigger: section, start: "top top", end: () => `+=${window.innerHeight * (distance + releaseBuffer) / 100}`,
@@ -70,14 +66,12 @@ export function EarthMotion({ active }: { active: boolean }) {
       requestAnimationFrame(() => { ScrollTrigger.sort(); ScrollTrigger.refresh(); });
       return () => {
         root.classList.remove("earth-hero--motion-ready");
+        manifestoAct?.classList.remove("earth-manifesto--overlap");
+        requestAnimationFrame(() => ScrollTrigger.refresh());
         root.style.removeProperty("--earth-progress");
         root.style.removeProperty("--earth-handoff");
         root.style.removeProperty("--earth-globe-opacity");
         root.style.removeProperty("--earth-copy");
-        root.style.removeProperty("--earth-cloud-opacity");
-        root.style.removeProperty("--earth-cloud-back-x");
-        root.style.removeProperty("--earth-cloud-mid-x");
-        root.style.removeProperty("--earth-cloud-front-x");
       };
     });
     return () => media.revert();

@@ -56,11 +56,6 @@ export function EarthHero({ hero }: { hero: SiteContent["hero"] }) {
         <div className={styles.halo} />
         <canvas ref={canvasRef} className={styles.canvas} aria-hidden="true" />
       </div>
-      <div className={styles.cloudWipe} aria-hidden="true">
-        <span className={styles.cloudLayerBack} />
-        <span className={styles.cloudLayerMid} />
-        <span className={styles.cloudLayerFront} />
-      </div>
       <div className={`hero__content ${styles.content}`}>
         <div className="hero__brand"><Image src="/assets/space/logo.png" alt="Space Panamá" width={260} height={134} priority /></div>
         <p className="eyebrow">{hero.eyebrow}</p>

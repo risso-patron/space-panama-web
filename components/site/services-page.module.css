@@ -1,0 +1,67 @@
+/* Servicios · "Un mundo por capítulo" (owner, 2026-11-21). Light palette B, depth like Inicio's orbit. */
+.hero { background: var(--site-sky); overflow: hidden; }
+.heroInner { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); align-items: center; gap: clamp(2rem, 5vw, 4rem); width: min(100% - 3rem, 1180px); margin-inline: auto; padding-block: clamp(4rem, 8vw, 6.5rem); }
+
+/* Small linked orbit: the same idea as Inicio, here as a jump menu. */
+.heroOrbit { position: relative; aspect-ratio: 400 / 260; }
+.heroOrbit svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.heroCore { position: absolute; left: 50%; top: 50%; display: grid; place-items: center; width: 22%; aspect-ratio: 1; border-radius: 50%; transform: translate(-50%, -50%); background: radial-gradient(circle at 32% 26%, #c9d9f2 0, #6f8fc4 18%, #3b598d 52%, #1b2a46 100%); box-shadow: inset -8px -10px 18px rgba(10, 20, 40, .45), inset 5px 6px 10px rgba(255, 255, 255, .18), 0 16px 28px rgba(23, 35, 59, .3); color: #f2f5fb; font-size: clamp(.5rem, .8vw, .68rem); font-weight: 800; letter-spacing: .2em; text-transform: uppercase; text-shadow: 0 1px 2px rgba(10, 20, 40, .5); }
+.heroOrbit ol { margin: 0; padding: 0; list-style: none; }
+.heroOrbit li { position: absolute; transform: translate(-50%, -50%); }
+/* Points on the near/far halves of the ellipse (cx 200, cy 130, rx 190, ry 78). */
+.heroOrbit li[data-world="marca"] { left: 7%; top: 50%; }
+.heroOrbit li[data-world="comunicacion"] { left: 30%; top: 22%; }
+.heroOrbit li[data-world="experiencias"] { left: 70%; top: 22%; }
+.heroOrbit li[data-world="digital"] { left: 93%; top: 50%; }
+.heroOrbit a, .index a { display: inline-flex; align-items: center; gap: .5rem; min-height: 44px; padding: .35rem .85rem .35rem .45rem; border: 1px solid var(--site-line); border-radius: 999px; background: linear-gradient(180deg, #ffffff, #eef3fa); color: var(--site-ink); font-family: Georgia, "Times New Roman", serif; font-size: clamp(.9rem, 1.2vw, 1.05rem); text-decoration: none; white-space: nowrap; box-shadow: 0 10px 22px rgba(23, 35, 59, .13), inset 0 1px 0 #ffffff; transition: background-color .2s, transform .2s, box-shadow .2s; }
+.heroOrbit a:hover, .heroOrbit a:focus-visible, .index a:hover, .index a:focus-visible { background: #e0bf8b; transform: translateY(-2px); box-shadow: 0 14px 26px rgba(23, 35, 59, .2); }
+.heroOrbit i, .index i, .worldTag i { flex: none; width: .7rem; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff3d6, #e0bf8b 50%, #9c7a45); box-shadow: 0 2px 4px rgba(23, 35, 59, .25); }
+
+/* Chapters with a sticky index beside them. */
+.layout { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: clamp(1.5rem, 3vw, 3rem); width: min(100% - 3rem, 1320px); margin-inline: auto; padding-top: clamp(2.5rem, 5vw, 4rem); }
+.aside { position: relative; min-width: 0; }
+.index { position: sticky; top: 112px; }
+.index ol { display: grid; gap: .55rem; margin: 0; padding: 0; list-style: none; }
+.index a { width: 100%; font-family: inherit; font-size: .86rem; font-weight: 700; box-shadow: 0 4px 10px rgba(23, 35, 59, .08), inset 0 1px 0 #ffffff; }
+.index a i { background: radial-gradient(circle at 35% 30%, #ffffff, #c4cfdf 50%, #6f82a3); }
+.index a[aria-current="location"] { border-color: #e0bf8b; background: #fff8ea; }
+.index a[aria-current="location"] i { background: radial-gradient(circle at 35% 30%, #fff3d6, #e0bf8b 50%, #9c7a45); box-shadow: 0 0 0 4px #e0bf8b40; }
+.chapters { min-width: 0; }
+
+.chapter { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); align-items: start; gap: clamp(1.5rem, 4vw, 3.5rem); padding: clamp(2.5rem, 5vw, 4rem) clamp(1rem, 3vw, 2.5rem); border-radius: 18px; scroll-margin-top: 110px; }
+.tint { background: #f4f7fb; }
+.chapterCopy { min-width: 0; }
+.worldTag { display: inline-flex; align-items: center; gap: .55rem; margin: 0 0 .8rem; color: var(--site-brand); font-size: .7rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+.chapter h2 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(2.4rem, 4vw, 3.6rem); font-weight: 400; line-height: 1.05; letter-spacing: -.035em; color: var(--site-ink); }
+.intro { max-width: 34ch; margin: .8rem 0 1.4rem; color: var(--site-muted); font-size: 1rem; line-height: 1.7; }
+.cards { display: grid; gap: .75rem; margin: 0 0 1.4rem; padding: 0; list-style: none; }
+.cards li { padding: 1rem 1.1rem; border: 1px solid var(--site-line); border-radius: 14px; background: linear-gradient(180deg, #ffffff, #f8fafd); box-shadow: 0 10px 22px rgba(23, 35, 59, .07), inset 0 1px 0 #ffffff; transition: transform .2s, box-shadow .2s; }
+.cards li:hover { transform: translateY(-2px); box-shadow: 0 16px 28px rgba(23, 35, 59, .12); }
+.cards h3 { margin: 0 0 .3rem; color: var(--site-ink); font-family: inherit; font-size: 1rem; font-weight: 700; letter-spacing: 0; }
+.cards p { margin: 0; color: var(--site-muted); font-size: .9rem; line-height: 1.6; }
+.evidence { min-width: 0; padding: clamp(.75rem, 2vw, 1.25rem); border: 1px solid var(--site-line); border-radius: 16px; box-shadow: 0 18px 36px rgba(23, 35, 59, .1); }
+.brandStack { display: grid; gap: 1rem; }
+.brandStack > figure:last-child { width: min(100%, 320px); }
+.wide { margin-top: clamp(2.5rem, 5vw, 4rem); border-radius: 18px; scroll-margin-top: 110px; }
+.wide .cards { margin-top: 1.4rem; }
+.wide h2#digital-title { font-size: clamp(2.6rem, 4.6vw, 4.4rem); }
+
+@media (max-width: 1000px) {
+  .layout { grid-template-columns: minmax(0, 1fr); }
+  .aside { position: sticky; top: 88px; z-index: 5; margin-inline: -1.5rem; padding: .6rem 1.5rem; background: rgba(255, 255, 255, .94); backdrop-filter: blur(6px); border-bottom: 1px solid var(--site-line); }
+  .index { position: static; }
+  .index ol { display: flex; gap: .45rem; overflow-x: auto; scrollbar-width: none; }
+  .index a { width: auto; min-height: 40px; }
+  .chapter { grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) {
+  .heroInner { grid-template-columns: 1fr; width: calc(100% - 2rem); padding-block: 3rem 2.5rem; }
+  .heroOrbit { display: none; }
+  .layout { width: calc(100% - 2rem); }
+  .aside { margin-inline: -1rem; padding-inline: 1rem; }
+  .chapter { padding: 2rem 1rem; border-radius: 14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .heroOrbit a, .index a, .cards li { transition: none; }
+  .heroOrbit a:hover, .index a:hover, .cards li:hover { transform: none; }
+}

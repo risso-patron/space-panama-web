@@ -122,9 +122,12 @@ export async function createEarthScene(canvas: HTMLCanvasElement, onReady: () =>
     atmosphere.scale.setScalar(earth.scale.x * (1.035 + abstraction * 0.025));
     earthMaterial.color.copy(earthBaseColor).lerp(earthHazeColor, abstraction * 0.86);
     const literal = 1 - THREE.MathUtils.smoothstep(progress, abstractionEnd - 0.08, abstractionEnd);
-    earthMaterial.opacity = literal;
-    earthMaterial.transparent = literal < 0.999;
-    earth.visible = literal > 0.001;
+    // Hold the Panama frame through the pin release. The page scroll then
+    // carries the globe away as the Manifesto enters, avoiding an empty frame.
+    const surfaceOpacity = Math.max(0.82, literal);
+    earthMaterial.opacity = surfaceOpacity;
+    earthMaterial.transparent = surfaceOpacity < 0.999;
+    earth.visible = true;
     atmosphereMaterial.uniforms.uOpacity.value = 0.11 + abstraction * 0.34;
     starsMaterial.opacity = 0.28 + THREE.MathUtils.smoothstep(progress, 0.72, 1) * 0.34;
     render();

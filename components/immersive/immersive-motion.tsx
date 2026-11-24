@@ -14,7 +14,7 @@ export function ImmersiveMotion() {
       if (reduced) return;
 
       const refresh = () => ScrollTrigger.refresh();
-      if (!document.querySelector("[data-earth-hero]")) {
+      if (document.querySelector(".scene--hero") && !document.querySelector("[data-earth-hero]")) {
         gsap.fromTo(".motion-headline", { yPercent: 14, autoAlpha: 0 }, { yPercent: 0, autoAlpha: 1, duration: 1.25, ease: "power3.out" });
         gsap.fromTo(".hero__atmosphere", { scale: 0.78, autoAlpha: 0.3 }, { scale: 1, autoAlpha: 1, duration: 1.8, ease: "power2.out" });
         gsap.to(".hero__content", { yPercent: -10, scale: 0.94, autoAlpha: 0.68, ease: "none", scrollTrigger: { trigger: ".scene--hero", start: "top top", end: "bottom top", scrub: 0.8 } });
@@ -22,10 +22,17 @@ export function ImmersiveMotion() {
       }
 
       const manifesto = document.querySelector<HTMLElement>(".scene--manifesto");
+      const manifestoStage = manifesto?.querySelector<HTMLElement>(".manifesto__stage");
       const steps = gsap.utils.toArray<HTMLElement>(".manifesto-step");
       const fill = document.querySelector<HTMLElement>(".manifesto__progress-fill");
       const label = document.querySelector<HTMLElement>(".manifesto__progress-label");
       const bar = document.querySelector<HTMLElement>(".manifesto__progress");
+      if (desktop && manifesto && manifestoStage) {
+        gsap.fromTo(manifestoStage, { y: 44, autoAlpha: 0.35 }, {
+          y: 0, autoAlpha: 1, ease: "none",
+          scrollTrigger: { trigger: manifesto, start: "top 18%", end: "top top", scrub: 0.65, invalidateOnRefresh: true },
+        });
+      }
       if (desktop && manifesto && steps.length) {
         gsap.set(steps, { autoAlpha: 0, y: 42, scale: 0.96 });
         gsap.set(steps[0], { autoAlpha: 1, y: 0, scale: 1 });

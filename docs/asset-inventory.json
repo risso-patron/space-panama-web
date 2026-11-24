@@ -1,0 +1,206 @@
+[
+  {
+    "path": "public/assets/don-ceviche/post-3.mp4",
+    "bytes": 4785074,
+    "codec_name": "h264",
+    "width": 1080,
+    "height": 1080,
+    "durationSeconds": 11.70288,
+    "format": "mp4"
+  },
+  {
+    "path": "public/assets/don-ceviche/post-4.png",
+    "bytes": 1522880,
+    "width": 2251,
+    "height": 2251,
+    "format": "png"
+  },
+  {
+    "path": "public/assets/don-ceviche/post-4.webp",
+    "bytes": 270674,
+    "width": 2251,
+    "height": 2251,
+    "format": "webp"
+  },
+  {
+    "path": "public/assets/don-ceviche/post-7.png",
+    "bytes": 2442445,
+    "width": 2251,
+    "height": 2250,
+    "format": "png"
+  },
+  {
+    "path": "public/assets/don-ceviche/post-7.webp",
+    "bytes": 404890,
+    "width": 2251,
+    "height": 2250,
+    "format": "webp"
+  },
+  {
+    "path": "public/assets/earth-hero/blue-marble-january-2004-4096.webp",
+    "bytes": 723470,
+    "width": 4096,
+    "height": 2048,
+    "format": "webp"
+  },
+  {
+    "path": "public/assets/portfolio-v12/asu-flyer.webp",
+    "bytes": 84738,
+    "width": 708,
+    "height": 1000,
+    "format": "webp"
+  },
+  {
+    "path": "public/assets/portfolio-v12/asu-label-pasta.webp",
+    "bytes": 102772,
+    "width": 1417,
+    "height": 1191,
+    "format": "webp"
+  },
+  {
+    "path": "public/assets/portfolio-v12/asu-label-round.webp",
+    "bytes": 155960,
+    "width": 1208,
+    "height": 1208,
+    "format": "webp"
+  },
+  {
+    "path": "public/assets/portfolio-v12/asu-logo.webp",
+    "bytes": 29894,
+    "width": 805,
+    "height": 1200,
+    "format": "webp"
+  },
+  {
+    "path": "public/assets/portfolio-v12/emc-social.webp",
+    "bytes": 208340,
+    "width": 2000,
+    "height": 1333,
+    "format": "webp"
+  },
+  {
+    "path": "public/assets/psicojazmin/identity.webp",
+    "bytes": 44396,
+    "width": 717,
+    "height": 963,
+    "format": "webp"
+  },
+  {
+    "path": "public/assets/psicojazmin/notebook.webp",
+    "bytes": 174372,
+    "width": 1600,
+    "height": 1200,
+    "format": "webp"
+  },
+  {
+    "path": "public/assets/psicojazmin/tazas.webp",
+    "bytes": 96672,
+    "width": 1600,
+    "height": 1200,
+    "format": "webp"
+  },
+  {
+    "path": "public/assets/sissy/five-actions.webp",
+    "bytes": 153392,
+    "width": 1127,
+    "height": 2008,
+    "format": "webp"
+  },
+  {
+    "path": "public/assets/sissy/sissy-5-acciones-poster.jpg",
+    "bytes": 79985,
+    "width": 720,
+    "height": 1270,
+    "format": "jpeg"
+  },
+  {
+    "path": "public/assets/sissy/sissy-5-acciones.mp4",
+    "bytes": 2051490,
+    "codec_name": "h264",
+    "width": 720,
+    "height": 1270,
+    "durationSeconds": 29.302993,
+    "format": "mp4"
+  },
+  {
+    "path": "public/assets/space/casamiento-space-luces.webp",
+    "bytes": 208178,
+    "width": 1600,
+    "height": 2133,
+    "format": "webp"
+  },
+  {
+    "path": "public/assets/space/casamiento-space-mesa.webp",
+    "bytes": 209662,
+    "width": 1600,
+    "height": 2133,
+    "format": "webp"
+  },
+  {
+    "path": "public/assets/space/hero-orbit-poster.webp",
+    "bytes": 188728,
+    "width": 1920,
+    "height": 1080,
+    "format": "webp"
+  },
+  {
+    "path": "public/assets/space/hero-orbit.mp4",
+    "bytes": 3160903,
+    "codec_name": "h264",
+    "width": 1920,
+    "height": 1080,
+    "durationSeconds": 10.041667,
+    "format": "mp4"
+  },
+  {
+    "path": "public/assets/space/logo.png",
+    "bytes": 106303,
+    "width": 2275,
+    "height": 1166,
+    "format": "png"
+  },
+  {
+    "path": "public/assets/space/orbital-starfield.webp",
+    "bytes": 91130,
+    "width": 1280,
+    "height": 2160,
+    "format": "webp"
+  },
+  {
+    "path": "public/assets/space/social-card.jpg",
+    "bytes": 30220,
+    "width": 1200,
+    "height": 630,
+    "format": "jpeg"
+  },
+  {
+    "path": "public/assets/selected/don-ceviche-guacho.webp",
+    "width": 1440,
+    "height": 1439,
+    "format": "webp",
+    "bytes": 185506,
+    "source": "public/assets/don-ceviche/post-7.png",
+    "permission": "Autorización expresa usuario: revisión y versión local; no publicación/despliegue",
+    "usage": "Hero: evidencia secundaria; Trabajo: pieza de producto"
+  },
+  {
+    "path": "public/assets/selected/don-ceviche-alimentacion.webp",
+    "width": 1440,
+    "height": 1440,
+    "format": "webp",
+    "bytes": 129302,
+    "source": "public/assets/don-ceviche/post-4.png",
+    "permission": "Autorización expresa usuario: revisión y versión local; no publicación/despliegue",
+    "usage": "Selected Work: pieza principal de Don Ceviche; Trabajo"
+  },
+  {
+    "path": "public/assets/selected/emc-redes.webp",
+    "width": 1600,
+    "height": 1066,
+    "format": "webp",
+    "bytes": 141076,
+    "source": "public/assets/portfolio-v12/emc-social.webp",
+    "permission": "Autorización expresa usuario: revisión y versión local; no publicación/despliegue",
+    "usage": "Selected Work; Digital; Trabajo"
+  }
+]

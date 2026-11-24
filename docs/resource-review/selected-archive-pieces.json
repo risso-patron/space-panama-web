@@ -1,0 +1,31 @@
+{
+  "deploymentAuthorized": false,
+  "scope": "Two complete historical promotional works from explicitly owner-authorized project folders, local review only. No separate rights/credit assertions about embedded imagery, software, medical outcomes, awards or results. Original credits retained, not independently attributed to Space. No independent extraction of embedded imagery or public deployment authorized.",
+  "items": [
+    {
+      "source": "E:/SPACE MARKETING/2025/año 2020-21/PREVENGO/Material Publicitario/Redes-Space/Material Marketing/post 3.png",
+      "sourceSha256": "2255d01c06e27b46d5d7c2c687d0d80c3863bbe55afd415739e3cc9e5cd31b59",
+      "sourceBytes": 77850,
+      "destination": "public/assets/selected/prevengo-comunicacion-historica.webp",
+      "width": 1055,
+      "height": 1021,
+      "destinationBytes": 50074,
+      "destinationSha256": "d88edb29a8464dd54589bf77bb3653b3a28d4091edd34105f6429c3178c1a05c",
+      "permission": "Owner explicitly authorizes named project folder use in S10; current request reiterates local portfolio enrichment. Not deployment authorization.",
+      "scope": "Complete historical promotional artwork, no crops, no photo/software/results credits inferred",
+      "alphaPreserved": true
+    },
+    {
+      "source": "E:/SPACE MARKETING/2025/año 2020-21/HEROES DE PANAMA/PRENSA/POSTER OFICIAL.jpeg",
+      "sourceSha256": "e48b158dbe321ec3d55ce7582f646878d8956bac9692b22270ed8546179182ea",
+      "sourceBytes": 129450,
+      "destination": "public/assets/selected/heroes-panama-convocatoria.webp",
+      "width": 724,
+      "height": 1024,
+      "destinationBytes": 157852,
+      "destinationSha256": "5ac3550b678dab5d1a8fd16f117ba2f1522158378c64d0cda12830d79b56ee55",
+      "permission": "Owner explicitly authorizes named project folder use in S10; current request reiterates local portfolio enrichment. Not deployment authorization.",
+      "scope": "Complete historical promotional artwork, no crops, no photo/software/results credits inferred"
+    }
+  ]
+}

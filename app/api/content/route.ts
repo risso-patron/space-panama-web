@@ -1,7 +1,8 @@
-import { resolveContentAdapter } from "@/lib/adapters/content-adapter";
+import { contact, navigation, selectedWork, serviceGroups, weddingImages } from "@/lib/public-site";
 
 export async function GET() {
-  const content = await resolveContentAdapter().getSiteContent();
+  // Do not expose archived concepts, unapproved clients, or restricted media.
+  const content = { navigation, services: serviceGroups, contact, work: { projects: selectedWork, events: { category: "Eventos", images: weddingImages } } };
 
   return Response.json(
     { content },

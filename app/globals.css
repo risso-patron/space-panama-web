@@ -1,3 +1,12 @@
+html[data-site-motion="paused"], html[data-site-motion="reduced"],
+html[data-site-motion="paused"] *, html[data-site-motion="reduced"] *,
+html[data-site-motion="paused"] *::before, html[data-site-motion="paused"] *::after,
+html[data-site-motion="reduced"] *::before, html[data-site-motion="reduced"] *::after {
+  animation-play-state: paused !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+
 :root {
   --ink: #222d3d;
   --ink-soft: #3a475a;
@@ -13,7 +22,7 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; background: var(--ink); }
+html { scroll-behavior: smooth; scroll-padding-top: 104px; background: var(--ink); }
 body {
   margin: 0; min-height: 100vh; color: var(--cream);
   background: radial-gradient(circle at 18% 0%, rgba(133,151,178,.23), transparent 34rem),
@@ -58,7 +67,6 @@ h2 { max-width: 12ch; margin-bottom: 1.25rem; font-size: clamp(3rem,8vw,7rem); l
 .manifesto-step__index { display:block; margin-bottom:clamp(1rem,4vh,3rem); color:var(--gold); font-size:.78rem; letter-spacing:.24em; }
 .manifesto-step h3 { margin:0; color:var(--cream-strong); font-family:Georgia,"Times New Roman",serif; font-size:clamp(3rem,6.2vw,7rem); font-weight:500; line-height:.88; letter-spacing:-.075em; }
 .manifesto-step p { max-width:31rem; margin:clamp(1rem,3vh,2rem) 0 0; color:rgba(245,234,216,.72); font-size:clamp(.95rem,1.25vw,1.15rem); line-height:1.6; }
-.scene--manifesto:not(.is-pinned) .manifesto-step h3 { font-size:clamp(2rem,4vw,4.2rem); line-height:.98; }
 .manifesto__progress { display:none; position:absolute; right:clamp(2rem,7vw,7rem); bottom:clamp(2rem,6vh,5rem); width:min(24rem,34vw); height:2px; background:rgba(245,234,216,.24); }
 .scene--manifesto.is-pinned .manifesto__progress { display:block; }
 .manifesto__progress-fill { display:block; width:100%; height:100%; background:var(--lime); transform:scaleX(0); transform-origin:left center; }
@@ -255,6 +263,9 @@ h2 { max-width: 12ch; margin-bottom: 1.25rem; font-size: clamp(3rem,8vw,7rem); l
 .immersive .hero__deck { max-width:36rem; }
 .hero__atmosphere { right:-3vw; top:18%; }
 .story-act--manifesto { z-index:2; margin-top:-14vh; background:linear-gradient(180deg,rgba(32,42,56,0) 0%,rgba(32,42,56,.24) 18%,rgba(32,42,56,.72) 48%,#202a38 82%); }
+@media (min-width:1101px) {
+ .story-act--manifesto.earth-manifesto--overlap { margin-top:-100svh; }
+}
 .immersive .scene--manifesto { min-height:auto; background:none; }
 .immersive .scene--manifesto .manifesto-step:first-child { opacity:1; }
 .immersive .scene--manifesto .manifesto-step:first-child .manifesto-step__index { opacity:var(--manifest-index,1); }
